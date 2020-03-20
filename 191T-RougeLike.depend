@@ -1,0 +1,58 @@
+# depslib dependency file v1.0
+1584732546 source:c:\school\spring2020\csci191\191t-rougelike\main.cpp
+	<windows.h>
+	<stdlib.h>
+	<iostream>
+	<windows.h>
+	<stack>
+	<Scene.h>
+
+1584730733 c:\school\spring2020\csci191\191t-rougelike\include\scene.h
+	<windows.h>
+	<GL/glut.h>
+	<iostream>
+	<Entity.h>
+
+1580347068 c:\school\spring2020\csci191\common\include\gl\glut.h
+	<windows.h>
+	<stdlib.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1584730469 c:\school\spring2020\csci191\191t-rougelike\include\entity.h
+	<GL/gl.h>
+	<Texture.h>
+
+1584730032 c:\school\spring2020\csci191\191t-rougelike\include\texture.h
+	<SOIL.h>
+	<GL/gl.h>
+	<iostream>
+
+1582162418 c:\school\spring2020\csci191\common\include\soil.h
+
+1584744199 source:c:\school\spring2020\csci191\191t-rougelike\src\button.cpp
+	"Button.h"
+
+1584744199 c:\school\spring2020\csci191\191t-rougelike\include\button.h
+
+1584731601 source:c:\school\spring2020\csci191\191t-rougelike\src\entity.cpp
+	"Entity.h"
+
+1584744347 source:c:\school\spring2020\csci191\191t-rougelike\src\inputs.cpp
+	"Inputs.h"
+
+1584744336 c:\school\spring2020\csci191\191t-rougelike\include\inputs.h
+	<windows.h>
+
+1584731011 source:c:\school\spring2020\csci191\191t-rougelike\src\scene.cpp
+	"Scene.h"
+
+1584730093 source:c:\school\spring2020\csci191\191t-rougelike\src\texture.cpp
+	"Texture.h"
+
+1584731949 source:c:\school\spring2020\csci191\191t-rougelike\src\timer.cpp
+	"Timer.h"
+
+1584732151 c:\school\spring2020\csci191\191t-rougelike\include\timer.h
+	<time.h>
+
