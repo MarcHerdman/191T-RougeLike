@@ -5,6 +5,7 @@
 #include <GL/glut.h>
 #include <iostream>
 #include <Entity.h>
+#include <Inputs.h>
 
 class Scene
 {

@@ -15,6 +15,7 @@
 #include <iostream>
 #include <windows.h>		// Header File For Windows
 #include <stack>
+#include <ctime>
 
 #include <Scene.h>
 
@@ -33,6 +34,8 @@ bool	fullscreen=TRUE;	// Fullscreen Flag Set To Fullscreen Mode By Default
 LRESULT	CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);	// Declaration For WndProc
 
 stack<Scene*> scenes;
+clock_t start;
+float FPS;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 //										THE KILL GL WINDOW
@@ -322,6 +325,8 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 
     Scene* s = new Scene();
     scenes.push(s);
+    start = clock();
+    FPS = 1.0/10 * 1000;
 
 	// Ask The User Which Screen Mode They Prefer
 	if (MessageBox(NULL,"Would You Like To Run In Fullscreen Mode?", "Start FullScreen?",MB_YESNO|MB_ICONQUESTION)==IDNO)
@@ -351,28 +356,32 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 		}
 		else										// If There Are No Messages
 		{
-			// Draw The Scene.  Watch For ESC Key And Quit Messages From DrawGLScene()
-			if (keys[VK_ESCAPE])	// Active?  Was There A Quit Received?
-			{
-				done=TRUE;							// ESC or DrawGLScene Signalled A Quit
-			}
-			else									// Not Time To Quit, Update Screen
-			{
-			    scenes.top()->DrawScene();
-				SwapBuffers(hDC);					// Swap Buffers (Double Buffering)
-			}
+		    if(clock() - start > FPS)
+            {
+                start = clock();
+                // Draw The Scene.  Watch For ESC Key And Quit Messages From DrawGLScene()
+                if (keys[VK_ESCAPE])	// Active?  Was There A Quit Received?
+                {
+                    done=TRUE;							// ESC or DrawGLScene Signalled A Quit
+                }
+                else									// Not Time To Quit, Update Screen
+                {
+                    scenes.top()->DrawScene();
+                    SwapBuffers(hDC);					// Swap Buffers (Double Buffering)
+                }
 
-			if (keys[VK_F1])						// Is F1 Being Pressed?
-			{
-				keys[VK_F1]=FALSE;					// If So Make Key FALSE
-				KillGLWindow();						// Kill Our Current Window
-				fullscreen=!fullscreen;				// Toggle Fullscreen / Windowed Mode
-				// Recreate Our OpenGL Window
-				if (!CreateGLWindow("Game Engine Lesson 01",fullscreenWidth,fullscreenHeight,256,fullscreen))
-				{
-					return 0;						// Quit If Window Was Not Created
-				}
-			}
+                if (keys[VK_F1])						// Is F1 Being Pressed?
+                {
+                    keys[VK_F1]=FALSE;					// If So Make Key FALSE
+                    KillGLWindow();						// Kill Our Current Window
+                    fullscreen=!fullscreen;				// Toggle Fullscreen / Windowed Mode
+                    // Recreate Our OpenGL Window
+                    if (!CreateGLWindow("Game Engine Lesson 01",fullscreenWidth,fullscreenHeight,256,fullscreen))
+                    {
+                        return 0;						// Quit If Window Was Not Created
+                    }
+                }
+            }
 		}
 	}
 

@@ -1,6 +1,7 @@
 #include "Scene.h"
 
-Entity *ply = new Entity();
+Entity* ply = new Entity();
+Inputs* kBMs = new Inputs(ply);
 
 Scene::Scene()
 {
@@ -28,8 +29,16 @@ GLint Scene::InitGL()
 
     //plx->parallaxInit("images/Flower.jpg");
 
-    ply->InitEntity("images/guy.png");
-
+    ply->InitEntity("images/prof.png", 9, 4);
+    ply->AddAnimation("WalkUp", 0, 9);
+    ply->AddAnimation("WalkLeft", 9, 9);
+    ply->AddAnimation("WalkDown", 18, 9);
+    ply->AddAnimation("WalkRight", 27, 9);
+    ply->AddAnimation("IdleUp", 0, 1);
+    ply->AddAnimation("IdleLeft", 9, 1);
+    ply->AddAnimation("IdleDown", 18, 1);
+    ply->AddAnimation("IdleRight", 27, 1);
+    ply->tex->SetAnimation("IdleDown",true,false,0);
     return true;
 }
 
@@ -60,14 +69,17 @@ int Scene::WinMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
     switch(uMsg)
     {
+
         case WM_KEYDOWN:
-            //kBMs ->wParam = wParam;
+            kBMs ->wParam = wParam;
             //kBMs->keyPressed(myModel); //Handling model movement
             //kBMs->keyEnv(plx, 0.005);
-            //kBMs->keyPressed(ply);
+            kBMs->KeyPressed();
             break;
 
         case WM_KEYUP:
+            kBMs->wParam = wParam;
+            kBMs->KeyReleased();
             break;
 
         case WM_LBUTTONDOWN:

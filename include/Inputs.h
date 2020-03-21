@@ -2,11 +2,12 @@
 #define INPUTS_H
 
 #include<windows.h>
+#include<Entity.h>
 
 class Inputs
 {
     public:
-        Inputs();
+        Inputs(Entity*);
         virtual ~Inputs();
 
         void KeyPressed();
@@ -21,6 +22,8 @@ class Inputs
         double prevMouseY;
 
         WPARAM wParam;
+
+        Entity* ply;
 
     protected:
 

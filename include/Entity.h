@@ -19,7 +19,8 @@ class Entity
 
         void DrawEntity();
         void PositionEntity();
-        void InitEntity(char*);
+        void InitEntity(char*,int,int);
+        void AddAnimation(char*, int, int);
         void Actions();
 
         float scale[3] = {1.0,1.0,1.0};
