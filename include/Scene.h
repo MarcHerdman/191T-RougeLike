@@ -7,6 +7,8 @@
 #include <Entity.h>
 #include <Inputs.h>
 
+#include <Maze.h>
+
 class Scene
 {
     public:
@@ -18,7 +20,7 @@ class Scene
         GLvoid ResizeScene(GLsizei, GLsizei);  //screen size changes
         int WinMsg(HWND, UINT, WPARAM, LPARAM);	// Callback of Inputs
 
-
+        Maze* maze;
         float screenHeight, screenWidth; //To map background images
 
     protected:

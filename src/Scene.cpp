@@ -7,6 +7,8 @@ Scene::Scene()
 {
     screenWidth = GetSystemMetrics(SM_CXSCREEN);
     screenHeight = GetSystemMetrics(SM_CYSCREEN);
+    maze = new Maze();
+    maze->GenerateMaze(10,10);
 }
 
 Scene::~Scene()
@@ -49,9 +51,11 @@ GLint Scene::DrawScene()
 
     glTranslated(0,0,-10.0);         //placing objects
     glPushMatrix();
-        ply->Actions();
+        //ply->Actions();
         ply->DrawEntity();
     glPopMatrix();
+
+    maze->DrawMaze();
 }
 
 GLvoid Scene::ResizeScene(GLsizei width, GLsizei height)

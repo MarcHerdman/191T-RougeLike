@@ -3,10 +3,10 @@
 Texture::Texture()
 {
     //ctor
-    bool playAnim = false;
-    bool loopAnim = false;
-    std::string curAnim = "";
-    int curFrame = 0;
+    playAnim = false;
+    loopAnim = false;
+    curAnim = "";
+    curFrame = 0;
 }
 
 Texture::~Texture()
@@ -52,7 +52,6 @@ void Texture::AddAnimation(std::string name, int start, int frames)
 
 void Texture::SetAnimation(std::string name, bool isPlaying, bool isLooping, int startFrsme)
 {
-
     if(name != curAnim) //Dont change if already playing this animation
     {
         curAnim = name;
@@ -60,50 +59,63 @@ void Texture::SetAnimation(std::string name, bool isPlaying, bool isLooping, int
         loopAnim = isLooping;
         curFrame = startFrsme;
     }
-
 }
 void Texture::Draw()
 {
-
-    if(curAnim != "")
+    int curFrameX, curFrameY;
+    if(curAnim == "") //No animation so render current frame
     {
-        int start = animations[curAnim].first;
-        int frames = animations[curAnim].second;
-        int curFrameX = (start + curFrame) % cellsX;
-        int curFrameY = (start + curFrame) / cellsX;
-        std::cout << curFrameX << std::endl;
-        float xMin = offsetX * curFrameX;
-        float xMax = offsetX * curFrameX + offsetX;
-        float yMin = offsetY * curFrameY;
-        float yMax = offsetY * curFrameY + offsetY;
-        glBegin(GL_QUADS);
-            glTexCoord2f(xMin,yMax);
-            glVertex3f(0.0,0.0,-10.0);
+        //Convert frame number into x,y cells;
+        curFrameX = curFrame % cellsX;
+        curFrameY = curFrame / cellsX;
+    }
+    else //If animation is set
+    {
+        int start = animations[curAnim].first; //The first frame of this animation
+        int frames = animations[curAnim].second; //The total number of frames of this animation
 
-            glTexCoord2f(xMax,yMax);
-            glVertex3f(1.0,0.0,-10.0);
+        //Calculate the x,y cell of the current frame of animation
+        curFrameX = (start + curFrame) % cellsX;
+        curFrameY = (start + curFrame) / cellsX;
 
-            glTexCoord2f(xMax,yMin);
-            glVertex3f(1.0,1.0,-10.0);
-
-            glTexCoord2f(xMin,yMin);
-            glVertex3f(0.0,1.0,-10.0);
-        glEnd();
-        if(playAnim)
+        if(playAnim) //If this animation is set to play
         {
-            curFrame++;
-            if(curFrame >= frames)
+            curFrame++; //increase the frames
+            if(curFrame >= frames) //if we go past the total number of frames...
             {
-                if(loopAnim)
+                if(loopAnim)//...If this animation is set to loop...
                 {
-                    curFrame = 0;
+                    curFrame = 0;//...Reset the counter to 0...
                 }
-                else
+                else//...Otherwise...
                 {
-                    curFrame = frames;
+                    curFrame = frames; //...Leave the frame counter at the end of the animation
                 }
             }
         }
     }
-}
 
+    //Calculate the percentages of the image to display
+    float xMin = offsetX * curFrameX;
+    float xMax = offsetX * curFrameX + offsetX;
+    float yMin = offsetY * curFrameY;
+    float yMax = offsetY * curFrameY + offsetY;
+
+    //Debuging
+    //xMin = 0.0; xMax = 1.0; yMin = 0.0; yMax = 1.0;
+    //std::cout << xMin << "," << xMax << "," << yMin << "," << yMax << std::endl;
+
+    glBegin(GL_QUADS);
+        glTexCoord2f(xMin,yMax);
+        glVertex3f(0.0,0.0,-10.0);
+
+        glTexCoord2f(xMax,yMax);
+        glVertex3f(1.0,0.0,-10.0);
+
+        glTexCoord2f(xMax,yMin);
+        glVertex3f(1.0,1.0,-10.0);
+
+        glTexCoord2f(xMin,yMin);
+        glVertex3f(0.0,1.0,-10.0);
+    glEnd();
+}

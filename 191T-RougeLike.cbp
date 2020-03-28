@@ -14,6 +14,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add directory="include" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -24,6 +25,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add directory="include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -35,6 +37,7 @@
 			<Add directory="C:/School/Spring2020/csci191/common/include" />
 		</Compiler>
 		<Linker>
+			<Add library="../common/lib/libSOIL.a" />
 			<Add library="glut32" />
 			<Add library="opengl32" />
 			<Add library="glu32" />
@@ -42,7 +45,21 @@
 			<Add library="gdi32" />
 			<Add directory="C:/School/Spring2020/csci191/common/lib" />
 		</Linker>
+		<Unit filename="include/Button.h" />
+		<Unit filename="include/Entity.h" />
+		<Unit filename="include/Inputs.h" />
+		<Unit filename="include/Maze.h" />
+		<Unit filename="include/Scene.h" />
+		<Unit filename="include/Texture.h" />
+		<Unit filename="include/Timer.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/Button.cpp" />
+		<Unit filename="src/Entity.cpp" />
+		<Unit filename="src/Inputs.cpp" />
+		<Unit filename="src/Maze.cpp" />
+		<Unit filename="src/Scene.cpp" />
+		<Unit filename="src/Texture.cpp" />
+		<Unit filename="src/Timer.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
