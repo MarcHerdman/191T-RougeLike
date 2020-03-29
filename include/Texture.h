@@ -21,6 +21,7 @@ class Texture
         void Draw();
 
         int width,height;
+        float widthPercentage, heightPercentage;
         unsigned char* image;
         GLuint tex;
         int cellsX;

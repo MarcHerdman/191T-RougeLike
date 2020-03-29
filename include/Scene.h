@@ -20,6 +20,8 @@ class Scene
         GLvoid ResizeScene(GLsizei, GLsizei);  //screen size changes
         int WinMsg(HWND, UINT, WPARAM, LPARAM);	// Callback of Inputs
 
+        Entity* ply;
+        Inputs* kBMs;
         Maze* maze;
         float screenHeight, screenWidth; //To map background images
 

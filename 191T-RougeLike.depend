@@ -8,7 +8,7 @@
 	<ctime>
 	<Scene.h>
 
-1585013441 c:\school\spring2020\csci191\191t-rougelike\include\scene.h
+1585419969 c:\school\spring2020\csci191\191t-rougelike\include\scene.h
 	<windows.h>
 	<GL/glut.h>
 	<iostream>
@@ -22,11 +22,11 @@
 	<GL/gl.h>
 	<GL/glu.h>
 
-1584772095 c:\school\spring2020\csci191\191t-rougelike\include\entity.h
+1585416002 c:\school\spring2020\csci191\191t-rougelike\include\entity.h
 	<GL/gl.h>
 	<Texture.h>
 
-1585369880 c:\school\spring2020\csci191\191t-rougelike\include\texture.h
+1585430892 c:\school\spring2020\csci191\191t-rougelike\include\texture.h
 	<SOIL.h>
 	<GL/gl.h>
 	<iostream>
@@ -40,20 +40,21 @@
 
 1584744199 c:\school\spring2020\csci191\191t-rougelike\include\button.h
 
-1585374646 source:c:\school\spring2020\csci191\191t-rougelike\src\entity.cpp
+1585449253 source:c:\school\spring2020\csci191\191t-rougelike\src\entity.cpp
 	"Entity.h"
 
-1584774067 source:c:\school\spring2020\csci191\191t-rougelike\src\inputs.cpp
+1585454103 source:c:\school\spring2020\csci191\191t-rougelike\src\inputs.cpp
 	"Inputs.h"
 
-1584772185 c:\school\spring2020\csci191\191t-rougelike\include\inputs.h
+1585447985 c:\school\spring2020\csci191\191t-rougelike\include\inputs.h
 	<windows.h>
 	<Entity.h>
+	<Maze.h>
 
-1585375434 source:c:\school\spring2020\csci191\191t-rougelike\src\scene.cpp
+1585449161 source:c:\school\spring2020\csci191\191t-rougelike\src\scene.cpp
 	"Scene.h"
 
-1585374700 source:c:\school\spring2020\csci191\191t-rougelike\src\texture.cpp
+1585432597 source:c:\school\spring2020\csci191\191t-rougelike\src\texture.cpp
 	"Texture.h"
 
 1584731949 source:c:\school\spring2020\csci191\191t-rougelike\src\timer.cpp
@@ -62,7 +63,7 @@
 1584732151 c:\school\spring2020\csci191\191t-rougelike\include\timer.h
 	<time.h>
 
-1585367988 c:\school\spring2020\csci191\191t-rougelike\include\maze.h
+1585454407 c:\school\spring2020\csci191\191t-rougelike\include\maze.h
 	<vector>
 	<iostream>
 	<time.h>
@@ -71,6 +72,6 @@
 	<utility>
 	<Texture.h>
 
-1585375036 source:c:\school\spring2020\csci191\191t-rougelike\src\maze.cpp
+1585452088 source:c:\school\spring2020\csci191\191t-rougelike\src\maze.cpp
 	"Maze.h"
 

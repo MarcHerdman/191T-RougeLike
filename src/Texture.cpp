@@ -22,7 +22,7 @@ void Texture::CreateTexture(char* fileName, int x, int y)
     image = SOIL_load_image(fileName,&width,&height, 0,SOIL_LOAD_RGBA);
 
     if(!image) std::cout << "fail to find image" << std::endl;
-
+    //std::cout << "File: " << fileName << " GLuint: " << tex << " Image: " << image << std::endl;
 
     glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width, height,0,GL_RGBA,GL_UNSIGNED_BYTE,image);
     SOIL_free_image_data(image);
@@ -38,6 +38,9 @@ void Texture::CreateTexture(char* fileName, int x, int y)
 
     offsetX = 1.0/x;
     offsetY = 1.0/y;
+
+    widthPercentage = width/x/1920.0;
+    heightPercentage = height/y/1080.0;
 }
 
 void Texture::TextureBinder()
@@ -101,21 +104,19 @@ void Texture::Draw()
     float yMin = offsetY * curFrameY;
     float yMax = offsetY * curFrameY + offsetY;
 
-    //Debuging
-    //xMin = 0.0; xMax = 1.0; yMin = 0.0; yMax = 1.0;
-    //std::cout << xMin << "," << xMax << "," << yMin << "," << yMax << std::endl;
-
     glBegin(GL_QUADS);
-        glTexCoord2f(xMin,yMax);
-        glVertex3f(0.0,0.0,-10.0);
-
-        glTexCoord2f(xMax,yMax);
-        glVertex3f(1.0,0.0,-10.0);
-
-        glTexCoord2f(xMax,yMin);
-        glVertex3f(1.0,1.0,-10.0);
 
         glTexCoord2f(xMin,yMin);
-        glVertex3f(0.0,1.0,-10.0);
+        glVertex3f(0.0,0.0,0.0);
+
+        glTexCoord2f(xMin,yMax);
+        glVertex3f(0.0,heightPercentage,0.0);
+
+        glTexCoord2f(xMax,yMax);
+        glVertex3f(widthPercentage,heightPercentage,0.0);
+
+        glTexCoord2f(xMax,yMin);
+        glVertex3f(widthPercentage,0.0,0.0);
+
     glEnd();
 }

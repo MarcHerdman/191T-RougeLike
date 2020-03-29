@@ -4,6 +4,9 @@ Maze::Maze()
 {
     //ctor
     srand (time(NULL));
+    plyLoc = 0;
+    plyX = 512;
+    speed = 8;
 }
 
 Maze::~Maze()
@@ -13,16 +16,34 @@ Maze::~Maze()
 
 void Maze::GenerateMaze(int x, int y)
 {
+    displayPieces = new Texture();
+    westWall = new Texture();
+    southWall = new Texture();
+    eastWall = new Texture();
+    northWall = new Texture();
+    floor = new Texture();
+
+    displayPieces->CreateTexture("images/RL_MapPieces.png", 4,4);
+    westWall->CreateTexture("images/RL_WestWall.png", 1, 1);
+    southWall->CreateTexture("images/RL_SouthWall.png", 1, 2);
+    eastWall->CreateTexture("images/RL_EastWall.png", 1, 1);
+    northWall->CreateTexture("images/RL_NorthWall.png", 1, 2);
+    floor->CreateTexture("images/RL_Floor.png", 1, 1);
+
     mazeSizeX = x;
     mazeSizeY = y;
     mazeSize = x*y;
+
+    mapScreenPosX = 0.5 - displayPieces->widthPercentage * mazeSizeX / 2;
+    mapScreenPosY = 1.0 - displayPieces->heightPercentage * mazeSizeY;
+
     for(int i = 0; i< mazeSize; ++i)
     {
             room r;
             r.visited = false;
             r.walls = 15; //Bitfield 1=LeftWall, 2=SouthWall, 4=RightWall, 8=NorthWall
-            r.tex = new Texture();
-            r.tex->CreateTexture("images/MazeWalls.png", 4, 4);
+            //r.tex = new Texture();
+            //r.tex->CreateTexture("images/MazeWalls.png", 4, 4);
             maze.push_back(r);
     }
     std::stack<int> progress; //Stack up rooms as we traverse to allow backtracking
@@ -46,7 +67,10 @@ void Maze::GenerateMaze(int x, int y)
             progress.push(newRoom); //Push the new room to the stack
         }
     }
-    SetMaze(); //Set room's texture to know what frame to display
+    for(int i = 0; i < maze.size(); ++i)
+    {
+        maze[i].visited=false;
+    }
     PrintMaze(); //Draw maze in console
 }
 
@@ -161,13 +185,17 @@ void Maze::PrintMaze()
     }
 }
 
-void Maze::SetMaze()
+
+void Maze::Moving(int dir)
 {
-    for(int i = 1; i < maze.size(); ++i)
-    {
-        maze[i].tex->curFrame = maze[i].walls;
-    }
+    if(dir == 0) plyX -= speed;
+    else if(dir == 2) plyX += speed;
+    int locX = plyX / 1024;
+    ipair loc = IntToXY(plyLoc);
+    plyLoc = XYtoInt(std::make_pair(locX, loc.second));
+    //std::cout << "PLYX: " << plyX << "PLYLOC: " << locX << std::endl;
 }
+
 
 int Maze::XYtoInt(ipair ip)
 {
@@ -179,17 +207,90 @@ ipair Maze::IntToXY(int i)
     return std::make_pair(i%mazeSizeX, i/mazeSizeX);
 }
 
-void Maze::DrawMaze()
+void Maze::PrepareToDraw()
 {
-    maze[0].tex->TextureBinder();
-    glPushMatrix();
+    instantaniousXY = IntToXY(plyLoc);
+}
+
+void Maze::DrawMazeDisplay()
+{
+    displayPieces->TextureBinder();
     for(int i = 0; i < maze.size(); ++i)
     {
+        displayPieces->curFrame = maze[i].walls;
         ipair pos = IntToXY(i);
-        //glTranslatef(100+16*pos.first,100+16*pos.second,5.0);
-        //glScalef(2.0,2.0,1.0);
-
-        maze[i].tex->Draw();
+        float locX = mapScreenPosX + displayPieces->widthPercentage*pos.first;
+        float locY = mapScreenPosY + displayPieces->heightPercentage*pos.second;
+        glPushMatrix();
+            glTranslatef(locX,locY,0);
+            displayPieces->Draw();
+            if(i == plyLoc)
+            {
+                displayPieces->curFrame = 15;
+                displayPieces->Draw();
+            }
+        glPopMatrix();
     }
+}
+
+void Maze::DrawMazeBG()
+{
+    northWall->TextureBinder();
+    northWall->curFrame = !((maze[plyLoc].walls & 8) >> 3);
+    //std::cout << "NW " << northWall->curFrame << std::endl;
+    float modifier = (plyX - (instantaniousXY.first * northWall->width)) / 1920.0;
+    //std::cout << "Base: " << base << std::endl;
+    float startX = 0.5 - modifier;
+    glPushMatrix();
+        glTranslatef(startX,0,0);
+        northWall->Draw();
+    glPopMatrix();
+    glPushMatrix();
+        glTranslatef(startX,northWall->heightPercentage,0);
+        floor->TextureBinder();
+        floor->Draw();
+    glPopMatrix();
+}
+
+void Maze::testRotate(int dir)
+{
+    //This code rotates the rightmost 4 bits by n
+    //& 0xF ensures the all bits but the last 4 are reset to 0s
+    int n = 1;
+    if(dir == 1) //Clockwise
+        test = ((test >> n) | (test << (4-n))) & 0xF;
+    else//Counterclockwise
+        test = ((test << n) | (test >> (4-n))) & 0xF;
+    std::cout << "Test " << test << std::endl;
+}
+
+void Maze::DrawMazeFG()
+{
+    southWall->curFrame = !((maze[plyLoc].walls & 2) >> 1);
+    //std::cout << "SW " << southWall->curFrame << std::endl;
+
+    ipair loc = IntToXY(plyLoc);
+    float base = (plyX - (loc.first * southWall->width)) / 1920.0;
+    float startX = 0.5 - base;
+    if(maze[plyLoc].walls & 1) //West Wall exists
+    {
+        glPushMatrix();
+            westWall->TextureBinder();
+            glTranslatef(startX,0,0);
+            westWall->Draw();
+        glPopMatrix();
+    }
+    if(maze[plyLoc].walls & 4) //East Wall exists
+    {
+        glPushMatrix();
+            eastWall->TextureBinder();
+            glTranslatef(startX+eastWall->widthPercentage*7,0,0);
+            eastWall->Draw();
+        glPopMatrix();
+    }
+    glPushMatrix();
+        glTranslatef(startX,northWall->heightPercentage + southWall->heightPercentage,0);
+        southWall->TextureBinder();
+        southWall->Draw();
     glPopMatrix();
 }

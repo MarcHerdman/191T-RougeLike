@@ -39,8 +39,10 @@ Entity::~Entity()
 
 void Entity::DrawEntity()
 {
+
     tex->TextureBinder();
-    glScalef(xSize,ySize,1);
+    glTranslatef(0.5 - tex->widthPercentage,0.5 - tex->heightPercentage,0);
+    glScalef(3.0,3.0,0.0);
     tex->Draw();
 }
 

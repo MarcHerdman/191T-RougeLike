@@ -1,14 +1,16 @@
 #include "Scene.h"
 
-Entity* ply = new Entity();
-Inputs* kBMs = new Inputs(ply);
-
 Scene::Scene()
 {
     screenWidth = GetSystemMetrics(SM_CXSCREEN);
     screenHeight = GetSystemMetrics(SM_CYSCREEN);
+
+    ply = new Entity();
     maze = new Maze();
-    maze->GenerateMaze(10,10);
+    kBMs = new Inputs(ply,maze);
+
+    //maze->tex->CreateTexture("images/MazeWalls.png", 4, 4);
+
 }
 
 Scene::~Scene()
@@ -30,7 +32,6 @@ GLint Scene::InitGL()
     //myModel->initModel("images/metal.jpg");
 
     //plx->parallaxInit("images/Flower.jpg");
-
     ply->InitEntity("images/prof.png", 9, 4);
     ply->AddAnimation("WalkUp", 0, 9);
     ply->AddAnimation("WalkLeft", 9, 9);
@@ -41,6 +42,8 @@ GLint Scene::InitGL()
     ply->AddAnimation("IdleDown", 18, 1);
     ply->AddAnimation("IdleRight", 27, 1);
     ply->tex->SetAnimation("IdleDown",true,false,0);
+
+    maze->GenerateMaze(9,9);
     return true;
 }
 
@@ -49,22 +52,27 @@ GLint Scene::DrawScene()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	// Clear Screen And Depth Buffer
     glLoadIdentity();
 
-    glTranslated(0,0,-10.0);         //placing objects
+    //Push and Pop Matrix Located inside DrawMaze()
+    maze->DrawMazeDisplay();
+    maze->DrawMazeBG();
     glPushMatrix();
-        //ply->Actions();
         ply->DrawEntity();
     glPopMatrix();
+    maze->DrawMazeFG();
 
-    maze->DrawMaze();
+
 }
 
 GLvoid Scene::ResizeScene(GLsizei width, GLsizei height)
 {
-    GLfloat aspectRatio = (GLfloat) width/(GLfloat) height; //ratio for window mode
+    //GLfloat aspectRatio = (GLfloat) width/(GLfloat) height; //ratio for window mode
     glViewport(0,0,width,height); //setting viewport
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(45.0,aspectRatio,0.1,100);
+    std::cout << "W: " << width << std::endl;
+    //gluPerspective(45.0,aspectRatio,0.1,100);
+    gluOrtho2D(0,1,1,0); //Top Left is the origin point
+
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 }

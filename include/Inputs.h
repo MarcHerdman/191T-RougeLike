@@ -3,11 +3,12 @@
 
 #include<windows.h>
 #include<Entity.h>
+#include<Maze.h>
 
 class Inputs
 {
     public:
-        Inputs(Entity*);
+        Inputs(Entity*, Maze*);
         virtual ~Inputs();
 
         void KeyPressed();
@@ -24,6 +25,7 @@ class Inputs
         WPARAM wParam;
 
         Entity* ply;
+        Maze* maze;
 
     protected:
 
