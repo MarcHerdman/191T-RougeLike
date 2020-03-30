@@ -49,6 +49,7 @@
 		<Unit filename="include/Entity.h" />
 		<Unit filename="include/Inputs.h" />
 		<Unit filename="include/Maze.h" />
+		<Unit filename="include/Player.h" />
 		<Unit filename="include/Scene.h" />
 		<Unit filename="include/Texture.h" />
 		<Unit filename="include/Timer.h" />
@@ -57,6 +58,7 @@
 		<Unit filename="src/Entity.cpp" />
 		<Unit filename="src/Inputs.cpp" />
 		<Unit filename="src/Maze.cpp" />
+		<Unit filename="src/Player.cpp" />
 		<Unit filename="src/Scene.cpp" />
 		<Unit filename="src/Texture.cpp" />
 		<Unit filename="src/Timer.cpp" />
