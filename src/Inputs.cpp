@@ -28,9 +28,11 @@ void Inputs::KeyPressed()
             break;
         case VK_UP:
             ply->tex->SetAnimation("WalkUp", true, true, 0);
+            maze->Moving(3);
             break;
         case VK_DOWN:
             ply->tex->SetAnimation("WalkDown", true, true, 0);
+            maze->Moving(1);
             break;
     }
 }
@@ -41,11 +43,9 @@ void Inputs::KeyReleased()
     {
         case VK_LEFT:
             ply->tex->SetAnimation("IdleLeft", true, false, 0);
-            //maze->testRotate(-1);
             break;
         case VK_RIGHT:
             ply->tex->SetAnimation("IdleRight", true, false, 0);
-            //maze->testRotate(1);
             break;
         case VK_UP:
             ply->tex->SetAnimation("IdleUp", true, false, 0);

@@ -4,7 +4,7 @@
 #include <windows.h>
 #include <GL/glut.h>
 #include <iostream>
-#include <Entity.h>
+#include <Player.h>
 #include <Inputs.h>
 
 #include <Maze.h>
@@ -20,7 +20,7 @@ class Scene
         GLvoid ResizeScene(GLsizei, GLsizei);  //screen size changes
         int WinMsg(HWND, UINT, WPARAM, LPARAM);	// Callback of Inputs
 
-        Entity* ply;
+        Player* ply;
         Inputs* kBMs;
         Maze* maze;
         float screenHeight, screenWidth; //To map background images

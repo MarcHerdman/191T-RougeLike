@@ -32,7 +32,7 @@ class Maze
 
         void Moving(int dir);
 
-        void PrepareToDraw();
+        void PrepareToDrawMaze();
         void DrawMazeDisplay();
         void DrawMazeBG();
         void DrawMazeFG();
@@ -61,8 +61,7 @@ class Maze
 
 
         //Testing a mechanic - Can be removed
-        void testRotate(int);
-        unsigned short test = 7;
+        void Rotate(int);
 
     protected:
 

@@ -8,11 +8,11 @@
 	<ctime>
 	<Scene.h>
 
-1585419969 c:\school\spring2020\csci191\191t-rougelike\include\scene.h
+1585535638 c:\school\spring2020\csci191\191t-rougelike\include\scene.h
 	<windows.h>
 	<GL/glut.h>
 	<iostream>
-	<Entity.h>
+	<Player.h>
 	<Inputs.h>
 	<Maze.h>
 
@@ -22,7 +22,7 @@
 	<GL/gl.h>
 	<GL/glu.h>
 
-1585416002 c:\school\spring2020\csci191\191t-rougelike\include\entity.h
+1585536690 c:\school\spring2020\csci191\191t-rougelike\include\entity.h
 	<GL/gl.h>
 	<Texture.h>
 
@@ -40,10 +40,10 @@
 
 1584744199 c:\school\spring2020\csci191\191t-rougelike\include\button.h
 
-1585449253 source:c:\school\spring2020\csci191\191t-rougelike\src\entity.cpp
+1585536322 source:c:\school\spring2020\csci191\191t-rougelike\src\entity.cpp
 	"Entity.h"
 
-1585454103 source:c:\school\spring2020\csci191\191t-rougelike\src\inputs.cpp
+1585538106 source:c:\school\spring2020\csci191\191t-rougelike\src\inputs.cpp
 	"Inputs.h"
 
 1585447985 c:\school\spring2020\csci191\191t-rougelike\include\inputs.h
@@ -51,7 +51,7 @@
 	<Entity.h>
 	<Maze.h>
 
-1585449161 source:c:\school\spring2020\csci191\191t-rougelike\src\scene.cpp
+1585537430 source:c:\school\spring2020\csci191\191t-rougelike\src\scene.cpp
 	"Scene.h"
 
 1585432597 source:c:\school\spring2020\csci191\191t-rougelike\src\texture.cpp
@@ -63,7 +63,7 @@
 1584732151 c:\school\spring2020\csci191\191t-rougelike\include\timer.h
 	<time.h>
 
-1585454407 c:\school\spring2020\csci191\191t-rougelike\include\maze.h
+1585537152 c:\school\spring2020\csci191\191t-rougelike\include\maze.h
 	<vector>
 	<iostream>
 	<time.h>
@@ -72,6 +72,12 @@
 	<utility>
 	<Texture.h>
 
-1585452088 source:c:\school\spring2020\csci191\191t-rougelike\src\maze.cpp
+1585537368 source:c:\school\spring2020\csci191\191t-rougelike\src\maze.cpp
 	"Maze.h"
+
+1585536514 c:\school\spring2020\csci191\191t-rougelike\include\player.h
+	<Entity.h>
+
+1585536080 source:c:\school\spring2020\csci191\191t-rougelike\src\player.cpp
+	"Player.h"
 

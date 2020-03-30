@@ -45,31 +45,3 @@ void Entity::DrawEntity()
     glScalef(3.0,3.0,0.0);
     tex->Draw();
 }
-
-void Entity::PositionEntity()
-{
-
-}
-
-void Entity::InitEntity(char* filename, int x, int y)
-{
-    tex->CreateTexture(filename, x, y);
-}
-
-void Entity::AddAnimation(char* name, int start, int frames)
-{
-    tex->AddAnimation(name,start,frames);
-}
-
-void Entity::Actions()
-{
-    switch(action)
-    {
-        case 0: xMin+=1.0/frames;
-                xMax+=1.0/frames;
-                yMin=0.5;
-                yMax=0.75;
-                if(xMax>=1) {xMin=0.0; xMax=1.0/frames;}
-        break;
-    }
-}

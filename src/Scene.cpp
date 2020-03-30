@@ -5,7 +5,7 @@ Scene::Scene()
     screenWidth = GetSystemMetrics(SM_CXSCREEN);
     screenHeight = GetSystemMetrics(SM_CYSCREEN);
 
-    ply = new Entity();
+    ply = new Player();
     maze = new Maze();
     kBMs = new Inputs(ply,maze);
 
@@ -32,16 +32,8 @@ GLint Scene::InitGL()
     //myModel->initModel("images/metal.jpg");
 
     //plx->parallaxInit("images/Flower.jpg");
-    ply->InitEntity("images/prof.png", 9, 4);
-    ply->AddAnimation("WalkUp", 0, 9);
-    ply->AddAnimation("WalkLeft", 9, 9);
-    ply->AddAnimation("WalkDown", 18, 9);
-    ply->AddAnimation("WalkRight", 27, 9);
-    ply->AddAnimation("IdleUp", 0, 1);
-    ply->AddAnimation("IdleLeft", 9, 1);
-    ply->AddAnimation("IdleDown", 18, 1);
-    ply->AddAnimation("IdleRight", 27, 1);
-    ply->tex->SetAnimation("IdleDown",true,false,0);
+    //ply->InitEntity("images/prof.png", 9, 4);
+    ply->Init("images/prof.png", 9, 4);
 
     maze->GenerateMaze(9,9);
     return true;
@@ -53,6 +45,7 @@ GLint Scene::DrawScene()
     glLoadIdentity();
 
     //Push and Pop Matrix Located inside DrawMaze()
+    maze->PrepareToDrawMaze();
     maze->DrawMazeDisplay();
     maze->DrawMazeBG();
     glPushMatrix();

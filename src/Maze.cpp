@@ -188,11 +188,42 @@ void Maze::PrintMaze()
 
 void Maze::Moving(int dir)
 {
-    if(dir == 0) plyX -= speed;
-    else if(dir == 2) plyX += speed;
-    int locX = plyX / 1024;
-    ipair loc = IntToXY(plyLoc);
-    plyLoc = XYtoInt(std::make_pair(locX, loc.second));
+    int localX = plyX % 1024;
+    //std::cout << localX << std::endl;
+    ipair cell = IntToXY(plyLoc);
+    if(dir == 0) //Left
+    {
+        if(!(maze[plyLoc].walls & 1 && localX < 128))
+        {
+            plyX -= speed;
+        }
+    }
+    else if(dir == 2) //Right
+    {
+        if(!(maze[plyLoc].walls & 4 && localX > 768))
+        {
+            plyX += speed;
+        }
+    }
+    else if(dir == 1 && localX > 392 && localX < 576) //Down
+    {
+        if(!(maze[plyLoc].walls & 2))
+        {
+            std::cout << "Move Down" << std::endl;
+            cell.second += 1;
+        }
+    }
+    else if(dir == 3 && localX > 392 && localX < 576) //Up
+    {
+        if(!(maze[plyLoc].walls & 8))
+        {
+            std::cout << "Move Up" << std::endl;
+            cell.second -= 1;
+        }
+    }
+    int cellX = plyX / 1024;
+    plyLoc = XYtoInt(std::make_pair(cellX, cell.second));
+    maze[plyLoc].visited = true;
     //std::cout << "PLYX: " << plyX << "PLYLOC: " << locX << std::endl;
 }
 
@@ -207,8 +238,9 @@ ipair Maze::IntToXY(int i)
     return std::make_pair(i%mazeSizeX, i/mazeSizeX);
 }
 
-void Maze::PrepareToDraw()
+void Maze::PrepareToDrawMaze()
 {
+    //std::cout << plyLoc << std::endl;
     instantaniousXY = IntToXY(plyLoc);
 }
 
@@ -217,19 +249,76 @@ void Maze::DrawMazeDisplay()
     displayPieces->TextureBinder();
     for(int i = 0; i < maze.size(); ++i)
     {
-        displayPieces->curFrame = maze[i].walls;
-        ipair pos = IntToXY(i);
-        float locX = mapScreenPosX + displayPieces->widthPercentage*pos.first;
-        float locY = mapScreenPosY + displayPieces->heightPercentage*pos.second;
-        glPushMatrix();
-            glTranslatef(locX,locY,0);
-            displayPieces->Draw();
-            if(i == plyLoc)
-            {
-                displayPieces->curFrame = 15;
+        if(maze[i].visited)
+        {
+            displayPieces->curFrame = maze[i].walls;
+            ipair pos = IntToXY(i);
+            float locX = mapScreenPosX + displayPieces->widthPercentage*pos.first;
+            float locY = mapScreenPosY + displayPieces->heightPercentage*pos.second;
+            glPushMatrix();
+                glTranslatef(locX,locY,0);
                 displayPieces->Draw();
+                if(i == plyLoc)
+                {
+                    displayPieces->curFrame = 15;
+                    displayPieces->Draw();
+                }
+            glPopMatrix();
+        }
+    }
+}
+
+void Maze::Rotate(int dir)
+{
+    //This code rotates the rightmost 4 bits by n
+    //& 0xF ensures the all bits but the last 4 are reset to 0s
+    //int n = 1;
+    //if(dir == 1) //Clockwise
+    //    test = ((test >> n) | (test << (4-n))) & 0xF;
+    //else//Counterclockwise
+    //    test = ((test << n) | (test >> (4-n))) & 0xF;
+    //std::cout << "Test " << test << std::endl;
+    int N = mazeSizeX;
+    for(int x = 0; x < N / 2; ++x)
+    {
+        for(int y = x; y < N-x-1; ++y)
+        {
+            int first = XYtoInt(std::make_pair(x,y));
+            int second = XYtoInt(std::make_pair(y,N-1-x));
+            int third = XYtoInt(std::make_pair(N-1-x,N-1-y));
+            int forth = XYtoInt(std::make_pair(N-1-y,x));
+            if(dir == 1)
+            {
+                room temp = maze[first];
+                maze[first] = maze[second];
+                maze[second] = maze[third];
+                maze[third] = maze[forth];
+                maze[forth] = temp;
+                maze[first].walls = ((maze[first].walls >> 1) | (maze[first].walls << (3))) & 0xF;
+                maze[second].walls = ((maze[second].walls >> 1) | (maze[second].walls << (3))) & 0xF;
+                maze[third].walls = ((maze[third].walls >> 1) | (maze[third].walls << (3))) & 0xF;
+                maze[forth].walls = ((maze[forth].walls >> 1) | (maze[forth].walls << (3))) & 0xF;
             }
-        glPopMatrix();
+            else if(dir == -1)
+            {
+                room temp = maze[forth];
+                maze[forth] = maze[third];
+                maze[third] = maze[second];
+                maze[second] = maze[first];
+                maze[first] = temp;
+                maze[first].walls = ((maze[first].walls << 1) | (maze[first].walls >> (3))) & 0xF;
+                maze[second].walls = ((maze[second].walls << 1) | (maze[second].walls >> (3))) & 0xF;
+                maze[third].walls = ((maze[third].walls << 1) | (maze[third].walls >> (3))) & 0xF;
+                maze[forth].walls = ((maze[forth].walls << 1) | (maze[forth].walls >> (3))) & 0xF;
+            }
+        }
+    }
+    if(mazeSize % 2)
+    {
+        int i = (mazeSize - 1) / 2;
+        std::cout << "i: " << i << std::endl;
+        if(dir == 1) maze[i].walls = ((maze[i].walls >> 1) | (maze[i].walls << (3))) & 0xF;
+        else if(dir == -1) maze[i].walls = ((maze[i].walls << 1) | (maze[i].walls >> (3))) & 0xF;
     }
 }
 
@@ -238,6 +327,8 @@ void Maze::DrawMazeBG()
     northWall->TextureBinder();
     northWall->curFrame = !((maze[plyLoc].walls & 8) >> 3);
     //std::cout << "NW " << northWall->curFrame << std::endl;
+    //ipair loc = IntToXY(plyLoc);
+    //float base = (plyX - (loc.first * northWall->width)) / 1920.0;
     float modifier = (plyX - (instantaniousXY.first * northWall->width)) / 1920.0;
     //std::cout << "Base: " << base << std::endl;
     float startX = 0.5 - modifier;
@@ -252,26 +343,15 @@ void Maze::DrawMazeBG()
     glPopMatrix();
 }
 
-void Maze::testRotate(int dir)
-{
-    //This code rotates the rightmost 4 bits by n
-    //& 0xF ensures the all bits but the last 4 are reset to 0s
-    int n = 1;
-    if(dir == 1) //Clockwise
-        test = ((test >> n) | (test << (4-n))) & 0xF;
-    else//Counterclockwise
-        test = ((test << n) | (test >> (4-n))) & 0xF;
-    std::cout << "Test " << test << std::endl;
-}
-
 void Maze::DrawMazeFG()
 {
     southWall->curFrame = !((maze[plyLoc].walls & 2) >> 1);
     //std::cout << "SW " << southWall->curFrame << std::endl;
 
-    ipair loc = IntToXY(plyLoc);
-    float base = (plyX - (loc.first * southWall->width)) / 1920.0;
-    float startX = 0.5 - base;
+    //ipair loc = IntToXY(plyLoc);
+    //float base = (plyX - (loc.first * southWall->width)) / 1920.0;
+    float modifier = (plyX - (instantaniousXY.first * northWall->width)) / 1920.0;
+    float startX = 0.5 - modifier;
     if(maze[plyLoc].walls & 1) //West Wall exists
     {
         glPushMatrix();
