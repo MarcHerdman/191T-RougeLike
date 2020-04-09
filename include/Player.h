@@ -1,3 +1,5 @@
+//The player entity
+
 #ifndef PLAYER_H
 #define PLAYER_H
 
@@ -10,7 +12,8 @@ class Player : public Entity
         Player();
         virtual ~Player();
 
-        void Init(char*,int,int);
+        void Init(char*,int,int);   //Initialize the player
+        void Action(int);           //Handle inputs
 
     protected:
 

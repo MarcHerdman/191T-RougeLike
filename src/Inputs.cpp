@@ -1,10 +1,9 @@
 #include "Inputs.h"
 
-Inputs::Inputs(Entity* p, Maze* m)
+Inputs::Inputs(Timer* t)
 {
     //ctor
-    ply = p;
-    maze = m;
+    timer = t;
 }
 
 Inputs::~Inputs()
@@ -12,47 +11,76 @@ Inputs::~Inputs()
     //dtor
 }
 
-
-void Inputs::KeyPressed()
+void Inputs::SetPlayer(Entity* e)
 {
-    //std::cout << wParam << std::endl;
-    switch(wParam)
+    ply = e;
+}
+
+void Inputs::SetMaze(Maze* m)
+{
+    maze = m;
+}
+
+void Inputs::SetBtns(Buttons* b)
+{
+    btns = b;
+}
+
+void Inputs::KeyPressed()//ONLY RESPOND ONCE WHEN THE KEY IS FIRST PRESSED
+{
+    if(!timer->IsPaused())
     {
-        case VK_LEFT:
-            ply->tex->SetAnimation("WalkLeft", true, true, 0);
-            maze->Moving(0);
-            break;
-        case VK_RIGHT:
-            ply->tex->SetAnimation("WalkRight", true, true, 0);
-            maze->Moving(2);
-            break;
-        case VK_UP:
-            ply->tex->SetAnimation("WalkUp", true, true, 0);
-            maze->Moving(3);
-            break;
-        case VK_DOWN:
-            ply->tex->SetAnimation("WalkDown", true, true, 0);
-            maze->Moving(1);
-            break;
+        switch(wParam)
+        {
+            case VK_LEFT:
+                if(ply) ply->Action(1);
+                //if(ply) ply->tex->SetAnimation("WalkLeft", true, true, 0);
+                //if(maze) maze->Moving(0);
+                break;
+            case VK_RIGHT:
+                if(ply) ply->Action(4);
+                //if(ply) ply->tex->SetAnimation("WalkRight", true, true, 0);
+                //if(maze) maze->Moving(2);
+                break;
+            case VK_UP:
+                if(ply) ply->Action(8);
+                //if(ply) ply->tex->SetAnimation("WalkUp", true, true, 0);
+                //if(maze) maze->Moving(3);
+                break;
+            case VK_DOWN:
+                if(ply) ply->Action(2);
+                //if(ply) ply->tex->SetAnimation("WalkDown", true, true, 0);
+                //if(maze) maze->Moving(1);
+                break;
+            case VK_RETURN:
+                break;
+        }
     }
 }
 
 void Inputs::KeyReleased()
 {
-    switch(wParam)
+    if(!timer->IsPaused())
     {
-        case VK_LEFT:
-            ply->tex->SetAnimation("IdleLeft", true, false, 0);
-            break;
-        case VK_RIGHT:
-            ply->tex->SetAnimation("IdleRight", true, false, 0);
-            break;
-        case VK_UP:
-            ply->tex->SetAnimation("IdleUp", true, false, 0);
-            break;
-        case VK_DOWN:
-            ply->tex->SetAnimation("IdleDown", true, false, 0);
-            break;
+        switch(wParam)
+        {
+            case VK_LEFT:
+                if(ply) ply->Action(-1);
+                //if(ply) ply->tex->SetAnimation("IdleLeft", true, false, 0);
+                break;
+            case VK_RIGHT:
+                if(ply) ply->Action(-4);
+                //if(ply) ply->tex->SetAnimation("IdleRight", true, false, 0);
+                break;
+            case VK_UP:
+                if(ply) ply->Action(-8);
+                //if(ply) ply->tex->SetAnimation("IdleUp", true, false, 0);
+                break;
+            case VK_DOWN:
+                if(ply) ply->Action(-2);
+                //if(ply) ply->tex->SetAnimation("IdleDown", true, false, 0);
+                break;
+        }
     }
 }
 
@@ -75,9 +103,10 @@ void Inputs::mouseEventDown(double x, double y)
     }
 }
 
-void Inputs::mouseEventUp()
+std::string Inputs::mouseEventUp()
 {
-
+    if(btns) return btns->CheckClick();
+    return "";
 }
 
 void Inputs::mouseWheel(double delta)
@@ -88,7 +117,6 @@ void Inputs::mouseWheel(double delta)
 void Inputs::mouseMove(double x, double y)
 {
     //Code Here
-
     prevMouseX = x;
     prevMouseY = y;
 }

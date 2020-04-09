@@ -1,15 +1,11 @@
+//Abstract class to provide common functionality to things that must move on the screen
+//Mainly intended to be used for the player and enemies
+
 #ifndef ENTITY_H
 #define ENTITY_H
 
 #include<GL/gl.h>
 #include<Texture.h>
-
-typedef struct
-{
-    float x;
-    float y;
-    float z;
-}vec3;
 
 class Entity
 {
@@ -18,32 +14,20 @@ class Entity
         virtual ~Entity();
 
         void DrawEntity();
-        void PositionEntity();
+        void PositionEntity(int);
 
         virtual void Init(char*, int, int) = 0; //Force all child classes to have an Init function
+        virtual void Action(int) = 0;           //Force all child classes to have an Action function
 
-        float scale[3] = {1.0,1.0,1.0};
-        vec3 verticies[4];
+        float xPos;                             //x position of the entity
+        float yPos;                             //y position of the entity
 
-        float xPos;     //x position of the player
-        float yPos;     //y position of the player
-        float zPos;     //z position of the player
+        int movementFlag;                       //bitflag of current directions entity is moving (W=1,S=2,E=4,N=8)
+        std::string whenIdle;                   //what idle animation to play if no longer moving
 
-        float xSize;    //X Y scaling
-        float ySize;
+        float walkSpeed;                        //Movement speed in terms of percentage of screen moved per frame
 
-        float xRotation;    //Rotations of the player
-        float yRotation;
-        float zRotation;
-
-        float runSpeed;
-        float jumpSpeed;
-
-        float xMax,xMin,yMax,yMin;
-
-        int action;
-        int frames;
-        Texture* tex;
+        Texture* tex;                           //Texture information for the entity
 
     protected:
 

@@ -3,33 +3,6 @@
 Entity::Entity()
 {
     tex = new Texture();
-
-    verticies[0].x=0.0; verticies[0].y=0.0; verticies[0].z=-8.0;
-    verticies[1].x=1.0; verticies[1].y=0.0; verticies[1].z=-8.0;
-    verticies[2].x=1.0; verticies[2].y=1.0; verticies[2].z=-8.0;
-    verticies[3].x=0.0; verticies[3].y=1.0; verticies[3].z=-8.0;
-
-    runSpeed = 0;
-    jumpSpeed = 0;
-
-    xPos = 0.0;
-    yPos = 0.0;
-    zPos = 5.0;
-
-    xSize = 2.0;    //X Y scaling
-    ySize = 2.0;
-
-    xRotation = 0.0;    //Rotations of the player
-    yRotation = 0.0;
-    zRotation = 0.0;
-
-    action = 0;
-
-    frames = 7;
-    xMin = 0.0;
-    yMin = 0.0;
-    xMax = 1.0/frames;
-    yMax = 1.0/4;
 }
 
 Entity::~Entity()
@@ -37,11 +10,32 @@ Entity::~Entity()
     //dtor
 }
 
+//Draw the entity to the screen
+//Requires Push Matrix be call before and Pop Matrix be called after
 void Entity::DrawEntity()
 {
-
     tex->TextureBinder();
-    glTranslatef(0.5 - tex->widthPercentage,0.5 - tex->heightPercentage,0);
-    glScalef(3.0,3.0,0.0);
-    tex->Draw();
+    //tex->Draw(0.5 - tex->widthPercentage,0.5 - tex->heightPercentage, 3.0, 3.0);
+    tex->Draw(xPos,yPos,3.0,3.0);
+}
+
+//Set the entity's position based on the movement flag and walk speed.
+void Entity::PositionEntity(int room)
+{
+    if(movementFlag & 1) xPos-=walkSpeed;
+    if(movementFlag & 2) yPos+=walkSpeed;
+    if(movementFlag & 4) xPos+=walkSpeed;
+    if(movementFlag & 8) yPos-=walkSpeed;
+
+    //std::cout << "X: " << xPos << ", Y: " << yPos << std::endl;
+
+    if(room & 1) if(xPos < 0.3) xPos+=walkSpeed;
+    //else if(xPos<0.2) Action("ChangeRoomLeft");
+    if(room & 4) if(xPos > 0.7) xPos-=walkSpeed;
+    //else if(xPos>0.8) Action("ChangeRoomRight");
+    if(room & 2) if(yPos > 0.6) yPos-=walkSpeed;
+    //else if(yPos<0.62 && xPos > 0.45 && xPos < 0.55) Action("ChangeRoomDown");
+    if(room & 8) if(yPos < 0.4) yPos+=walkSpeed;
+    //else if(yPos<0.38 && xPos > 0.55 && xPos < 0.55 ) Action("ChangeRoomUp");
+
 }

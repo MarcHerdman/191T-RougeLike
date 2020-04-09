@@ -17,7 +17,12 @@
 #include <stack>
 #include <ctime>
 
+#include <Timer.h>
 #include <Scene.h>
+#include <BlankScreen.h>
+#include <TitleScreen.h>
+#include <Level.h> //Debug Only
+#include <MenuScreen.h> //Debug Only
 
 using namespace std;
 
@@ -33,9 +38,12 @@ bool	fullscreen=TRUE;	// Fullscreen Flag Set To Fullscreen Mode By Default
 
 LRESULT	CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);	// Declaration For WndProc
 
-stack<Scene*> scenes;
-clock_t start;
-float FPS;
+const int fps = 10;         //Number of frames to draw each second;
+float FPS;                  //Number of seconds between draw screens
+Timer* timer;               //Control Draw Screen Intervals
+stack<Scene*> scenes;       //Hold all active scenes in a stack. Draw only the top one
+
+
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -136,12 +144,13 @@ BOOL CreateGLWindow(char* title, int width, int height, int bits, bool fullscree
 
 		dwExStyle=WS_EX_APPWINDOW;								// Window Extended Style
 		dwStyle= WS_POPUP;			// must handle Gsync situations: Windows Style
-		ShowCursor(FALSE);									// Hide Mouse Pointer
+		ShowCursor(TRUE);									// Hide Mouse Pointer
 	}
 	else
 	{
 		dwExStyle=WS_EX_APPWINDOW | WS_EX_WINDOWEDGE;			// Window Extended Style
 		dwStyle=WS_OVERLAPPEDWINDOW;							// Windows Style
+		//dwStyle=WS_POPUP | WS_THICKFRAME;                       //No Border
 	}
 
 	AdjustWindowRectEx(&WindowRect, dwStyle, FALSE, dwExStyle);		// Adjust Window To True Requested Size
@@ -226,9 +235,11 @@ BOOL CreateGLWindow(char* title, int width, int height, int bits, bool fullscree
 	ShowWindow(hWnd,SW_SHOW);						// Show The Window
 	SetForegroundWindow(hWnd);						// Slightly Higher Priority
 	SetFocus(hWnd);									// Sets Keyboard Focus To The Window
-	scenes.top()->ResizeScene(width, height);			// Set Up Our Perspective GL Screen
+	int heightWithoutTitlebar = height;
+	if(!fullscreen) height -= 16;                   //Compensate for the Title Bar
+	scenes.top()->ResizeScene(width, height);		// Set Up Our Orthogonal GL Screen
 
-	if (!scenes.top()->InitGL())							// Initialize Our Newly Created GL Window
+	if (!scenes.top()->InitGL())				    // Initialize Our Newly Created GL Window
 	{
 		KillGLWindow();								// Reset The Display
 		MessageBox(NULL,"Initialization Failed.","ERROR",MB_OK|MB_ICONEXCLAMATION);
@@ -324,11 +335,16 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 	int	fullscreenWidth  = GetSystemMetrics(SM_CXSCREEN);
     int	fullscreenHeight = GetSystemMetrics(SM_CYSCREEN);
 
-    Scene* s = new Scene();
-    scenes.push(s);
-    start = clock();
-    FPS = 1.0/10 * 1000;
+    timer = new Timer();                            //Create timer instance for draw control
 
+    BlankScreen* bs = new BlankScreen(&scenes);     //Create a blank scene for catching QUIT
+    scenes.push(bs);                                //Push it to bottom of the scene stack
+    TitleScreen* ts = new TitleScreen(&scenes);     //Create the Title Screen
+    //MenuScreen* ts = new MenuScreen(&scenes);     //DEBUG: Go directly to Menu Screen
+    //Level* ts = new Level(&scenes);               //DEBUG: Go directly to a level
+    scenes.push(ts);                                //Set the created scene to top(active) scene
+
+    FPS = 1.0/fps * 1000;                            //Calculate the FPS
 	// Ask The User Which Screen Mode They Prefer
 	if (MessageBox(NULL,"Would You Like To Run In Fullscreen Mode?", "Start FullScreen?",MB_YESNO|MB_ICONQUESTION)==IDNO)
 	{
@@ -340,7 +356,7 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 	{
 		return 0;									// Quit If Window Was Not Created
 	}
-
+    timer->Start();                                 //Start the timer
 	while(!done)									// Loop That Runs While done=FALSE
 	{
 		if (PeekMessage(&msg,NULL,0,0,PM_REMOVE))	// Is There A Message Waiting?
@@ -357,11 +373,12 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 		}
 		else										// If There Are No Messages
 		{
-		    if(clock() - start > FPS)
+		    if(timer->GetTicks() > FPS)             //Only proceed if enough time has passed
             {
-                start = clock();
+                timer->Reset();                     //Reset clock
                 // Draw The Scene.  Watch For ESC Key And Quit Messages From DrawGLScene()
-                if (keys[VK_ESCAPE])	// Active?  Was There A Quit Received?
+                //if (keys[VK_ESCAPE] || scenes.size() == 1)	// Active?  Was There A Quit Received?
+                if (scenes.size() == 1)             //Quit if only the blank scene is left on the stack
                 {
                     done=TRUE;							// ESC or DrawGLScene Signalled A Quit
                 }

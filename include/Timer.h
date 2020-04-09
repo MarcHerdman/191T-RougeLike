@@ -2,6 +2,7 @@
 #define TIMER_H
 
 #include <time.h>
+#include <iostream>
 
 class Timer
 {
@@ -23,6 +24,9 @@ class Timer
         clock_t pausedAt;
         bool started;
         bool paused;
+
+        float FPS;
+        clock_t baseTime;
 
     protected:
 

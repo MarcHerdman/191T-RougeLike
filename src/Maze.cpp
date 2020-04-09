@@ -24,11 +24,11 @@ void Maze::GenerateMaze(int x, int y)
     floor = new Texture();
 
     displayPieces->CreateTexture("images/RL_MapPieces.png", 4,4);
-    westWall->CreateTexture("images/RL_WestWall.png", 1, 1);
-    southWall->CreateTexture("images/RL_SouthWall.png", 1, 2);
-    eastWall->CreateTexture("images/RL_EastWall.png", 1, 1);
-    northWall->CreateTexture("images/RL_NorthWall.png", 1, 2);
-    floor->CreateTexture("images/RL_Floor.png", 1, 1);
+    westWall->CreateTexture("images/RL_WestWall.png", 1, 1,0.0,0.0);
+    southWall->CreateTexture("images/RL_SouthWall.png", 1, 2,0.5,0.0);
+    eastWall->CreateTexture("images/RL_EastWall.png", 1, 1,1.0,0.0);
+    northWall->CreateTexture("images/RL_NorthWall.png", 1, 2,0.5,0.0);
+    floor->CreateTexture("images/RL_Floor.png", 1, 1,0.5,0.0);
 
     mazeSizeX = x;
     mazeSizeY = y;
@@ -42,8 +42,6 @@ void Maze::GenerateMaze(int x, int y)
             room r;
             r.visited = false;
             r.walls = 15; //Bitfield 1=LeftWall, 2=SouthWall, 4=RightWall, 8=NorthWall
-            //r.tex = new Texture();
-            //r.tex->CreateTexture("images/MazeWalls.png", 4, 4);
             maze.push_back(r);
     }
     std::stack<int> progress; //Stack up rooms as we traverse to allow backtracking
@@ -76,72 +74,39 @@ void Maze::GenerateMaze(int x, int y)
 
 int Maze::GetNextDir(int curLoc)
 {
-    unsigned short thisRoomWalls = maze[curLoc].walls; //Get the walls as they stand now
-    ipair thisRoom = IntToXY(curLoc); //Get X Y coords for this room
+    int validSelections=0;
+    ipair curLocXY = IntToXY(curLoc);
+    if(curLocXY.first - 1 >= 0) //West
+    {
+        int neightbor = XYtoInt(std::make_pair(curLocXY.first - 1,curLocXY.second));
+        if(!maze[neightbor].visited) validSelections+=1;
 
-    //Remove ability to pick wall that leads to visited room or out of maze
-    if(thisRoom.first > 0) //Not against west edge
-    {
-        int westNeighbor = XYtoInt(std::make_pair(thisRoom.first - 1, thisRoom.second));
-        if(maze[westNeighbor].visited) //West neighbor has been visited
-        {
-            thisRoomWalls = thisRoomWalls & ~1; //Remove ability to pick west wall
-        }
     }
-    else //Against west edge
+    if(curLocXY.first + 1 < mazeSizeX) //East
     {
-        thisRoomWalls = thisRoomWalls & ~1; //Remove ability to pick west wall
+        int neightbor = XYtoInt(std::make_pair(curLocXY.first + 1,curLocXY.second));
+        if(!maze[neightbor].visited) validSelections+=4;
     }
+    if(curLocXY.second - 1 >= 0) //North
+    {
+        int neightbor = XYtoInt(std::make_pair(curLocXY.first,curLocXY.second -1));
+        if(!maze[neightbor].visited) validSelections+=8;
+    }
+    if(curLocXY.second + 1 < mazeSizeY) //South
+    {
+        int neightbor = XYtoInt(std::make_pair(curLocXY.first,curLocXY.second+1));
+        if(!maze[neightbor].visited) validSelections+=2;
 
-    if(thisRoom.first < mazeSizeX-1) //Not against east edge
-    {
-        int eastNeighbor = XYtoInt(std::make_pair(thisRoom.first + 1, thisRoom.second));
-        if(maze[eastNeighbor].visited) //East neighbor has been visited
-        {
-            thisRoomWalls = thisRoomWalls & ~4; //Remove ability to pick east wall
-        }
     }
-    else //Against west edge
-    {
-        thisRoomWalls = thisRoomWalls & ~4; //Remove ability to pick east wall
-    }
-
-    if(thisRoom.second > 0) //Not against north edge
-    {
-        int northNeighbor = XYtoInt(std::make_pair(thisRoom.first, thisRoom.second - 1));
-        if(maze[northNeighbor].visited) //North neighbor has been visited
-        {
-            thisRoomWalls = thisRoomWalls & ~8; //Remove ability to pick west wall
-        }
-    }
-    else //Against north edge
-    {
-        thisRoomWalls = thisRoomWalls & ~8; //Remove ability to pick north wall
-    }
-
-    if(thisRoom.second < mazeSizeY-1) //Not against south edge
-    {
-        int southNeighbor = XYtoInt(std::make_pair(thisRoom.first, thisRoom.second + 1));
-        if(maze[southNeighbor].visited) //South neighbor has been visited
-        {
-            thisRoomWalls = thisRoomWalls & ~2; //Remove ability to pick east wall
-        }
-    }
-    else //Against south edge
-    {
-        thisRoomWalls = thisRoomWalls & ~2; //Remove ability to pick south wall
-    }
-
-    if(thisRoomWalls == 0) return -1; //No valid options so return -1
-
-    unsigned short proposedDir;
-    unsigned short proposedWall;
-    do //While the prosed wall to remove is not valid for this room keep trying.
+    if(!validSelections) return -1;
+    int proposedDir = 0;
+    int proposedWall = 0;
+    do
     {
         proposedDir = rand() % 4; //Select a number between 0-3
         proposedWall = 1 << proposedDir; //Turn it into a bitmask 1,2,4, or 8
-    }while(!(thisRoomWalls & proposedWall));
-    return (int)proposedDir;
+    }while(!(validSelections & proposedWall));
+    return proposedDir;
 }
 
 int Maze::GetNeighbor(int curLoc, int dir)
@@ -164,6 +129,7 @@ int Maze::GetNeighbor(int curLoc, int dir)
     }
 }
 
+
 void Maze::PrintMaze()
 {
     std::cout << " ";
@@ -185,7 +151,7 @@ void Maze::PrintMaze()
     }
 }
 
-
+/*
 void Maze::Moving(int dir)
 {
     int localX = plyX % 1024;
@@ -226,7 +192,7 @@ void Maze::Moving(int dir)
     maze[plyLoc].visited = true;
     //std::cout << "PLYX: " << plyX << "PLYLOC: " << locX << std::endl;
 }
-
+*/
 
 int Maze::XYtoInt(ipair ip)
 {
@@ -238,14 +204,17 @@ ipair Maze::IntToXY(int i)
     return std::make_pair(i%mazeSizeX, i/mazeSizeX);
 }
 
+/*
 void Maze::PrepareToDrawMaze()
 {
     //std::cout << plyLoc << std::endl;
     instantaniousXY = IntToXY(plyLoc);
 }
+*/
 
 void Maze::DrawMazeDisplay()
 {
+    glPushMatrix();
     displayPieces->TextureBinder();
     for(int i = 0; i < maze.size(); ++i)
     {
@@ -255,17 +224,16 @@ void Maze::DrawMazeDisplay()
             ipair pos = IntToXY(i);
             float locX = mapScreenPosX + displayPieces->widthPercentage*pos.first;
             float locY = mapScreenPosY + displayPieces->heightPercentage*pos.second;
-            glPushMatrix();
-                glTranslatef(locX,locY,0);
-                displayPieces->Draw();
-                if(i == plyLoc)
-                {
-                    displayPieces->curFrame = 15;
-                    displayPieces->Draw();
-                }
-            glPopMatrix();
+
+            displayPieces->Draw(locX,locY);
+            if(i == plyLoc)
+            {
+                displayPieces->curFrame = 15;
+                displayPieces->Draw(locX,locY);
+            }
         }
     }
+    glPopMatrix();
 }
 
 void Maze::Rotate(int dir)
@@ -324,53 +292,52 @@ void Maze::Rotate(int dir)
 
 void Maze::DrawMazeBG()
 {
-    northWall->TextureBinder();
-    northWall->curFrame = !((maze[plyLoc].walls & 8) >> 3);
-    //std::cout << "NW " << northWall->curFrame << std::endl;
-    //ipair loc = IntToXY(plyLoc);
-    //float base = (plyX - (loc.first * northWall->width)) / 1920.0;
-    float modifier = (plyX - (instantaniousXY.first * northWall->width)) / 1920.0;
-    //std::cout << "Base: " << base << std::endl;
-    float startX = 0.5 - modifier;
+
+    northWall->curFrame = !((maze[plyLoc].walls & 8) >> 3); //Create a 1 or 0 for north door present or not
+    //float modifier = (plyX - (instantaniousXY.first * northWall->width)) / (float)defaultScreenSizeX;
+    //float startX = 0.5 - modifier;
     glPushMatrix();
-        glTranslatef(startX,0,0);
-        northWall->Draw();
-    glPopMatrix();
-    glPushMatrix();
-        glTranslatef(startX,northWall->heightPercentage,0);
+        northWall->TextureBinder();
+        //northWall->Draw(startX,0);
+        northWall->Draw(0.5,0);
+    //glPopMatrix();
+    //glPushMatrix();
         floor->TextureBinder();
-        floor->Draw();
+        //floor->Draw(startX,northWall->heightPercentage);
+        floor->Draw(0.5,northWall->heightPercentage);
+            if(maze[plyLoc].walls & 1) //West Wall exists
+    {
+        //glPushMatrix();
+            westWall->TextureBinder();
+            //westWall->Draw(startX,0);
+            westWall->Draw(0.233,0);
+        //glPopMatrix();
+    }
+    if(maze[plyLoc].walls & 4) //East Wall exists
+    {
+        //glPushMatrix();
+            eastWall->TextureBinder();
+            //eastWall->Draw(startX+eastWall->widthPercentage*7,0);
+            eastWall->Draw(0.766,0);
+        //glPopMatrix();
+    }
     glPopMatrix();
 }
 
 void Maze::DrawMazeFG()
 {
-    southWall->curFrame = !((maze[plyLoc].walls & 2) >> 1);
-    //std::cout << "SW " << southWall->curFrame << std::endl;
-
-    //ipair loc = IntToXY(plyLoc);
-    //float base = (plyX - (loc.first * southWall->width)) / 1920.0;
-    float modifier = (plyX - (instantaniousXY.first * northWall->width)) / 1920.0;
-    float startX = 0.5 - modifier;
-    if(maze[plyLoc].walls & 1) //West Wall exists
-    {
-        glPushMatrix();
-            westWall->TextureBinder();
-            glTranslatef(startX,0,0);
-            westWall->Draw();
-        glPopMatrix();
-    }
-    if(maze[plyLoc].walls & 4) //East Wall exists
-    {
-        glPushMatrix();
-            eastWall->TextureBinder();
-            glTranslatef(startX+eastWall->widthPercentage*7,0,0);
-            eastWall->Draw();
-        glPopMatrix();
-    }
     glPushMatrix();
-        glTranslatef(startX,northWall->heightPercentage + southWall->heightPercentage,0);
+    southWall->curFrame = !((maze[plyLoc].walls & 2) >> 1); //Create a 1 or 0 for south door present or not
+    //float modifier = (plyX - (instantaniousXY.first * northWall->width)) / (float)defaultScreenSizeX;
+    //float startX = 0.5 - modifier;
+    //glPushMatrix();
         southWall->TextureBinder();
-        southWall->Draw();
+        //southWall->Draw(startX,northWall->heightPercentage + southWall->heightPercentage);
+        southWall->Draw(0.5,northWall->heightPercentage + southWall->heightPercentage);
     glPopMatrix();
+}
+
+int Maze::GetRoomWalls()
+{
+    return maze[plyLoc].walls;
 }

@@ -13,7 +13,10 @@ Texture::~Texture()
 {
     //dtor
 }
-void Texture::CreateTexture(char* fileName, int x, int y)
+
+//Requires filename (relative to the exe), number of cells wide and number of cells high
+//Defaults to drawing from the top left corner.
+void Texture::CreateTexture(char* fileName, int cx, int cy, float pivX, float pivY)
 {
     glGenTextures(1,&tex);
     glTexEnvi(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,GL_MODULATE);
@@ -22,7 +25,6 @@ void Texture::CreateTexture(char* fileName, int x, int y)
     image = SOIL_load_image(fileName,&width,&height, 0,SOIL_LOAD_RGBA);
 
     if(!image) std::cout << "fail to find image" << std::endl;
-    //std::cout << "File: " << fileName << " GLuint: " << tex << " Image: " << image << std::endl;
 
     glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width, height,0,GL_RGBA,GL_UNSIGNED_BYTE,image);
     SOIL_free_image_data(image);
@@ -34,13 +36,16 @@ void Texture::CreateTexture(char* fileName, int x, int y)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 
-    cellsX = x;
+    cellsX = cx;
 
-    offsetX = 1.0/x;
-    offsetY = 1.0/y;
+    offsetX = 1.0/cx;
+    offsetY = 1.0/cy;
 
-    widthPercentage = width/x/1920.0;
-    heightPercentage = height/y/1080.0;
+    widthPercentage = width/cx/(float)defaultScreenSizeX;
+    heightPercentage = height/cy/(float)defaultScreenSizeY;
+
+    pivotX = pivX;
+    pivotY = pivY;
 }
 
 void Texture::TextureBinder()
@@ -55,15 +60,15 @@ void Texture::AddAnimation(std::string name, int start, int frames)
 
 void Texture::SetAnimation(std::string name, bool isPlaying, bool isLooping, int startFrsme)
 {
-    if(name != curAnim) //Dont change if already playing this animation
-    {
+    //if(name != curAnim) //Dont change if already playing this animation
+    //{
         curAnim = name;
         playAnim = isPlaying;
         loopAnim = isLooping;
         curFrame = startFrsme;
-    }
+    //}
 }
-void Texture::Draw()
+void Texture::Draw(float xPos, float yPos, float xScale, float yScale)
 {
     int curFrameX, curFrameY;
     if(curAnim == "") //No animation so render current frame
@@ -83,15 +88,22 @@ void Texture::Draw()
 
         if(playAnim) //If this animation is set to play
         {
+            //std::cout << "Playing " << curAnim << std::endl;
             curFrame++; //increase the frames
             if(curFrame >= frames) //if we go past the total number of frames...
             {
                 if(loopAnim)//...If this animation is set to loop...
                 {
+                    //std::cout << "LOOPED " << frames << std::endl;
+                    //std::cout << "Walk up frames " << animations["WalkUp"].second <<  std::endl;
+                    //std::cout << "Walk down frames " << animations["WalkDown"].second <<  std::endl;
+                    //std::cout << "Walk left frames " << animations["WalkLeft"].second <<  std::endl;
+                    //std::cout << "Walk right frames " << animations["WalkRight"].second <<  std::endl;
                     curFrame = 0;//...Reset the counter to 0...
                 }
                 else//...Otherwise...
                 {
+                    //std::cout << "STALLED " << std::endl;
                     curFrame = frames; //...Leave the frame counter at the end of the animation
                 }
             }
@@ -104,19 +116,18 @@ void Texture::Draw()
     float yMin = offsetY * curFrameY;
     float yMax = offsetY * curFrameY + offsetY;
 
+    //std::cout <<"PX: " << pivotX << std::endl;
     glBegin(GL_QUADS);
-
         glTexCoord2f(xMin,yMin);
-        glVertex3f(0.0,0.0,0.0);
+        glVertex3f(xPos-(pivotX*widthPercentage*xScale),yPos-(pivotY*heightPercentage*yScale),0.0);
 
         glTexCoord2f(xMin,yMax);
-        glVertex3f(0.0,heightPercentage,0.0);
+        glVertex3f(xPos-(pivotX*widthPercentage*xScale),yPos-(pivotY*heightPercentage*yScale)+(heightPercentage*yScale),0.0);
 
         glTexCoord2f(xMax,yMax);
-        glVertex3f(widthPercentage,heightPercentage,0.0);
+        glVertex3f(xPos-(pivotX*widthPercentage*xScale)+(widthPercentage*xScale),yPos-(pivotY*heightPercentage*yScale)+(heightPercentage*yScale),0.0);
 
         glTexCoord2f(xMax,yMin);
-        glVertex3f(widthPercentage,0.0,0.0);
-
+        glVertex3f(xPos-(pivotX*widthPercentage*xScale)+(widthPercentage*xScale),yPos-(pivotY*heightPercentage*yScale),0.0);
     glEnd();
 }
