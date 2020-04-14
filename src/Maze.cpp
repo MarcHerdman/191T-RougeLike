@@ -17,25 +17,27 @@ Maze::~Maze()
 void Maze::GenerateMaze(int x, int y)
 {
     displayPieces = new Texture();
-    westWall = new Texture();
-    southWall = new Texture();
-    eastWall = new Texture();
-    northWall = new Texture();
-    floor = new Texture();
+    roomPieces = new Texture();
+    //westWall = new Texture();
+    //southWall = new Texture();
+    //eastWall = new Texture();
+    //northWall = new Texture();
+    //floor = new Texture();
 
     displayPieces->CreateTexture("images/RL_MapPieces.png", 4,4);
-    westWall->CreateTexture("images/RL_WestWall.png", 1, 1,0.0,0.0);
-    southWall->CreateTexture("images/RL_SouthWall.png", 1, 2,0.5,0.0);
-    eastWall->CreateTexture("images/RL_EastWall.png", 1, 1,1.0,0.0);
-    northWall->CreateTexture("images/RL_NorthWall.png", 1, 2,0.5,0.0);
-    floor->CreateTexture("images/RL_Floor.png", 1, 1,0.5,0.0);
+    roomPieces->CreateTexture("images/RL_TopDown.png",4,2);
+    //westWall->CreateTexture("images/RL_WestWall.png", 1, 1,0.0,0.0);
+    //southWall->CreateTexture("images/RL_SouthWall.png", 1, 2,0.5,0.0);
+    //eastWall->CreateTexture("images/RL_EastWall.png", 1, 1,1.0,0.0);
+    //northWall->CreateTexture("images/RL_NorthWall.png", 1, 2,0.5,0.0);
+    //floor->CreateTexture("images/RL_Floor.png", 1, 1,0.5,0.0);
 
     mazeSizeX = x;
     mazeSizeY = y;
     mazeSize = x*y;
 
-    mapScreenPosX = 0.5 - displayPieces->widthPercentage * mazeSizeX / 2;
-    mapScreenPosY = 1.0 - displayPieces->heightPercentage * mazeSizeY;
+    mapScreenPosX = 0.5 + displayPieces->widthPercentage * mazeSizeX / 2;   //Where to put the map readout
+    mapScreenPosY = 0.01;//displayPieces->heightPercentage * mazeSizeY;      //Where to put the map readout
 
     for(int i = 0; i< mazeSize; ++i)
     {
@@ -69,6 +71,8 @@ void Maze::GenerateMaze(int x, int y)
     {
         maze[i].visited=false;
     }
+    plyLoc = rand() % mazeSize;
+    maze[plyLoc].visited = true;
     PrintMaze(); //Draw maze in console
 }
 
@@ -214,7 +218,7 @@ void Maze::PrepareToDrawMaze()
 
 void Maze::DrawMazeDisplay()
 {
-    glPushMatrix();
+    //glPushMatrix();
     displayPieces->TextureBinder();
     for(int i = 0; i < maze.size(); ++i)
     {
@@ -222,18 +226,18 @@ void Maze::DrawMazeDisplay()
         {
             displayPieces->curFrame = maze[i].walls;
             ipair pos = IntToXY(i);
-            float locX = mapScreenPosX + displayPieces->widthPercentage*pos.first;
-            float locY = mapScreenPosY + displayPieces->heightPercentage*pos.second;
+            float locX = mapScreenPosX + displayPieces->widthPercentage*pos.first*2;
+            float locY = mapScreenPosY + displayPieces->heightPercentage*pos.second*2;
 
-            displayPieces->Draw(locX,locY);
+            displayPieces->Draw(locX,locY,2.0,2.0);
             if(i == plyLoc)
             {
                 displayPieces->curFrame = 15;
-                displayPieces->Draw(locX,locY);
+                displayPieces->Draw(locX,locY,2.0,2.0);
             }
         }
     }
-    glPopMatrix();
+    //glPopMatrix();
 }
 
 void Maze::Rotate(int dir)
@@ -290,6 +294,48 @@ void Maze::Rotate(int dir)
     }
 }
 
+void Maze::DrawRoom()
+{
+    int cells = 7;
+    roomPieces->TextureBinder();
+    for(int y = 0; y < cells; ++y)
+    {
+        for(int x = 0; x < cells; ++x)
+        {
+            bool mirror = false;
+            bool flip = false;
+            int curFrame = 7;
+            if(x == 0)
+            {
+                curFrame = 1;
+                if(y == 3 && !(maze[plyLoc].walls & 1)) curFrame = 3;
+            }
+            else if(x == cells-1)
+            {
+                curFrame = 1;
+                mirror = true;
+                if(y == 3 && !(maze[plyLoc].walls & 4)) curFrame = 3;
+            }
+
+            if(y == 0)
+            {
+                curFrame = 0;
+                if(x == 0 || x == cells-1) curFrame = 6;
+                else if(x == 3 && !(maze[plyLoc].walls & 8)) curFrame = 2;
+            }
+            else if(y == cells-1)
+            {
+                curFrame = 0;
+                flip = true;
+                if(x == 0 || x == cells-1) curFrame = 6;
+                else if(x == 3 && !(maze[plyLoc].walls & 2)) curFrame = 2;
+            }
+            roomPieces->curFrame = curFrame;
+            roomPieces->Draw(x*roomPieces->widthPercentage,y*roomPieces->heightPercentage,1.0,1.0,mirror, flip);
+        }
+    }
+}
+/*
 void Maze::DrawMazeBG()
 {
 
@@ -336,8 +382,78 @@ void Maze::DrawMazeFG()
         southWall->Draw(0.5,northWall->heightPercentage + southWall->heightPercentage);
     glPopMatrix();
 }
-
+*/
 int Maze::GetRoomWalls()
 {
     return maze[plyLoc].walls;
+}
+
+
+std::string Maze::checkWallCollision(fpair loc)
+{
+    std::cout << "PLYLOC: " << plyLoc << " WALLS " << maze[plyLoc].walls << " XY: " << loc.first << ", " << loc.second << std::endl;
+    float westBase = 0.07;
+    float northBase = 0.03;
+    float eastBase = 0.4;
+    float southBase = 0.65;
+
+    int onDoorFlag = 0;
+
+    if(loc.second > 0.32 && loc.second < 0.38)
+    {
+        if(!(maze[plyLoc].walls & 1))
+        {
+            westBase = 0.03;
+            onDoorFlag +=1;
+        }
+        if(!(maze[plyLoc].walls & 4))
+        {
+            eastBase = 0.44;
+            onDoorFlag +=4;
+        }
+    }
+    if(loc.first > 0.22 && loc.first < 0.26)
+    {
+        if(!(maze[plyLoc].walls & 2))
+        {
+            southBase = 0.7;
+            onDoorFlag +=2;
+        }
+        if(!(maze[plyLoc].walls & 8))
+        {
+            northBase = 0.01;
+            onDoorFlag +=8;
+        }
+    }
+
+    if(loc.first < westBase)
+    {
+        if(onDoorFlag & 1) return "TRANS_W";
+        return "COLL_W";
+    }
+    if(loc.first > eastBase)
+    {
+        if(onDoorFlag & 4) return "TRANS_E";
+        return "COLL_E";
+    }
+    if(loc.second < northBase)
+    {
+        if(onDoorFlag & 8) return "TRANS_N";
+        return "COLL_N";
+    }
+    if(loc.second > southBase)
+    {
+        if(onDoorFlag & 2) return "TRANS_S";
+        return "COLL_S";
+    }
+    return "COLL_NONE";
+}
+
+void Maze::movePlayer(std::string dir)
+{
+    if(dir == "N") plyLoc -= mazeSizeX;
+    else if(dir == "S") plyLoc += mazeSizeX;
+    else if(dir == "W") plyLoc--;
+    else if(dir == "E") plyLoc++;
+    maze[plyLoc].visited = true;
 }

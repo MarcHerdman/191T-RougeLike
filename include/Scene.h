@@ -17,6 +17,7 @@
 #include <Maze.h>
 //#include <Button.h>
 #include <Timer.h>
+#include <Util.h>
 
 class Scene
 {
@@ -27,7 +28,7 @@ class Scene
         GLint InitGL();                                 //initialize OpenGL
         GLint DrawScene();                              //Renderer
         GLvoid ResizeScene(GLsizei, GLsizei);           //screen size changes
-        int WinMsg(HWND, UINT, WPARAM, LPARAM);	        // Callback of Inputs
+        int WinMsg(HWND, UINT, WPARAM, LPARAM);	        //Callback of Inputs
 
         virtual void Init(int, int) = 0;                //Force all scenes to have an Init function
         virtual void Draw() = 0;                        //Force all scenes to have a Draw function

@@ -23,7 +23,7 @@ class Texture
         void TextureBinder();                                                       //Make this the active texture
         void AddAnimation(std::string,int,int);                                     //Create and animation
         void SetAnimation(std::string, bool, bool, int);                            //Set the active animation
-        void Draw(float xPos, float yPos, float xScale = 1.0, float yScale=1.0);    //Draw the current frame at position and scale
+        void Draw(float xPos, float yPos, float xScale = 1.0, float yScale=1.0, bool flip=false, bool mirror=false);    //Draw the current frame at position and scale
 
         int width,height;                           //Height and width of the whole texture
         float widthPercentage, heightPercentage;    //Height and width of a single cell in terms of percentage of screen

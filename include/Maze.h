@@ -38,8 +38,12 @@ class Maze
 
         //void PrepareToDrawMaze();
         void DrawMazeDisplay();             //Draw the minimap
+        void DrawRoom();
         void DrawMazeBG();                  //Draw all things behind the player
         void DrawMazeFG();                  //Draw all things in front of the player
+
+        std::string checkWallCollision(fpair);
+        void movePlayer(std::string);
 
         int XYtoInt(ipair);                 //Convert X,Y to single array index     <-Move to Util class
         ipair IntToXY(int);                 //Convert single array index to X, Y    <-Move to Util class
@@ -57,11 +61,12 @@ class Maze
         std::vector<room> maze;             //The maze
 
         Texture* displayPieces;             //Textures for the minimap
-        Texture* westWall;                  //Textures for the room display
-        Texture* southWall;                 // ""                  ""
-        Texture* eastWall;                  // ""                  ""
-        Texture* northWall;                 // ""                  ""
-        Texture* floor;                     // ""                  ""
+        Texture* roomPieces;
+        //Texture* westWall;                  //Textures for the room display
+        //Texture* southWall;                 // ""                  ""
+        //Texture* eastWall;                  // ""                  ""
+        //Texture* northWall;                 // ""                  ""
+        //Texture* floor;                     // ""                  ""
 
         float mapScreenPosX;                //Where to draw the map screen
         float mapScreenPosY;                //Where to draw the map screen

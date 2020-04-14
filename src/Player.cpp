@@ -5,8 +5,8 @@ Player::Player()
     //ctor
     movementFlag = 0;
     walkSpeed = 0.01;
-    xPos = 0.5;
-    yPos = 0.5;
+    xPos = 0.1;
+    yPos = 0.1;
 }
 
 Player::~Player()
@@ -59,4 +59,12 @@ void Player::Action(int input)
         whenIdle = "IdleUp";
     }
     if(movementFlag == 0) tex->SetAnimation(whenIdle, true, false, 0);
+}
+
+void Player::Teleport(std::string dir)
+{
+    if(dir == "W") xPos = 0.43;
+    if(dir == "E") xPos = 0.031;
+    if(dir == "N") yPos = 0.69;
+    if(dir == "S") yPos = 0.02;
 }

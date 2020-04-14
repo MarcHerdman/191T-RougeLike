@@ -27,6 +27,7 @@ Level::~Level()
 void Level::Init(int screenWidth, int screenHeight)
 {
     ply->Init("images/prof.png", 9, 4);
+    ply->PositionEntity(std::make_pair(0.2,0.2));
     maze->GenerateMaze(9,9);
     popup->Init(screenWidth, screenHeight);
     //btns->Init("images/RL_Buttons_1024.png", 4, 8);
@@ -39,18 +40,32 @@ void Level::Init(int screenWidth, int screenHeight)
 //Draw this scene to the screen
 void Level::Draw()
 {
+    fpair newXY = ply->GetNextXY();
+    std::string coll = maze->checkWallCollision(newXY);
+    std::cout << coll << std::endl;
+    if(coll == "COLL_NONE") ply->PositionEntity(newXY);
+    if(coll.substr(0,5) == "TRANS")
+    {
+        std::string dir = coll.substr(6,1);
+        std::cout << dir << std::endl;
+        ply->Teleport(dir);
+        maze->movePlayer(dir);
+    }
+
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	// Clear Screen And Depth Buffer
     glLoadIdentity();
 
     //Push and Pop Matrix Located inside DrawMaze()
     //maze->PrepareToDrawMaze();
-    maze->DrawMazeDisplay();
-    maze->DrawMazeBG();
     glPushMatrix();
-        ply->PositionEntity(maze->GetRoomWalls());
+    maze->DrawMazeDisplay();
+    //maze->DrawMazeBG();
+    maze->DrawRoom();
+
+        //ply->PositionEntity(maze->GetRoomWalls());
         ply->DrawEntity();
     glPopMatrix();
-    maze->DrawMazeFG();
+    //maze->DrawMazeFG();
     if(timer->IsPaused())
     {
         popup->Draw(mouseX,mouseY);

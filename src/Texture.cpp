@@ -68,7 +68,7 @@ void Texture::SetAnimation(std::string name, bool isPlaying, bool isLooping, int
         curFrame = startFrsme;
     //}
 }
-void Texture::Draw(float xPos, float yPos, float xScale, float yScale)
+void Texture::Draw(float xPos, float yPos, float xScale, float yScale, bool flip, bool mirror)
 {
     int curFrameX, curFrameY;
     if(curAnim == "") //No animation so render current frame
@@ -115,7 +115,18 @@ void Texture::Draw(float xPos, float yPos, float xScale, float yScale)
     float xMax = offsetX * curFrameX + offsetX;
     float yMin = offsetY * curFrameY;
     float yMax = offsetY * curFrameY + offsetY;
-
+    if(flip)
+    {
+        float temp = xMin;
+        xMin = xMax;
+        xMax = temp;
+    }
+    if(mirror)
+    {
+        float temp = yMin;
+        yMin = yMax;
+        yMax = temp;
+    }
     //std::cout <<"PX: " << pivotX << std::endl;
     glBegin(GL_QUADS);
         glTexCoord2f(xMin,yMin);

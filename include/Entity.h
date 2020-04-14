@@ -6,6 +6,7 @@
 
 #include<GL/gl.h>
 #include<Texture.h>
+#include<Util.h>
 
 class Entity
 {
@@ -14,10 +15,12 @@ class Entity
         virtual ~Entity();
 
         void DrawEntity();
-        void PositionEntity(int);
+        fpair GetNextXY();
+        void PositionEntity(fpair);
 
         virtual void Init(char*, int, int) = 0; //Force all child classes to have an Init function
         virtual void Action(int) = 0;           //Force all child classes to have an Action function
+        //virtual bool CheckCollision(int) = 0;
 
         float xPos;                             //x position of the entity
         float yPos;                             //y position of the entity

@@ -15,6 +15,8 @@ class Player : public Entity
         void Init(char*,int,int);   //Initialize the player
         void Action(int);           //Handle inputs
 
+        void Teleport(std::string);
+
     protected:
 
     private:
