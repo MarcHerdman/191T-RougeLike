@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="191T-RougeLike-Development" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/GAMEDEV" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="C:/Users/cvaug/Desktop/Csci173/Common/bin" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add directory="include" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/GAMEDEV" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="C:/Users/cvaug/Desktop/Csci173/Common/bin" />
+				<Option object_output="obj/Release/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add directory="include" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add directory="C:/Users/cvaug/Desktop/Csci173/Common/include" />
+			<Add directory="../Common/include" />
+		</Compiler>
+		<Linker>
+			<Add library="../Common/lib/libSOIL.a" />
+			<Add library="glut32" />
+			<Add library="opengl32" />
+			<Add library="glu32" />
+			<Add library="winmm" />
+			<Add library="gdi32" />
+			<Add directory="C:/Users/cvaug/Desktop/Csci173/Common/lib" />
+			<Add directory="../Common/lib" />
+		</Linker>
+		<Unit filename="include/BlankScreen.h" />
+		<Unit filename="include/Button.h" />
+		<Unit filename="include/Buttons.h" />
+		<Unit filename="include/Entity.h" />
+		<Unit filename="include/HelpScreen.h" />
+		<Unit filename="include/Inputs.h" />
+		<Unit filename="include/Level.h" />
+		<Unit filename="include/Maze.h" />
+		<Unit filename="include/MenuScreen.h" />
+		<Unit filename="include/Player.h" />
+		<Unit filename="include/Popup.h" />
+		<Unit filename="include/Scene.h" />
+		<Unit filename="include/Stencil.h" />
+		<Unit filename="include/Texture.h" />
+		<Unit filename="include/Timer.h" />
+		<Unit filename="include/TitleScreen.h" />
+		<Unit filename="include/Util.h" />
+		<Unit filename="main.cpp" />
+		<Unit filename="src/BlankScreen.cpp" />
+		<Unit filename="src/Button.cpp" />
+		<Unit filename="src/Buttons.cpp" />
+		<Unit filename="src/Entity.cpp" />
+		<Unit filename="src/HelpScreen.cpp" />
+		<Unit filename="src/Inputs.cpp" />
+		<Unit filename="src/Level.cpp" />
+		<Unit filename="src/Maze.cpp" />
+		<Unit filename="src/MenuScreen.cpp" />
+		<Unit filename="src/Player.cpp" />
+		<Unit filename="src/Popup.cpp" />
+		<Unit filename="src/Scene.cpp" />
+		<Unit filename="src/Stencil.cpp" />
+		<Unit filename="src/Texture.cpp" />
+		<Unit filename="src/Timer.cpp" />
+		<Unit filename="src/TitleScreen.cpp" />
+		<Unit filename="src/Util.cpp" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

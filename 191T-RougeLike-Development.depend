@@ -1,0 +1,165 @@
+# depslib dependency file v1.0
+1586899109 source:c:\users\cvaug\desktop\csci173\gamedev\main.cpp
+	<windows.h>
+	<stdlib.h>
+	<iostream>
+	<windows.h>
+	<stack>
+	<ctime>
+	<Timer.h>
+	<Scene.h>
+	<BlankScreen.h>
+	<TitleScreen.h>
+	<Level.h>
+	<MenuScreen.h>
+
+1586847399 c:\users\cvaug\desktop\csci173\gamedev\include\timer.h
+	<time.h>
+	<iostream>
+
+1586911316 c:\users\cvaug\desktop\csci173\gamedev\include\scene.h
+	<windows.h>
+	<GL/glut.h>
+	<vector>
+	<stack>
+	<Scene.h>
+	<Texture.h>
+	<iostream>
+	<Player.h>
+	<Inputs.h>
+	<Maze.h>
+	<Stencil.h>
+	<Timer.h>
+	<Util.h>
+
+1585326168 c:\users\cvaug\desktop\csci173\common\include\gl\glut.h
+	<windows.h>
+	<stdlib.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1586847399 c:\users\cvaug\desktop\csci173\gamedev\include\texture.h
+	<SOIL.h>
+	<GL/gl.h>
+	<iostream>
+	<map>
+	<utility>
+	<Util.h>
+
+1215483208 c:\users\cvaug\desktop\csci173\common\include\soil.h
+
+1586847399 c:\users\cvaug\desktop\csci173\gamedev\include\util.h
+	<utility>
+
+1586847399 c:\users\cvaug\desktop\csci173\gamedev\include\player.h
+	<Entity.h>
+
+1586847399 c:\users\cvaug\desktop\csci173\gamedev\include\entity.h
+	<GL/gl.h>
+	<Texture.h>
+	<Util.h>
+
+1586847399 c:\users\cvaug\desktop\csci173\gamedev\include\inputs.h
+	<windows.h>
+	<Entity.h>
+	<Maze.h>
+	<Timer.h>
+	<Buttons.h>
+
+1586847399 c:\users\cvaug\desktop\csci173\gamedev\include\maze.h
+	<vector>
+	<iostream>
+	<time.h>
+	<stdlib.h>
+	<stack>
+	<utility>
+	<Texture.h>
+	<Util.h>
+
+1586847399 c:\users\cvaug\desktop\csci173\gamedev\include\buttons.h
+	<vector>
+	<iostream>
+	<Texture.h>
+
+1586847399 c:\users\cvaug\desktop\csci173\gamedev\include\blankscreen.h
+	<Scene.h>
+
+1586847399 c:\users\cvaug\desktop\csci173\gamedev\include\titlescreen.h
+	<Scene.h>
+	<MenuScreen.h>
+	<Buttons.h>
+
+1586847399 c:\users\cvaug\desktop\csci173\gamedev\include\menuscreen.h
+	<Scene.h>
+	<Level.h>
+	<HelpScreen.h>
+	<Buttons.h>
+
+1586911361 c:\users\cvaug\desktop\csci173\gamedev\include\level.h
+	<Scene.h>
+	<Popup.h>
+
+1586847399 c:\users\cvaug\desktop\csci173\gamedev\include\popup.h
+	<Buttons.h>
+	<Texture.h>
+
+1586847399 c:\users\cvaug\desktop\csci173\gamedev\include\helpscreen.h
+	<Scene.h>
+	<Buttons.h>
+
+1586847399 source:c:\users\cvaug\desktop\csci173\gamedev\src\blankscreen.cpp
+	"BlankScreen.h"
+
+1584744199 source:c:\users\cvaug\desktop\csci173\gamedev\src\button.cpp
+	"Button.h"
+
+1584744199 c:\users\cvaug\desktop\csci173\gamedev\include\button.h
+
+1586847399 source:c:\users\cvaug\desktop\csci173\gamedev\src\buttons.cpp
+	"Buttons.h"
+
+1586847399 source:c:\users\cvaug\desktop\csci173\gamedev\src\entity.cpp
+	"Entity.h"
+
+1586847399 source:c:\users\cvaug\desktop\csci173\gamedev\src\helpscreen.cpp
+	"HelpScreen.h"
+
+1586847399 source:c:\users\cvaug\desktop\csci173\gamedev\src\inputs.cpp
+	"Inputs.h"
+
+1586910408 source:c:\users\cvaug\desktop\csci173\gamedev\src\level.cpp
+	"Level.h"
+	<math.h>
+
+1586847399 source:c:\users\cvaug\desktop\csci173\gamedev\src\maze.cpp
+	"Maze.h"
+
+1586847399 source:c:\users\cvaug\desktop\csci173\gamedev\src\menuscreen.cpp
+	"MenuScreen.h"
+
+1586847399 source:c:\users\cvaug\desktop\csci173\gamedev\src\player.cpp
+	"Player.h"
+
+1586847399 source:c:\users\cvaug\desktop\csci173\gamedev\src\popup.cpp
+	"Popup.h"
+
+1586847399 source:c:\users\cvaug\desktop\csci173\gamedev\src\scene.cpp
+	"Scene.h"
+
+1586898346 source:c:\users\cvaug\desktop\csci173\gamedev\src\texture.cpp
+	"Texture.h"
+
+1586847399 source:c:\users\cvaug\desktop\csci173\gamedev\src\timer.cpp
+	"Timer.h"
+
+1586847399 source:c:\users\cvaug\desktop\csci173\gamedev\src\titlescreen.cpp
+	"TitleScreen.h"
+
+1586847399 source:c:\users\cvaug\desktop\csci173\gamedev\src\util.cpp
+	"Util.h"
+	<utility>
+
+1586911297 c:\users\cvaug\desktop\csci173\gamedev\include\stencil.h
+	<Entity.h>
+	<math.h>
+
