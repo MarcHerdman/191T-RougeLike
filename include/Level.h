@@ -22,6 +22,7 @@ class Level : public Scene
         Maze* maze;                     //The maze
         Popup* popup;
         Stencil* mask;
+        Sound* sound;
 
         //Texture* question;              //The popup message
         //Buttons* btns;                  //The popup buttons

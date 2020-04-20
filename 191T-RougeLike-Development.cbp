@@ -35,7 +35,6 @@
 		<Compiler>
 			<Add option="-Wall" />
 			<Add directory="C:/Users/cvaug/Desktop/Csci173/Common/include" />
-			<Add directory="../Common/include" />
 		</Compiler>
 		<Linker>
 			<Add library="../Common/lib/libSOIL.a" />
@@ -44,8 +43,8 @@
 			<Add library="glu32" />
 			<Add library="winmm" />
 			<Add library="gdi32" />
+			<Add library="../Common/lib/libirrKlang.a" />
 			<Add directory="C:/Users/cvaug/Desktop/Csci173/Common/lib" />
-			<Add directory="../Common/lib" />
 		</Linker>
 		<Unit filename="include/BlankScreen.h" />
 		<Unit filename="include/Button.h" />
@@ -59,6 +58,7 @@
 		<Unit filename="include/Player.h" />
 		<Unit filename="include/Popup.h" />
 		<Unit filename="include/Scene.h" />
+		<Unit filename="include/Sound.h" />
 		<Unit filename="include/Stencil.h" />
 		<Unit filename="include/Texture.h" />
 		<Unit filename="include/Timer.h" />
@@ -77,6 +77,7 @@
 		<Unit filename="src/Player.cpp" />
 		<Unit filename="src/Popup.cpp" />
 		<Unit filename="src/Scene.cpp" />
+		<Unit filename="src/Sound.cpp" />
 		<Unit filename="src/Stencil.cpp" />
 		<Unit filename="src/Texture.cpp" />
 		<Unit filename="src/Timer.cpp" />

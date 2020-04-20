@@ -25,6 +25,10 @@ void Inputs::SetBtns(Buttons* b)
 {
     btns = b;
 }
+void Inputs::SetSound(Sound* s)
+{
+    sound = s;
+}
 
 void Inputs::KeyPressed()//ONLY RESPOND ONCE WHEN THE KEY IS FIRST PRESSED
 {
@@ -34,21 +38,25 @@ void Inputs::KeyPressed()//ONLY RESPOND ONCE WHEN THE KEY IS FIRST PRESSED
         {
             case VK_LEFT:
                 if(ply) ply->Action(1);
+                if(sound) sound->playSound("sounds/Click.wav");
                 //if(ply) ply->tex->SetAnimation("WalkLeft", true, true, 0);
                 //if(maze) maze->Moving(0);
                 break;
             case VK_RIGHT:
                 if(ply) ply->Action(4);
+                if(sound) sound->playSound("sounds/Click.wav");
                 //if(ply) ply->tex->SetAnimation("WalkRight", true, true, 0);
                 //if(maze) maze->Moving(2);
                 break;
             case VK_UP:
                 if(ply) ply->Action(8);
+                if(sound) sound->playSound("sounds/Click.wav");
                 //if(ply) ply->tex->SetAnimation("WalkUp", true, true, 0);
                 //if(maze) maze->Moving(3);
                 break;
             case VK_DOWN:
                 if(ply) ply->Action(2);
+                if(sound) sound->playSound("sounds/Click.wav");
                 //if(ply) ply->tex->SetAnimation("WalkDown", true, true, 0);
                 //if(maze) maze->Moving(1);
                 break;

@@ -16,6 +16,7 @@
 #include <Inputs.h>
 #include <Maze.h>
 #include <Stencil.h>
+#include<Sound.h>
 //#include <Button.h>
 #include <Timer.h>
 #include <Util.h>

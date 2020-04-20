@@ -9,11 +9,13 @@ Level::Level(std::stack<Scene*>* s)
     maze = new Maze();
     popup = new Popup;
     mask = new Stencil();
+    sound = new Sound();
     //btns = new Buttons();
     kBMs = new Inputs(timer);
     kBMs->SetPlayer(ply);
     kBMs->SetMaze(maze);
     kBMs->SetBtns(popup->btns);
+    kBMs->SetSound(sound);
     //question = new Texture();
 
 }
@@ -31,6 +33,8 @@ void Level::Init(int screenWidth, int screenHeight)
     ply->PositionEntity(std::make_pair(0.2,0.2));
     maze->GenerateMaze(9,9);
     popup->Init(screenWidth, screenHeight);
+    sound->initSounds();
+    sound->playMusic("sounds/Bob-Omb Battlefield Tropical cover.mp3");
     //btns->Init("images/RL_Buttons_1024.png", 4, 8);
     //btns->AddButton("Accept", ACCEPT, 0.4, 0.33, false, screenWidth, screenHeight);
     //btns->AddButton("Decline", DECLINE, 0.6, 0.33, false, screenWidth, screenHeight);
