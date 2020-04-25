@@ -23,6 +23,7 @@ class Level : public Scene
         Popup* popup;
         Stencil* mask;
         Sound* sound;
+        Shader* shader;
 
         //Texture* question;              //The popup message
         //Buttons* btns;                  //The popup buttons

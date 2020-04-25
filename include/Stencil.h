@@ -8,7 +8,7 @@ class Stencil
     public:
         Stencil();
         virtual ~Stencil();
-        void drawMask(Entity*);
+        void drawMask(Entity*,float);
         void disableBuffer();
 
     protected:

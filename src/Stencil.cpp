@@ -9,7 +9,7 @@ Stencil::~Stencil()
 {
     //dtor
 }
-void Stencil::drawMask(Entity* E)
+void Stencil::drawMask(Entity* E, float aspectRatio)
 {
 glColorMask( GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE );
 
@@ -25,18 +25,33 @@ glColorMask( GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE );
 		glPushMatrix();
 
 
-
-    glBegin(GL_TRIANGLE_FAN);
-	for(int ii = 0; ii < 360; ii++)
+ glBegin(GL_TRIANGLE_FAN);
+	for(int ii = 0; ii < 8; ii++)
 	{
-		float theta = 2.0f * 3.1415926f * float(ii) / float(360);//get the current angle
-
-		float x = 0.1 * cosf(theta);//calculate the x component
-		float y = 0.1 * sinf(theta);//calculate the y component
+		float theta = 2.0f * 3.1415926f * float(ii*45) / float(360);//get the current angle
+        std::cout << aspectRatio << std::endl;
+		float x = 0.1 * cosf(theta)*aspectRatio+0.01;//calculate the x component
+		float y = 0.1 * sinf(theta)+0.01;//calculate the y component
 
 		glVertex2f(x + E->xPos, y + E->yPos);//output vertex
 
+
 	}
+	glEnd();
+    glBegin(GL_TRIANGLES);
+	//for(int ii = 0; ii < 1; ii++)
+	//{
+		//float theta = 2.0f * 3.1415926f * float(0*360) / float(360);//get the current angle
+        //std::cout << aspectRatio << std::endl;
+		//float x = 0.2 * cosf(theta)*aspectRatio;//calculate the x component
+		//float y = 0.2 * sinf(theta);//calculate the y component
+
+		//glVertex2f(x + E->xPos, y + E->yPos);//output vertex
+		glVertex2f(E->xPos,E->yPos+0.1);//output vertex
+		glVertex2f(.3+E->xPos, .1+E->yPos);//output vertex
+		glVertex2f(.3+E->xPos, -.1+E->yPos);//output vertex
+
+	//}
 	glEnd();
 
     glPopMatrix();
