@@ -1,0 +1,550 @@
+# depslib dependency file v1.0
+1586911183 source:c:\users\cvaug\desktop\csci173\gamedev\main.cpp
+	<windows.h>
+	<stdlib.h>
+	<iostream>
+	<windows.h>
+	<stack>
+	<ctime>
+	<Timer.h>
+	<Scene.h>
+	<BlankScreen.h>
+	<TitleScreen.h>
+	<Level.h>
+	<MenuScreen.h>
+
+1586847399 c:\users\cvaug\desktop\csci173\gamedev\include\timer.h
+	<time.h>
+	<iostream>
+
+1587412952 c:\users\cvaug\desktop\csci173\gamedev\include\scene.h
+	<windows.h>
+	<GL/glut.h>
+	<vector>
+	<stack>
+	<Scene.h>
+	<Texture.h>
+	<iostream>
+	<Player.h>
+	<Inputs.h>
+	<Maze.h>
+	<Stencil.h>
+	<Sound.h>
+	<Timer.h>
+	<Util.h>
+
+1585326168 c:\users\cvaug\desktop\csci173\common\include\gl\glut.h
+	<windows.h>
+	<stdlib.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1586847399 c:\users\cvaug\desktop\csci173\gamedev\include\texture.h
+	<SOIL.h>
+	<GL/gl.h>
+	<iostream>
+	<map>
+	<utility>
+	<Util.h>
+
+1215483208 c:\users\cvaug\desktop\csci173\common\include\soil.h
+
+1586847399 c:\users\cvaug\desktop\csci173\gamedev\include\util.h
+	<utility>
+
+1586847399 c:\users\cvaug\desktop\csci173\gamedev\include\player.h
+	<Entity.h>
+
+1586847399 c:\users\cvaug\desktop\csci173\gamedev\include\entity.h
+	<GL/gl.h>
+	<Texture.h>
+	<Util.h>
+
+1587414289 c:\users\cvaug\desktop\csci173\gamedev\include\inputs.h
+	<windows.h>
+	<Entity.h>
+	<Maze.h>
+	<Timer.h>
+	<Buttons.h>
+	<Sound.h>
+
+1586847399 c:\users\cvaug\desktop\csci173\gamedev\include\maze.h
+	<vector>
+	<iostream>
+	<time.h>
+	<stdlib.h>
+	<stack>
+	<utility>
+	<Texture.h>
+	<Util.h>
+
+1586847399 c:\users\cvaug\desktop\csci173\gamedev\include\buttons.h
+	<vector>
+	<iostream>
+	<Texture.h>
+
+1586847399 c:\users\cvaug\desktop\csci173\gamedev\include\blankscreen.h
+	<Scene.h>
+
+1586847399 c:\users\cvaug\desktop\csci173\gamedev\include\titlescreen.h
+	<Scene.h>
+	<MenuScreen.h>
+	<Buttons.h>
+
+1586847399 c:\users\cvaug\desktop\csci173\gamedev\include\menuscreen.h
+	<Scene.h>
+	<Level.h>
+	<HelpScreen.h>
+	<Buttons.h>
+
+1587412980 c:\users\cvaug\desktop\csci173\gamedev\include\level.h
+	<Scene.h>
+	<Popup.h>
+
+1586847399 c:\users\cvaug\desktop\csci173\gamedev\include\popup.h
+	<Buttons.h>
+	<Texture.h>
+
+1586847399 c:\users\cvaug\desktop\csci173\gamedev\include\helpscreen.h
+	<Scene.h>
+	<Buttons.h>
+
+1586847399 source:c:\users\cvaug\desktop\csci173\gamedev\src\blankscreen.cpp
+	"BlankScreen.h"
+
+1584744199 source:c:\users\cvaug\desktop\csci173\gamedev\src\button.cpp
+	"Button.h"
+
+1584744199 c:\users\cvaug\desktop\csci173\gamedev\include\button.h
+
+1586847399 source:c:\users\cvaug\desktop\csci173\gamedev\src\buttons.cpp
+	"Buttons.h"
+
+1586847399 source:c:\users\cvaug\desktop\csci173\gamedev\src\entity.cpp
+	"Entity.h"
+
+1586847399 source:c:\users\cvaug\desktop\csci173\gamedev\src\helpscreen.cpp
+	"HelpScreen.h"
+
+1587414708 source:c:\users\cvaug\desktop\csci173\gamedev\src\inputs.cpp
+	"Inputs.h"
+
+1587414636 source:c:\users\cvaug\desktop\csci173\gamedev\src\level.cpp
+	"Level.h"
+
+1586847399 source:c:\users\cvaug\desktop\csci173\gamedev\src\maze.cpp
+	"Maze.h"
+
+1586847399 source:c:\users\cvaug\desktop\csci173\gamedev\src\menuscreen.cpp
+	"MenuScreen.h"
+
+1586847399 source:c:\users\cvaug\desktop\csci173\gamedev\src\player.cpp
+	"Player.h"
+
+1586847399 source:c:\users\cvaug\desktop\csci173\gamedev\src\popup.cpp
+	"Popup.h"
+
+1586847399 source:c:\users\cvaug\desktop\csci173\gamedev\src\scene.cpp
+	"Scene.h"
+
+1586898346 source:c:\users\cvaug\desktop\csci173\gamedev\src\texture.cpp
+	"Texture.h"
+
+1586847399 source:c:\users\cvaug\desktop\csci173\gamedev\src\timer.cpp
+	"Timer.h"
+
+1586847399 source:c:\users\cvaug\desktop\csci173\gamedev\src\titlescreen.cpp
+	"TitleScreen.h"
+
+1586847399 source:c:\users\cvaug\desktop\csci173\gamedev\src\util.cpp
+	"Util.h"
+	<utility>
+
+1586911544 c:\users\cvaug\desktop\csci173\gamedev\include\stencil.h
+	<Entity.h>
+	<math.h>
+
+1586911552 source:c:\users\cvaug\desktop\csci173\gamedev\src\stencil.cpp
+	"Stencil.h"
+
+1587412586 source:c:\users\cvaug\desktop\csci173\gamedev\src\sound.cpp
+	"Sound.h"
+
+1587413394 c:\users\cvaug\desktop\csci173\gamedev\include\sound.h
+	<SNDS/irrKlang.h>
+	<stdlib.h>
+	<iostream>
+	<Timer.h>
+
+1517335446 c:\users\cvaug\desktop\csci173\common\include\snds\irrklang.h
+	"ik_irrKlangTypes.h"
+	"ik_vec3d.h"
+	"ik_IRefCounted.h"
+	"ik_IVirtualRefCounted.h"
+	"ik_ESoundOutputDrivers.h"
+	"ik_ESoundEngineOptions.h"
+	"ik_EStreamModes.h"
+	"ik_SAudioStreamFormat.h"
+	"ik_ISoundEngine.h"
+	"ik_ISoundSource.h"
+	"ik_ISound.h"
+	"ik_IAudioStream.h"
+	"ik_IAudioStreamLoader.h"
+	"ik_ISoundEffectControl.h"
+	"ik_ISoundStopEventReceiver.h"
+	"ik_IFileFactory.h"
+	"ik_IFileReader.h"
+	"ik_ISoundDeviceList.h"
+	"ik_IAudioRecorder.h"
+	"ik_ISoundMixedOutputReceiver.h"
+
+1517256008 c:\users\cvaug\desktop\csci173\common\include\snds\ik_irrklangtypes.h
+	<wchar.h>
+
+1517256008 c:\users\cvaug\desktop\csci173\common\include\snds\ik_vec3d.h
+	<math.h>
+	"ik_irrKlangTypes.h"
+
+1517256008 c:\users\cvaug\desktop\csci173\common\include\snds\ik_irefcounted.h
+	"ik_irrKlangTypes.h"
+
+1517256008 c:\users\cvaug\desktop\csci173\common\include\snds\ik_ivirtualrefcounted.h
+	"ik_irrKlangTypes.h"
+
+1517256008 c:\users\cvaug\desktop\csci173\common\include\snds\ik_esoundoutputdrivers.h
+
+1517256008 c:\users\cvaug\desktop\csci173\common\include\snds\ik_esoundengineoptions.h
+
+1517256008 c:\users\cvaug\desktop\csci173\common\include\snds\ik_estreammodes.h
+
+1517256008 c:\users\cvaug\desktop\csci173\common\include\snds\ik_saudiostreamformat.h
+	"ik_IRefCounted.h"
+
+1517256008 c:\users\cvaug\desktop\csci173\common\include\snds\ik_isoundengine.h
+	"ik_IRefCounted.h"
+	"ik_vec3d.h"
+	"ik_ISoundSource.h"
+	"ik_ISound.h"
+	"ik_EStreamModes.h"
+	"ik_IFileFactory.h"
+	"ik_ISoundMixedOutputReceiver.h"
+
+1517256032 c:\users\cvaug\desktop\csci173\common\include\snds\ik_isoundsource.h
+	"ik_IVirtualRefCounted.h"
+	"ik_vec3d.h"
+	"ik_EStreamModes.h"
+	"ik_SAudioStreamFormat.h"
+
+1517256008 c:\users\cvaug\desktop\csci173\common\include\snds\ik_isound.h
+	"ik_IVirtualRefCounted.h"
+	"ik_ISoundEffectControl.h"
+	"ik_vec3d.h"
+
+1517256008 c:\users\cvaug\desktop\csci173\common\include\snds\ik_isoundeffectcontrol.h
+	"ik_IVirtualRefCounted.h"
+	"ik_vec3d.h"
+
+1517256008 c:\users\cvaug\desktop\csci173\common\include\snds\ik_ifilefactory.h
+	"ik_IRefCounted.h"
+
+1517256008 c:\users\cvaug\desktop\csci173\common\include\snds\ik_isoundmixedoutputreceiver.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1517256008 c:\users\cvaug\desktop\csci173\common\include\snds\ik_iaudiostream.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1517256008 c:\users\cvaug\desktop\csci173\common\include\snds\ik_iaudiostreamloader.h
+	"ik_IRefCounted.h"
+	"ik_IFileReader.h"
+
+1517256008 c:\users\cvaug\desktop\csci173\common\include\snds\ik_ifilereader.h
+	"ik_IRefCounted.h"
+
+1517256008 c:\users\cvaug\desktop\csci173\common\include\snds\ik_isoundstopeventreceiver.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1517256008 c:\users\cvaug\desktop\csci173\common\include\snds\ik_isounddevicelist.h
+	"ik_IRefCounted.h"
+
+1517256024 c:\users\cvaug\desktop\csci173\common\include\snds\ik_iaudiorecorder.h
+	"ik_IRefCounted.h"
+	"ik_ISoundSource.h"
+
+1587415064 source:c:\users\archaeon\documents\csci 191\191t-rougelike-development-mask\main.cpp
+	<windows.h>
+	<stdlib.h>
+	<iostream>
+	<windows.h>
+	<stack>
+	<ctime>
+	<Timer.h>
+	<Scene.h>
+	<BlankScreen.h>
+	<TitleScreen.h>
+	<Level.h>
+	<MenuScreen.h>
+
+1587415064 c:\users\archaeon\documents\csci 191\191t-rougelike-development-mask\include\timer.h
+	<time.h>
+	<iostream>
+
+1587415064 c:\users\archaeon\documents\csci 191\191t-rougelike-development-mask\include\scene.h
+	<windows.h>
+	<GL/glut.h>
+	<vector>
+	<stack>
+	<Scene.h>
+	<Texture.h>
+	<iostream>
+	<Player.h>
+	<Inputs.h>
+	<Maze.h>
+	<Stencil.h>
+	<Sound.h>
+	<Timer.h>
+	<Util.h>
+
+1587415064 c:\users\archaeon\documents\csci 191\191t-rougelike-development-mask\include\texture.h
+	<SOIL.h>
+	<GL/gl.h>
+	<iostream>
+	<map>
+	<utility>
+	<Util.h>
+
+1587415064 c:\users\archaeon\documents\csci 191\191t-rougelike-development-mask\include\util.h
+	<utility>
+
+1587415064 c:\users\archaeon\documents\csci 191\191t-rougelike-development-mask\include\player.h
+	<Entity.h>
+
+1587415064 c:\users\archaeon\documents\csci 191\191t-rougelike-development-mask\include\entity.h
+	<GL/gl.h>
+	<Texture.h>
+	<Util.h>
+
+1587415064 c:\users\archaeon\documents\csci 191\191t-rougelike-development-mask\include\inputs.h
+	<windows.h>
+	<Entity.h>
+	<Maze.h>
+	<Timer.h>
+	<Buttons.h>
+	<Sound.h>
+
+1587791788 c:\users\archaeon\documents\csci 191\191t-rougelike-development-mask\include\maze.h
+	<vector>
+	<iostream>
+	<time.h>
+	<stdlib.h>
+	<stack>
+	<utility>
+	<Texture.h>
+	<Util.h>
+	<bits/stdc++.h>
+
+1587415064 c:\users\archaeon\documents\csci 191\191t-rougelike-development-mask\include\buttons.h
+	<vector>
+	<iostream>
+	<Texture.h>
+
+1587415064 c:\users\archaeon\documents\csci 191\191t-rougelike-development-mask\include\sound.h
+	<SNDS/irrKlang.h>
+	<stdlib.h>
+	<iostream>
+	<Timer.h>
+
+1587415064 c:\users\archaeon\documents\csci 191\191t-rougelike-development-mask\include\stencil.h
+	<Entity.h>
+	<math.h>
+
+1587415064 c:\users\archaeon\documents\csci 191\191t-rougelike-development-mask\include\blankscreen.h
+	<Scene.h>
+
+1587415064 c:\users\archaeon\documents\csci 191\191t-rougelike-development-mask\include\titlescreen.h
+	<Scene.h>
+	<MenuScreen.h>
+	<Buttons.h>
+
+1587415064 c:\users\archaeon\documents\csci 191\191t-rougelike-development-mask\include\menuscreen.h
+	<Scene.h>
+	<Level.h>
+	<HelpScreen.h>
+	<Buttons.h>
+
+1587849980 c:\users\archaeon\documents\csci 191\191t-rougelike-development-mask\include\level.h
+	<Scene.h>
+	<Popup.h>
+
+1587415064 c:\users\archaeon\documents\csci 191\191t-rougelike-development-mask\include\popup.h
+	<Buttons.h>
+	<Texture.h>
+
+1587415064 c:\users\archaeon\documents\csci 191\191t-rougelike-development-mask\include\helpscreen.h
+	<Scene.h>
+	<Buttons.h>
+
+1587415064 source:c:\users\archaeon\documents\csci 191\191t-rougelike-development-mask\src\blankscreen.cpp
+	"BlankScreen.h"
+
+1587415064 source:c:\users\archaeon\documents\csci 191\191t-rougelike-development-mask\src\button.cpp
+	"Button.h"
+
+1587415064 c:\users\archaeon\documents\csci 191\191t-rougelike-development-mask\include\button.h
+
+1587415064 source:c:\users\archaeon\documents\csci 191\191t-rougelike-development-mask\src\buttons.cpp
+	"Buttons.h"
+
+1587415064 source:c:\users\archaeon\documents\csci 191\191t-rougelike-development-mask\src\entity.cpp
+	"Entity.h"
+
+1587415064 source:c:\users\archaeon\documents\csci 191\191t-rougelike-development-mask\src\helpscreen.cpp
+	"HelpScreen.h"
+
+1587415064 source:c:\users\archaeon\documents\csci 191\191t-rougelike-development-mask\src\inputs.cpp
+	"Inputs.h"
+
+1588033374 source:c:\users\archaeon\documents\csci 191\191t-rougelike-development-mask\src\level.cpp
+	"Level.h"
+
+1588033481 source:c:\users\archaeon\documents\csci 191\191t-rougelike-development-mask\src\maze.cpp
+	"Maze.h"
+
+1587415064 source:c:\users\archaeon\documents\csci 191\191t-rougelike-development-mask\src\menuscreen.cpp
+	"MenuScreen.h"
+
+1588031257 source:c:\users\archaeon\documents\csci 191\191t-rougelike-development-mask\src\player.cpp
+	"Player.h"
+
+1587415064 source:c:\users\archaeon\documents\csci 191\191t-rougelike-development-mask\src\popup.cpp
+	"Popup.h"
+
+1587415064 source:c:\users\archaeon\documents\csci 191\191t-rougelike-development-mask\src\scene.cpp
+	"Scene.h"
+
+1587415064 source:c:\users\archaeon\documents\csci 191\191t-rougelike-development-mask\src\sound.cpp
+	"Sound.h"
+
+1587415064 source:c:\users\archaeon\documents\csci 191\191t-rougelike-development-mask\src\stencil.cpp
+	"Stencil.h"
+
+1587415064 source:c:\users\archaeon\documents\csci 191\191t-rougelike-development-mask\src\texture.cpp
+	"Texture.h"
+
+1587415064 source:c:\users\archaeon\documents\csci 191\191t-rougelike-development-mask\src\timer.cpp
+	"Timer.h"
+
+1587415064 source:c:\users\archaeon\documents\csci 191\191t-rougelike-development-mask\src\titlescreen.cpp
+	"TitleScreen.h"
+
+1587415064 source:c:\users\archaeon\documents\csci 191\191t-rougelike-development-mask\src\util.cpp
+	"Util.h"
+	<utility>
+
+1568661960 c:\users\archaeon\documents\csci 172\csci172_projects\common\include\gl\glut.h
+	<windows.h>
+	<stdlib.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1215483208 c:\users\archaeon\documents\csci 172\csci172_projects\common\include\soil.h
+
+1398523410 c:\users\archaeon\documents\csci 172\csci172_projects\common\include\snds\irrklang.h
+	"ik_irrKlangTypes.h"
+	"ik_vec3d.h"
+	"ik_IRefCounted.h"
+	"ik_IVirtualRefCounted.h"
+	"ik_ESoundOutputDrivers.h"
+	"ik_ESoundEngineOptions.h"
+	"ik_EStreamModes.h"
+	"ik_SAudioStreamFormat.h"
+	"ik_ISoundEngine.h"
+	"ik_ISoundSource.h"
+	"ik_ISound.h"
+	"ik_IAudioStream.h"
+	"ik_IAudioStreamLoader.h"
+	"ik_ISoundEffectControl.h"
+	"ik_ISoundStopEventReceiver.h"
+	"ik_IFileFactory.h"
+	"ik_IFileReader.h"
+	"ik_ISoundDeviceList.h"
+	"ik_IAudioRecorder.h"
+	"ik_ISoundMixedOutputReceiver.h"
+
+1394131454 c:\users\archaeon\documents\csci 172\csci172_projects\common\include\snds\ik_irrklangtypes.h
+	<wchar.h>
+
+1399048338 c:\users\archaeon\documents\csci 172\csci172_projects\common\include\snds\ik_vec3d.h
+	<math.h>
+	"ik_irrKlangTypes.h"
+
+1394121294 c:\users\archaeon\documents\csci 172\csci172_projects\common\include\snds\ik_irefcounted.h
+	"ik_irrKlangTypes.h"
+
+1394121294 c:\users\archaeon\documents\csci 172\csci172_projects\common\include\snds\ik_ivirtualrefcounted.h
+	"ik_irrKlangTypes.h"
+
+1394121300 c:\users\archaeon\documents\csci 172\csci172_projects\common\include\snds\ik_esoundoutputdrivers.h
+
+1394121294 c:\users\archaeon\documents\csci 172\csci172_projects\common\include\snds\ik_esoundengineoptions.h
+
+1394121294 c:\users\archaeon\documents\csci 172\csci172_projects\common\include\snds\ik_estreammodes.h
+
+1394121294 c:\users\archaeon\documents\csci 172\csci172_projects\common\include\snds\ik_saudiostreamformat.h
+	"ik_IRefCounted.h"
+
+1394128864 c:\users\archaeon\documents\csci 172\csci172_projects\common\include\snds\ik_isoundengine.h
+	"ik_IRefCounted.h"
+	"ik_vec3d.h"
+	"ik_ISoundSource.h"
+	"ik_ISound.h"
+	"ik_EStreamModes.h"
+	"ik_IFileFactory.h"
+	"ik_ISoundMixedOutputReceiver.h"
+
+1394121294 c:\users\archaeon\documents\csci 172\csci172_projects\common\include\snds\ik_isoundsource.h
+	"ik_IVirtualRefCounted.h"
+	"ik_vec3d.h"
+	"ik_EStreamModes.h"
+	"ik_SAudioStreamFormat.h"
+
+1394121294 c:\users\archaeon\documents\csci 172\csci172_projects\common\include\snds\ik_isound.h
+	"ik_IVirtualRefCounted.h"
+	"ik_ISoundEffectControl.h"
+	"ik_vec3d.h"
+
+1394121294 c:\users\archaeon\documents\csci 172\csci172_projects\common\include\snds\ik_isoundeffectcontrol.h
+	"ik_IVirtualRefCounted.h"
+	"ik_vec3d.h"
+
+1394128852 c:\users\archaeon\documents\csci 172\csci172_projects\common\include\snds\ik_ifilefactory.h
+	"ik_IRefCounted.h"
+
+1394121294 c:\users\archaeon\documents\csci 172\csci172_projects\common\include\snds\ik_isoundmixedoutputreceiver.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1394121294 c:\users\archaeon\documents\csci 172\csci172_projects\common\include\snds\ik_iaudiostream.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1394121294 c:\users\archaeon\documents\csci 172\csci172_projects\common\include\snds\ik_iaudiostreamloader.h
+	"ik_IRefCounted.h"
+	"ik_IFileReader.h"
+
+1394121294 c:\users\archaeon\documents\csci 172\csci172_projects\common\include\snds\ik_ifilereader.h
+	"ik_IRefCounted.h"
+
+1394121294 c:\users\archaeon\documents\csci 172\csci172_projects\common\include\snds\ik_isoundstopeventreceiver.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1394121294 c:\users\archaeon\documents\csci 172\csci172_projects\common\include\snds\ik_isounddevicelist.h
+	"ik_IRefCounted.h"
+
+1394128848 c:\users\archaeon\documents\csci 172\csci172_projects\common\include\snds\ik_iaudiorecorder.h
+	"ik_IRefCounted.h"
+	"ik_ISoundSource.h"
+
