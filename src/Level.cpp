@@ -45,7 +45,7 @@ void Level::Init(int screenWidth, int screenHeight)
 void Level::Draw()
 {
     fpair newXY = ply->GetNextXY();
-    fpair newMXY = mon->MGetNextXY(newXY, ply->movementFlag);
+    fpair newMXY = mon->MGetNextXY(newXY);
     std::string coll = maze->checkWallCollision(newXY);
     std::string enemyColl = maze->checkWallCollision(newMXY);
     std::string enemyPlayerColl = mon->EnemyCollisionWithPlayer(newMXY, newXY);

@@ -30,7 +30,7 @@ fpair Entity::GetNextXY()
     return std::make_pair(x,y);
 }
 
-fpair Entity::MGetNextXY(fpair XYPlayer, int flag)
+fpair Entity::MGetNextXY(fpair XYPlayer)
 {
     float enemyX = xPos;
     float enemyY = yPos;
@@ -46,59 +46,7 @@ fpair Entity::MGetNextXY(fpair XYPlayer, int flag)
     std::cout << "Hypotenuse: " << hypotenuse << std::endl;
     std::cout << "Player coordinates: " << playerX << ", " << playerY << std::endl;
     if(hypotenuse < .600)
-    {/*
-        if(flag & 1)
-        {
-            if(playerX < enemyX)
-            {
-                tex->SetAnimation("WalkLeft", true, true, 0);
-                whenIdle = "IdleLeft";
-            } else if(playerX > enemyX)
-            {
-                tex->SetAnimation("WalkRight", true, true, 0);
-                whenIdle = "IdleRight";
-            }
-
-        }
-        else if(flag & 2)
-        {
-            if(playerY > enemyY)
-            {
-                tex->SetAnimation("WalkDown", true, true, 0);
-                whenIdle = "IdleDown";
-            } else if(playerY < enemyY)
-            {
-                tex->SetAnimation("WalkUp", true, true, 0);
-                whenIdle = "IdleUp";
-            }
-
-        }
-        else if(flag & 4)
-        {
-            if(playerX > enemyX)
-            {
-                tex->SetAnimation("WalkRight", true, true, 0);
-                whenIdle = "IdleRight";
-            } else if(playerX < enemyX)
-            {
-                tex->SetAnimation("WalkLeft", true, true, 0);
-                whenIdle = "IdleLeft";
-            }
-        }
-        else if(flag & 8)
-        {
-            if(playerY < enemyY)
-            {
-                tex->SetAnimation("WalkUp", true, true, 0);
-                whenIdle = "IdleUp";
-            }else if(playerY > enemyY)
-            {
-                tex->SetAnimation("WalkDown", true, true, 0);
-                whenIdle = "IdleDown";
-            }
-        }
-        if(flag & 0) tex->SetAnimation(whenIdle, true, false, 0);
-        */
+    {
         enemyX += walkSpeed * (distanceX/hypotenuse);
         enemyY += walkSpeed * (distanceY/hypotenuse);
     }

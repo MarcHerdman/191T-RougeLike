@@ -18,7 +18,7 @@ class Entity
 
         void DrawEntity();
         fpair GetNextXY();
-        fpair MGetNextXY(fpair, int);
+        fpair MGetNextXY(fpair);
         void PositionEntity(fpair);
 
         virtual void Init(char*, int, int) = 0; //Force all child classes to have an Init function
