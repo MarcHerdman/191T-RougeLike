@@ -17,6 +17,7 @@ class Level : public Scene
         void Draw();                    //Draw the scene
         void Action(std::string);       //Process any actions
         void ScreenResized(int,int);    //Recalculate the borders of the buttons
+        void NewLevel();                //Move to next level when exit is passed
 
         Player* ply;                    //The player
         Maze* maze;                     //The maze

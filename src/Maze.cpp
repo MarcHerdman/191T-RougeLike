@@ -71,7 +71,10 @@ void Maze::GenerateMaze(int x, int y)
     {
         maze[i].visited=false;
     }
-    plyLoc = rand() % mazeSize;
+    plyLoc = 40;
+    exitLoc = rand() % 32;
+    ExitWall();
+
     maze[plyLoc].visited = true;
     PrintMaze(); //Draw maze in console
 }
@@ -148,8 +151,14 @@ void Maze::PrintMaze()
         for(int x = 0; x < mazeSizeX; ++x)
         {
             int loc = XYtoInt(std::make_pair(x,y));
-            if(maze[loc].walls & 2){ std::cout << "_";} else std::cout << " ";
-            if(maze[loc].walls & 4){ std::cout << "|";} else std::cout << " ";
+            if(maze[loc].walls & 2){
+                if (loc == exitCell) {cout << "E";}     //Upper E = Wall underneath
+                else {std::cout << "_";}
+            }
+            else if (loc == exitCell){cout << "e";}     //Lower e = no Wall underneath
+            else {std::cout << " ";}
+
+            if(maze[loc].walls & 4){ std::cout << "|";}else std::cout << " ";
         }
         std::cout << std::endl;
     }
@@ -309,12 +318,18 @@ void Maze::DrawRoom()
             {
                 curFrame = 1;
                 if(y == 3 && !(maze[plyLoc].walls & 1)) curFrame = 3;
+                if(exitD == "West"){
+                        if(y == 3 && (plyLoc == exitCell)) curFrame = 5;
+                }
             }
             else if(x == cells-1)
             {
                 curFrame = 1;
                 mirror = true;
                 if(y == 3 && !(maze[plyLoc].walls & 4)) curFrame = 3;
+                if(exitD == "East"){
+                        if(y == 3 && (plyLoc == exitCell)) curFrame = 5;
+                }
             }
 
             if(y == 0)
@@ -322,6 +337,9 @@ void Maze::DrawRoom()
                 curFrame = 0;
                 if(x == 0 || x == cells-1) curFrame = 6;
                 else if(x == 3 && !(maze[plyLoc].walls & 8)) curFrame = 2;
+                if(exitD == "North"){
+                        if(x == 3 && (plyLoc == exitCell)) curFrame = 4;
+                }
             }
             else if(y == cells-1)
             {
@@ -329,6 +347,9 @@ void Maze::DrawRoom()
                 flip = true;
                 if(x == 0 || x == cells-1) curFrame = 6;
                 else if(x == 3 && !(maze[plyLoc].walls & 2)) curFrame = 2;
+                if(exitD == "South"){
+                        if(y == 3 && (plyLoc == exitCell)) curFrame = 4;
+                }
             }
             roomPieces->curFrame = curFrame;
             roomPieces->Draw(x*roomPieces->widthPercentage,y*roomPieces->heightPercentage,1.0,1.0,mirror, flip);
@@ -391,22 +412,23 @@ int Maze::GetRoomWalls()
 
 std::string Maze::checkWallCollision(fpair loc)
 {
-    std::cout << "PLYLOC: " << plyLoc << " WALLS " << maze[plyLoc].walls << " XY: " << loc.first << ", " << loc.second << std::endl;
+    //std::cout << "PLYLOC: " << plyLoc << " WALLS " << maze[plyLoc].walls << " XY: " << loc.first << ", " << loc.second << std::endl;
     float westBase = 0.07;
     float northBase = 0.03;
     float eastBase = 0.4;
     float southBase = 0.65;
 
     int onDoorFlag = 0;
+    int onExitFlag = 0;
 
     if(loc.second > 0.32 && loc.second < 0.38)
     {
-        if(!(maze[plyLoc].walls & 1))
+        if(!(maze[plyLoc].walls & 1) || ((plyLoc == exitCell) && (exitD == "West")))
         {
             westBase = 0.03;
             onDoorFlag +=1;
         }
-        if(!(maze[plyLoc].walls & 4))
+        if(!(maze[plyLoc].walls & 4) || ((plyLoc == exitCell) && (exitD == "East")))
         {
             eastBase = 0.44;
             onDoorFlag +=4;
@@ -414,12 +436,12 @@ std::string Maze::checkWallCollision(fpair loc)
     }
     if(loc.first > 0.22 && loc.first < 0.26)
     {
-        if(!(maze[plyLoc].walls & 2))
+        if(!(maze[plyLoc].walls & 2) || ((plyLoc == exitCell) && (exitD == "South")))
         {
             southBase = 0.7;
             onDoorFlag +=2;
         }
-        if(!(maze[plyLoc].walls & 8))
+        if(!(maze[plyLoc].walls & 8) || ((plyLoc == exitCell) && (exitD == "North")))
         {
             northBase = 0.01;
             onDoorFlag +=8;
@@ -457,3 +479,70 @@ void Maze::movePlayer(std::string dir)
     else if(dir == "E") plyLoc++;
     maze[plyLoc].visited = true;
 }
+
+void Maze::SetExit()
+{
+    if (exitLoc < 10){
+        exitCell = exitLoc;
+    }
+    else if (exitLoc > 22){
+        exitCell = exitLoc +48;
+    }
+    else if (exitLoc == 11){
+        exitCell = 17;
+    }
+    else if (exitLoc == 12){
+        exitCell = 18;
+    }
+    else if (exitLoc == 13){
+        exitCell = 26;
+    }
+    else if (exitLoc == 14){
+        exitCell = 27;
+    }
+    else if (exitLoc == 15){
+        exitCell = 35;
+    }
+    else if (exitLoc == 16){
+        exitCell = 36;
+    }
+    else if (exitLoc == 17){
+        exitCell = 44;
+    }
+    else if (exitLoc == 18){
+        exitCell = 45;
+    }
+    else if (exitLoc == 19){
+        exitCell = 53;
+    }
+    else if (exitLoc == 20){
+        exitCell = 54;
+    }
+    else if (exitLoc == 21){
+        exitCell = 62;
+    }
+    else if (exitLoc == 22){
+        exitCell = 63;
+    }
+}
+
+void Maze::ExitWall()
+{
+    SetExit();
+
+    int temp = exitCell;
+
+    if (temp > 71){
+        exitD = "South";
+    }
+    else if (temp < 9){
+        exitD = "North";
+    }
+    else if (temp%9 == 8){
+        exitD = "East";
+    }
+    else{
+        exitD = "West";
+    }
+}
+

@@ -34,7 +34,7 @@ void Level::Init(int screenWidth, int screenHeight)
     maze->GenerateMaze(9,9);
     popup->Init(screenWidth, screenHeight);
     sound->initSounds();
-    //sound->playMusic("sounds/Haunted.mp3");
+    sound->playMusic("sounds/Haunted.mp3");
     //btns->Init("images/RL_Buttons_1024.png", 4, 8);
     //btns->AddButton("Accept", ACCEPT, 0.4, 0.33, false, screenWidth, screenHeight);
     //btns->AddButton("Decline", DECLINE, 0.6, 0.33, false, screenWidth, screenHeight);
@@ -47,14 +47,19 @@ void Level::Draw()
 {
     fpair newXY = ply->GetNextXY();
     std::string coll = maze->checkWallCollision(newXY);
-    std::cout << coll << std::endl;
+    //std::cout << coll << std::endl;
     if(coll == "COLL_NONE") ply->PositionEntity(newXY);
     if(coll.substr(0,5) == "TRANS")
     {
         std::string dir = coll.substr(6,1);
-        std::cout << dir << std::endl;
-        ply->Teleport(dir);
-        maze->movePlayer(dir);
+        //std::cout << dir << std::endl;
+        if((maze->plyLoc == maze->exitCell) && (dir == maze->exitD.substr(0,1))){
+            NewLevel();                  //move to next level
+        }
+        else{
+            ply->Teleport(dir);
+            maze->movePlayer(dir);
+        }
     }
 
     glClear(GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	// Clear Screen And Depth Buffer
@@ -110,4 +115,10 @@ void Level::Action(std::string action)
 void Level::ScreenResized(int screenWidth, int screenHeight)
 {
     popup->btns->CalculateBorders(screenWidth, screenHeight);
+}
+void Level::NewLevel()
+{
+    delete maze;
+    maze = new Maze();
+    maze->GenerateMaze(9,9);
 }

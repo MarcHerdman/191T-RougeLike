@@ -11,6 +11,9 @@
 #include<utility>
 #include<Texture.h>
 #include<Util.h>
+#include<bits/stdc++.h>
+
+using namespace std;
 
 //abstract type to hold all info about a room
 typedef struct{
@@ -55,6 +58,9 @@ class Maze
 
         int mazeSizeX, mazeSizeY, mazeSize; //# of cells in X, Y and total;
         int plyLoc;                         //The index value of the cell player is in
+        int exitLoc;                        // roll random number for exit location generation
+        int exitCell;                       //Index value of the cell the exit will be generated in
+        string exitD;                       // direction of exit in it's cell (N,E,S,W)
         int plyX;                           //Total number of pixel moved along the x axis
         int speed;                          //The number of pixels player moves per step
 
@@ -73,6 +79,9 @@ class Maze
         //ipair instantaniousXY;              //The X and Y index of the cell the player is currently in
 
         void Rotate(int);                   //Rotate the maze
+
+        void SetExit();                  //Generate exit location for this maze
+        void ExitWall();
 
     protected:
 
