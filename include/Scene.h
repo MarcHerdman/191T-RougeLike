@@ -4,6 +4,7 @@
 #ifndef SCENE_H
 #define SCENE_H
 #include<Shader.h>
+
 #include <windows.h>
 #include <GL/glut.h>
 #include <vector>
