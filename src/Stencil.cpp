@@ -11,7 +11,45 @@ Stencil::~Stencil()
 }
 void Stencil::drawMask(Entity* E, float aspectRatio)
 {
-glColorMask( GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE );
+    float aspectRatioX = aspectRatio;
+    float aspectRatioY = 1;
+    if (E->whenIdle == "IdleRight") {
+        glTranslatef(E->xPos,E->yPos,0);
+        glRotated(0,0,0,1);
+        glTranslatef(-E->xPos,-E->yPos,0);
+        aspectRatioX = aspectRatio;
+        aspectRatioY = 1;
+
+    }
+    else if(E->whenIdle == "IdleLeft") {
+        glTranslatef(E->xPos,E->yPos,0);
+        glRotated(180,0,0,1);
+        glTranslatef(-E->xPos,-E->yPos,0);
+        aspectRatioX = aspectRatio;
+        aspectRatioY = 1;
+
+
+    }
+    else if(E->whenIdle == "IdleUp") {
+        glTranslatef(E->xPos,E->yPos,0);
+        glRotated(-90,0,0,1);
+        glTranslatef(-E->xPos,-E->yPos,0);
+        aspectRatioY = aspectRatio;
+        aspectRatioX = 1;
+
+
+    }
+    else if(E->whenIdle == "IdleDown") {
+        glTranslatef(E->xPos,E->yPos,0);
+        glRotated(90,0,0,1);
+        glTranslatef(-E->xPos,-E->yPos,0);
+        aspectRatioY = aspectRatio;
+        aspectRatioX = 1;
+
+    }
+
+
+    glColorMask( GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE );
     //Start using the stencil
     glEnable( GL_STENCIL_TEST );
 
@@ -28,8 +66,8 @@ glColorMask( GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE );
 	for(int ii = 0; ii < 45; ii++)
 	{
 		float theta = 2.0f * 3.1415926f * float(ii*8) / float(360);//get the current angle
-		float x = 0.1 * cosf(theta)*aspectRatio+0.01;//calculate the x component
-		float y = 0.1 * sinf(theta)+0.01;//calculate the y component
+		float x = 0.1 * cosf(theta)*aspectRatioX+0.01;//calculate the x component
+		float y = 0.1 * sinf(theta)*aspectRatioY+0.01;//calculate the y component
 
 		glVertex2f(x + E->xPos, y + E->yPos);//output vertex
 

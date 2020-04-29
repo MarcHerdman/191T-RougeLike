@@ -65,8 +65,9 @@ void Level::Draw()
     glClear(GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	// Clear Screen And Depth Buffer
     glLoadIdentity();
     maze->DrawMazeDisplay();
-
+    glPushMatrix();
     mask->drawMask(ply, aspectRatio);
+    glPopMatrix();
     //Push and Pop Matrix Located inside DrawMaze()
     //maze->PrepareToDrawMaze();
     glPushMatrix();
