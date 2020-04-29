@@ -13,7 +13,7 @@
 #include<Util.h>
 #include<bits/stdc++.h>
 
-using namespace std;
+//using namespace std;
 
 //abstract type to hold all info about a room
 typedef struct{
@@ -60,7 +60,7 @@ class Maze
         int plyLoc;                         //The index value of the cell player is in
         int exitLoc;                        // roll random number for exit location generation
         int exitCell;                       //Index value of the cell the exit will be generated in
-        string exitD;                       // direction of exit in it's cell (N,E,S,W)
+        std::string exitD;                       // direction of exit in it's cell (N,E,S,W)
         int plyX;                           //Total number of pixel moved along the x axis
         int speed;                          //The number of pixels player moves per step
 

@@ -152,10 +152,10 @@ void Maze::PrintMaze()
         {
             int loc = XYtoInt(std::make_pair(x,y));
             if(maze[loc].walls & 2){
-                if (loc == exitCell) {cout << "E";}     //Upper E = Wall underneath
+                if (loc == exitCell) {std::cout << "E";}     //Upper E = Wall underneath
                 else {std::cout << "_";}
             }
-            else if (loc == exitCell){cout << "e";}     //Lower e = no Wall underneath
+            else if (loc == exitCell){std::cout << "e";}     //Lower e = no Wall underneath
             else {std::cout << " ";}
 
             if(maze[loc].walls & 4){ std::cout << "|";}else std::cout << " ";
