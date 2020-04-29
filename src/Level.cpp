@@ -5,6 +5,7 @@ Level::Level(std::stack<Scene*>* s)
     //timer = new Timer;
     sceneStack = s;
     //ctor
+    mon = new Monster();
     ply = new Player();
     maze = new Maze();
     popup = new Popup;
@@ -13,6 +14,7 @@ Level::Level(std::stack<Scene*>* s)
     //btns = new Buttons();
     kBMs = new Inputs(timer);
     kBMs->SetPlayer(ply);
+    kBMs->SetMonster(mon);
     kBMs->SetMaze(maze);
     kBMs->SetBtns(popup->btns);
     kBMs->SetSound(sound);
@@ -30,7 +32,9 @@ Level::~Level()
 void Level::Init(int screenWidth, int screenHeight)
 {
     ply->Init("images/prof.png", 9, 4);
-    ply->PositionEntity(std::make_pair(0.2,0.2));
+    mon->Init("images/vampire.png", 12, 8);
+    ply->PositionEntity(std::make_pair(0.2, 0.2));
+    mon->PositionEntity(std::make_pair(0.1, 0.6));
     maze->GenerateMaze(9,9);
     popup->Init(screenWidth, screenHeight);
     sound->initSounds();
@@ -46,18 +50,41 @@ void Level::Init(int screenWidth, int screenHeight)
 void Level::Draw()
 {
     fpair newXY = ply->GetNextXY();
+    fpair newMXY = mon->MGetNextXY(newXY);
     std::string coll = maze->checkWallCollision(newXY);
-    //std::cout << coll << std::endl;
-    if(coll == "COLL_NONE") ply->PositionEntity(newXY);
+    std::string enemyColl = maze->checkWallCollision(newMXY);
+    std::string enemyPlayerColl = mon->EnemyCollisionWithPlayer(newMXY, newXY);
+    std::cout << coll << std::endl;
+    if(coll == "COLL_NONE")
+    {
+        ply->PositionEntity(newXY);
+    }
+
+    if(enemyColl == "COLL_NONE")
+    {
+        mon->PositionEntity(newMXY);
+
+    }
+    //enemy collision with player
+    if(enemyPlayerColl == "COLL_W_PLAYER")
+    {
+        std::cout << "YOU ARE DEAD..." << std::endl;
+        //timer->Pause();
+        //popup->SetActive(true);
+    }
+
     if(coll.substr(0,5) == "TRANS")
     {
         std::string dir = coll.substr(6,1);
-        //std::cout << dir << std::endl;
-        if((maze->plyLoc == maze->exitCell) && (dir == maze->exitD.substr(0,1))){
+        std::cout << dir << std::endl;
+        if((maze->plyLoc == maze->exitCell) && (dir == maze->exitD.substr(0,1)))
+        {
             NewLevel();                  //move to next level
         }
-        else{
+        else
+        {
             ply->Teleport(dir);
+            maze->movePlayer(dir);
             maze->movePlayer(dir);
         }
     }
@@ -76,6 +103,8 @@ void Level::Draw()
     ply->DrawEntity();
 
         //ply->PositionEntity(maze->GetRoomWalls());
+    ply->DrawEntity();
+    mon->DrawEntity();
     glPopMatrix();
     mask->disableBuffer();
     //maze->DrawMazeFG();
@@ -111,7 +140,6 @@ void Level::Action(std::string action)
         sceneStack->pop();
     }
 }
-
 //Recalculate the button edges each time screen is resized
 void Level::ScreenResized(int screenWidth, int screenHeight)
 {

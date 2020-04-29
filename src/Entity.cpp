@@ -27,10 +27,33 @@ fpair Entity::GetNextXY()
     if(movementFlag & 2) y+=walkSpeed;
     if(movementFlag & 4) x+=walkSpeed;
     if(movementFlag & 8) y-=walkSpeed;
-
     return std::make_pair(x,y);
 }
 
+fpair Entity::MGetNextXY(fpair XYPlayer)
+{
+    float enemyX = xPos;
+    float enemyY = yPos;
+
+    float playerX = XYPlayer.first;
+    float playerY = XYPlayer.second;
+
+    float distanceX = playerX - enemyX;
+    float distanceY = playerY - enemyY;
+
+    float hypotenuse = sqrt((distanceX * distanceX) + (distanceY * distanceY));
+    std::cout << "Distance coordinates: " << distanceX << ", " << distanceY << std::endl;
+    std::cout << "Hypotenuse: " << hypotenuse << std::endl;
+    std::cout << "Player coordinates: " << playerX << ", " << playerY << std::endl;
+    if(hypotenuse < .600)
+    {
+        enemyX += walkSpeed * (distanceX/hypotenuse);
+        enemyY += walkSpeed * (distanceY/hypotenuse);
+    }
+
+    std::cout << "Monster coordinates: " << enemyX << ", " << enemyY << std::endl;
+    return std::make_pair(enemyX,enemyY);
+}
 
 //Set the entity's position based on the movement flag and walk speed.
 void Entity::PositionEntity(fpair loc)

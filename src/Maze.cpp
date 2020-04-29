@@ -369,7 +369,7 @@ void Maze::DrawMazeBG()
         northWall->Draw(0.5,0);
     //glPopMatrix();
     //glPushMatrix();
-        floor->TextureBinder();
+        floor->TextureBinder();C:\Users\shaun\Documents\CSCI173\Final\src\Level.cpp
         //floor->Draw(startX,northWall->heightPercentage);
         floor->Draw(0.5,northWall->heightPercentage);
             if(maze[plyLoc].walls & 1) //West Wall exists

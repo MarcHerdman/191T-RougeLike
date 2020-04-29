@@ -16,12 +16,14 @@ class Inputs
         virtual ~Inputs();
 
         void SetPlayer(Entity*);            //Add a player to be notified of relevant inputs
+        void SetMonster(Entity*);
         void SetMaze(Maze*);                //Add a maze to be notified of relevant inputs
         void SetBtns(Buttons*);             //Add a set of buttons to be notified of relevant inputs
         void SetSound(Sound*);              //Add a Sound to be notified of Relevant inputs
 
         void KeyPressed();                  //Respond to the first instant a key is pressed
         void KeyReleased();                 //Respond to the first instant a key is released
+        void IdleMovement();
 
         void mouseEventDown(double ,double);    //Respond to the first instant the mouse is clicked
         std::string mouseEventUp();             //Respond to the first instance the mouse is released
@@ -34,6 +36,7 @@ class Inputs
         WPARAM wParam;                      //Input data from Windows
 
         Entity* ply;                        //The listening player
+        Entity* mon;                        //The Listening Monster
         Maze* maze;                         //The listening maze
         Buttons* btns;                      //The listening buttons
         Timer* timer;                       //The active timer from the scene

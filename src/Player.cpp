@@ -36,7 +36,6 @@ void Player::Init(char* filename, int x, int y)
 void Player::Action(int input)
 {
     //std::cout << input << std::endl;
-
     movementFlag+=input;
     if(input == 1)
     {

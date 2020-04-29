@@ -20,6 +20,7 @@ class Level : public Scene
         void NewLevel();                //Move to next level when exit is passed
 
         Player* ply;                    //The player
+        Monster* mon;                   //The Monsters
         Maze* maze;                     //The maze
         Popup* popup;
         Stencil* mask;

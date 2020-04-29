@@ -7,6 +7,8 @@
 #include<GL/gl.h>
 #include<Texture.h>
 #include<Util.h>
+#include <math.h>
+#include <cstdlib>
 
 class Entity
 {
@@ -16,6 +18,7 @@ class Entity
 
         void DrawEntity();
         fpair GetNextXY();
+        fpair MGetNextXY(fpair);
         void PositionEntity(fpair);
 
         virtual void Init(char*, int, int) = 0; //Force all child classes to have an Init function
