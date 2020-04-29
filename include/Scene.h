@@ -3,6 +3,7 @@
 
 #ifndef SCENE_H
 #define SCENE_H
+#include<Shader.h>
 
 #include <windows.h>
 #include <GL/glut.h>
@@ -15,6 +16,8 @@
 #include <Player.h>
 #include <Inputs.h>
 #include <Maze.h>
+#include <Stencil.h>
+#include<Sound.h>
 //#include <Button.h>
 #include <Timer.h>
 #include <Util.h>
@@ -37,6 +40,7 @@ class Scene
 
         Inputs* kBMs;                                   //Input handler
         float screenHeight, screenWidth;                //Keep track of the screen height and width
+        float aspectRatio;
         int mouseX, mouseY;                             //Current mouse position
 
         std::stack<Scene*>* sceneStack;                 //The scene stack

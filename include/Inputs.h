@@ -7,6 +7,7 @@
 #include<Maze.h>
 #include<Timer.h>
 #include<Buttons.h>
+#include<Sound.h>
 
 class Inputs
 {
@@ -17,6 +18,7 @@ class Inputs
         void SetPlayer(Entity*);            //Add a player to be notified of relevant inputs
         void SetMaze(Maze*);                //Add a maze to be notified of relevant inputs
         void SetBtns(Buttons*);             //Add a set of buttons to be notified of relevant inputs
+        void SetSound(Sound*);              //Add a Sound to be notified of Relevant inputs
 
         void KeyPressed();                  //Respond to the first instant a key is pressed
         void KeyReleased();                 //Respond to the first instant a key is released
@@ -35,6 +37,7 @@ class Inputs
         Maze* maze;                         //The listening maze
         Buttons* btns;                      //The listening buttons
         Timer* timer;                       //The active timer from the scene
+        Sound* sound;                          //The active sound
 
 
     protected:

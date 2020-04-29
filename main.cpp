@@ -183,14 +183,14 @@ BOOL CreateGLWindow(char* title, int width, int height, int bits, bool fullscree
 		PFD_SUPPORT_OPENGL |						// Format Must Support OpenGL
 		PFD_DOUBLEBUFFER,							// Must Support Double Buffering
 		PFD_TYPE_RGBA,								// Request An RGBA Format
-		bits,										// Select Our Color Depth
+		16,										// Select Our Color Depth
 		0, 0, 0, 0, 0, 0,							// Color Bits Ignored
 		0,											// No Alpha Buffer
 		0,											// Shift Bit Ignored
 		0,											// No Accumulation Buffer
 		0, 0, 0, 0,									// Accumulation Bits Ignored
-		16,											// 16Bit Z-Buffer (Depth Buffer)
-		0,											// No Stencil Buffer
+		24,											// 16Bit Z-Buffer (Depth Buffer) changed to 24 forgot why
+		8,											// Set to 8 for Stencil Buffer
 		0,											// No Auxiliary Buffer
 		PFD_MAIN_PLANE,								// Main Drawing Layer
 		0,											// Reserved
