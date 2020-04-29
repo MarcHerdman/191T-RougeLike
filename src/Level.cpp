@@ -9,12 +9,15 @@ Level::Level(std::stack<Scene*>* s)
     ply = new Player();
     maze = new Maze();
     popup = new Popup;
+    mask = new Stencil();
+    sound = new Sound();
     //btns = new Buttons();
     kBMs = new Inputs(timer);
     kBMs->SetPlayer(ply);
     kBMs->SetMonster(mon);
     kBMs->SetMaze(maze);
     kBMs->SetBtns(popup->btns);
+    kBMs->SetSound(sound);
     //question = new Texture();
 
 }
@@ -34,6 +37,8 @@ void Level::Init(int screenWidth, int screenHeight)
     mon->PositionEntity(std::make_pair(0.1, 0.6));
     maze->GenerateMaze(9,9);
     popup->Init(screenWidth, screenHeight);
+    sound->initSounds();
+    sound->playMusic("sounds/Haunted.mp3");
     //btns->Init("images/RL_Buttons_1024.png", 4, 8);
     //btns->AddButton("Accept", ACCEPT, 0.4, 0.33, false, screenWidth, screenHeight);
     //btns->AddButton("Decline", DECLINE, 0.6, 0.33, false, screenWidth, screenHeight);
@@ -72,25 +77,36 @@ void Level::Draw()
     {
         std::string dir = coll.substr(6,1);
         std::cout << dir << std::endl;
-        ply->Teleport(dir);
-        mon->Teleport(dir);
-        maze->movePlayer(dir);
+        if((maze->plyLoc == maze->exitCell) && (dir == maze->exitD.substr(0,1)))
+        {
+            NewLevel();                  //move to next level
+        }
+        else
+        {
+            ply->Teleport(dir);
+            maze->movePlayer(dir);
+            maze->movePlayer(dir);
+        }
     }
 
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	// Clear Screen And Depth Buffer
+    glClear(GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	// Clear Screen And Depth Buffer
     glLoadIdentity();
-
+    maze->DrawMazeDisplay();
+    glPushMatrix();
+    mask->drawMask(ply, aspectRatio);
+    glPopMatrix();
     //Push and Pop Matrix Located inside DrawMaze()
     //maze->PrepareToDrawMaze();
     glPushMatrix();
-    maze->DrawMazeDisplay();
     //maze->DrawMazeBG();
     maze->DrawRoom();
+    ply->DrawEntity();
 
         //ply->PositionEntity(maze->GetRoomWalls());
     ply->DrawEntity();
     mon->DrawEntity();
     glPopMatrix();
+    mask->disableBuffer();
     //maze->DrawMazeFG();
     if(timer->IsPaused())
     {
@@ -128,4 +144,10 @@ void Level::Action(std::string action)
 void Level::ScreenResized(int screenWidth, int screenHeight)
 {
     popup->btns->CalculateBorders(screenWidth, screenHeight);
+}
+void Level::NewLevel()
+{
+    delete maze;
+    maze = new Maze();
+    maze->GenerateMaze(9,9);
 }

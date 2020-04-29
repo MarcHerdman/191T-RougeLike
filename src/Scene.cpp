@@ -42,6 +42,7 @@ GLvoid Scene::ResizeScene(GLsizei width, GLsizei height)
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
+    aspectRatio=1.0*height/width;
     ScreenResized(width, height);
 }
 
