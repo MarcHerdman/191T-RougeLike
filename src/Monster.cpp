@@ -90,5 +90,6 @@ std::string Monster::EnemyCollisionWithPlayer(fpair enemy, fpair player)
         return "COLL_W_PLAYER";
 
     }
+    return "";
 }
 
