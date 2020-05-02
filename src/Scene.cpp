@@ -16,6 +16,7 @@ Scene::~Scene()
 
 GLint Scene::InitGL()
 {
+    //glewInit();
     glShadeModel(GL_SMOOTH); // to make graphics nicer
     glClearDepth(1.0f);  //Depth Clearance
     glEnable(GL_DEPTH_TEST); //

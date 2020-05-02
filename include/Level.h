@@ -22,8 +22,10 @@ class Level : public Scene
         Player* ply;                    //The player
         Maze* maze;                     //The maze
         Popup* popup;
-        Stencil* mask;
         Sound* sound;
+        Square* square;
+        Square* alphaSquare;
+        Stencil* mask;
         Shader* shader;
 
         //Texture* question;              //The popup message

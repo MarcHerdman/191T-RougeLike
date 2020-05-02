@@ -1,15 +1,19 @@
 #include "Level.h"
-
+float a = 0.0;
 Level::Level(std::stack<Scene*>* s)
 {
+
     //timer = new Timer;
     sceneStack = s;
     //ctor
     ply = new Player();
     maze = new Maze();
     popup = new Popup;
-    mask = new Stencil();
     sound = new Sound();
+    square = new Square();
+    shader = new Shader();
+    alphaSquare = new Square();
+    mask = new Stencil();
     //btns = new Buttons();
     kBMs = new Inputs(timer);
     kBMs->SetPlayer(ply);
@@ -34,7 +38,11 @@ void Level::Init(int screenWidth, int screenHeight)
     maze->GenerateMaze(9,9);
     popup->Init(screenWidth, screenHeight);
     sound->initSounds();
-    sound->playMusic("sounds/Haunted.mp3");
+    shader->initShader("vert.vs","frag.fs",shader->program);
+    square->Init("images/noise.png");
+    alphaSquare->Init("images/foghelper.png");
+    mask->tex->CreateTexture("images/Idontwantatextureonthisobjectbutprogramkeepscrashing.png",1,1);
+    //sound->playMusic("sounds/Haunted.mp3");
     //btns->Init("images/RL_Buttons_1024.png", 4, 8);
     //btns->AddButton("Accept", ACCEPT, 0.4, 0.33, false, screenWidth, screenHeight);
     //btns->AddButton("Decline", DECLINE, 0.6, 0.33, false, screenWidth, screenHeight);
@@ -64,25 +72,47 @@ void Level::Draw()
 
     glClear(GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	// Clear Screen And Depth Buffer
     glLoadIdentity();
+
+
+
     maze->DrawMazeDisplay();
-    glPushMatrix();
-    mask->drawMask(ply, aspectRatio);
-    glPopMatrix();
+
     //Push and Pop Matrix Located inside DrawMaze()
     //maze->PrepareToDrawMaze();
+
     glPushMatrix();
     //maze->DrawMazeBG();
     maze->DrawRoom();
-    ply->DrawEntity();
 
+    ply->DrawEntity();
         //ply->PositionEntity(maze->GetRoomWalls());
     glPopMatrix();
-    mask->disableBuffer();
+
+
     //maze->DrawMazeFG();
+    alphaSquare->DrawSquare(0,0,2,2);
+        glPushMatrix();
+    mask->drawMask();
+    glPopMatrix();
+        glUseProgram(shader->program);
+    GLuint loc = glGetUniformLocation(shader->program,"iTime");
+
+    if(loc != -1) {
+        glUniform1f(loc, a);
+    }
+        square->DrawSquare(-1,-.75,5,5);
+        glRotated(90,0,0,1);
+        square->DrawSquare(-1,-.75,5,5);
+        glUseProgram(0);
+
+    a+=0.1;
+    mask->disableBuffer();
+
     if(timer->IsPaused())
     {
         popup->Draw(mouseX,mouseY);
     }
+
 }
 
 //Collect user inputs relevant to this scene and act on them
