@@ -23,8 +23,10 @@ class Level : public Scene
         Monster* mon;                   //The Monsters
         Maze* maze;                     //The maze
         Popup* popup;
-        Stencil* mask;
         Sound* sound;
+        Square* square;
+        Square* alphaSquare;
+        Stencil* mask;
         Shader* shader;
 
         //Texture* question;              //The popup message

@@ -12,7 +12,6 @@
 #include <Scene.h>
 #include <Texture.h>
 #include <iostream>
-#include <Monster.h>
 #include <Player.h>
 #include <Inputs.h>
 #include <Maze.h>
@@ -21,8 +20,6 @@
 //#include <Button.h>
 #include <Timer.h>
 #include <Util.h>
-#include<Square.h>
-
 
 class Scene
 {
