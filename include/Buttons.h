@@ -7,7 +7,7 @@
 #include <iostream>
 
 #include<Texture.h>
-
+#include<Sound.h>
 enum text{RETURN, BEGIN, HELP, QUIT, PLAY, ABOUT, ACCEPT, DECLINE};
 enum style{NORMAL, CLICK, HOVER, BRIGHT};
 
@@ -45,7 +45,7 @@ class Buttons
         Texture* tex;                                   //Texture containing button images
         float posPercentX;                              //The percentage screen X location
         float posPercentY;                              //The percentage screen Y location
-
+        Sound* click;
 
     protected:
 

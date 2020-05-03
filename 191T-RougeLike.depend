@@ -425,10 +425,11 @@
 	<Util.h>
 	<bits/stdc++.h>
 
-1586847399 c:\users\cvaug\desktop\csci173\191t-rougelike\include\buttons.h
+1588482270 c:\users\cvaug\desktop\csci173\191t-rougelike\include\buttons.h
 	<vector>
 	<iostream>
 	<Texture.h>
+	<Sound.h>
 
 1588476825 c:\users\cvaug\desktop\csci173\191t-rougelike\include\sound.h
 	<stdlib.h>
@@ -578,7 +579,7 @@
 
 1584744199 c:\users\cvaug\desktop\csci173\191t-rougelike\include\button.h
 
-1586847399 source:c:\users\cvaug\desktop\csci173\191t-rougelike\src\buttons.cpp
+1588482290 source:c:\users\cvaug\desktop\csci173\191t-rougelike\src\buttons.cpp
 	"Buttons.h"
 
 1588471869 source:c:\users\cvaug\desktop\csci173\191t-rougelike\src\entity.cpp
@@ -595,7 +596,7 @@
 1588479925 source:c:\users\cvaug\desktop\csci173\191t-rougelike\src\inputs.cpp
 	"Inputs.h"
 
-1588480184 source:c:\users\cvaug\desktop\csci173\191t-rougelike\src\level.cpp
+1588481278 source:c:\users\cvaug\desktop\csci173\191t-rougelike\src\level.cpp
 	"Level.h"
 
 1586847399 source:c:\users\cvaug\desktop\csci173\191t-rougelike\src\menuscreen.cpp

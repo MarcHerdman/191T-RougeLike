@@ -88,6 +88,7 @@ void Level::CalculateChanges()
         if(enemyPlayerColl == "COLL_W_PLAYER")
         {
             std::cout << "YOU ARE DEAD..." << std::endl;
+            sound ->pauseMusic();
             timer->Pause();
             popup->SetActive(true);
         }

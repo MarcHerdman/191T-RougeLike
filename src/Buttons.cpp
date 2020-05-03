@@ -4,8 +4,8 @@ Buttons::Buttons()
 {
     //ctor
     tex = new Texture();
+    click = new Sound();
 }
-
 Buttons::~Buttons()
 {
     //dtor
@@ -17,6 +17,7 @@ Buttons::~Buttons()
 void Buttons::Init(char* filename, int x, int y, float pivX, float pivY)
 {
     tex->CreateTexture(filename, x, y, pivX, pivY);
+    click ->initSounds();
 }
 
 //Draw all buttons in this instance of the class to the screen
@@ -65,7 +66,9 @@ std::string Buttons::CheckClick()
     {
         if(btns[i]->isActive)
         {
-            if(btns[i]->isActive && btns[i]->status == HOVER) return clicked = btns[i]->name;
+            if(btns[i]->isActive && btns[i]->status == HOVER){
+                click->playSound("sounds/click.wav");
+                return clicked = btns[i]->name;}
         }
     }
     return clicked;

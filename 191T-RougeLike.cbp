@@ -37,6 +37,7 @@
 			<Add option="-Wall" />
 			<Add option="-std=c++0x" />
 			<Add directory="C:/School/Spring2020/csci191/common/include" />
+			<Add directory="../Common/include" />
 		</Compiler>
 		<Linker>
 			<Add library="../common/lib/libSOIL.a" />
@@ -49,6 +50,7 @@
 			<Add library="gdi32" />
 			<Add library="../common/lib/libirrKlang.a" />
 			<Add directory="C:/School/Spring2020/csci191/common/lib" />
+			<Add directory="../Common/lib" />
 		</Linker>
 		<Unit filename="include/BlankScreen.h" />
 		<Unit filename="include/Button.h" />
