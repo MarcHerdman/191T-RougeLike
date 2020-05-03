@@ -4,7 +4,8 @@ Player::Player()
 {
     //ctor
     movementFlag = 0;
-    walkSpeed = 0.01;
+    walkSpeed = 0.02;
+    runSpeed = 0.03;
     xPos = 0.1;
     yPos = 0.1;
 }
@@ -62,8 +63,10 @@ void Player::Action(int input)
 
 void Player::Teleport(std::string dir)
 {
-    if(dir == "W") xPos = 0.43;
-    if(dir == "E") xPos = 0.031;
-    if(dir == "N") yPos = 0.69;
-    if(dir == "S") yPos = 0.02;
+    std::cout << dir << std::endl;
+    if(dir == "W") xPos = 0.39;
+    else if(dir == "E") xPos = 0.08;
+    else if(dir == "N") yPos = 0.64;
+    else if(dir == "S") yPos = 0.04;
+    else if(dir == "M"){ xPos = 0.23; yPos = 0.34;}
 }

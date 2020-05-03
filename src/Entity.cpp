@@ -42,16 +42,16 @@ fpair Entity::MGetNextXY(fpair XYPlayer)
     float distanceY = playerY - enemyY;
 
     float hypotenuse = sqrt((distanceX * distanceX) + (distanceY * distanceY));
-    std::cout << "Distance coordinates: " << distanceX << ", " << distanceY << std::endl;
-    std::cout << "Hypotenuse: " << hypotenuse << std::endl;
-    std::cout << "Player coordinates: " << playerX << ", " << playerY << std::endl;
+//    std::cout << "Distance coordinates: " << distanceX << ", " << distanceY << std::endl;
+//    std::cout << "Hypotenuse: " << hypotenuse << std::endl;
+//    std::cout << "Player coordinates: " << playerX << ", " << playerY << std::endl;
     if(hypotenuse < .600)
     {
         enemyX += walkSpeed * (distanceX/hypotenuse);
         enemyY += walkSpeed * (distanceY/hypotenuse);
     }
 
-    std::cout << "Monster coordinates: " << enemyX << ", " << enemyY << std::endl;
+//    std::cout << "Monster coordinates: " << enemyX << ", " << enemyY << std::endl;
     return std::make_pair(enemyX,enemyY);
 }
 

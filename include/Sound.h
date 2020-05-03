@@ -1,8 +1,9 @@
 #ifndef SOUND_H
 #define SOUND_H
 
-#include<SNDS/irrKlang.h>
 #include<stdlib.h>
+#include<SNDS/irrKlang.h>
+
 #include<iostream>
 #include<Timer.h>
 

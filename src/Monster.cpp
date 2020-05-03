@@ -3,9 +3,12 @@
 Monster::Monster()
 {
     movementFlag = 0;
-    walkSpeed    = 0.006;
-    xPos         = 0.1;
-    yPos         = 0.1;
+    walkSpeed = 0.01;
+    runSpeed = 0.02;
+    xPos = 0.1;
+    yPos = 0.1;
+    waitInRoomTime = 25;
+    hasWaited = 0;
 }
 Monster::~Monster()
 {

@@ -1,7 +1,7 @@
 #ifndef STENCIL_H
 #define STENCIL_H
-#include <math.h>
 #include<GL/gl.h>
+#include <math.h>
 #include<Texture.h>
 
 

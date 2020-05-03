@@ -4,10 +4,9 @@
 #define GLEW_STATIC
 #define GL_GLEXT_PROTOTYPES
 
+#include <stdlib.h>
 #include <GL/glew.h>
 
-
-#include <stdlib.h>
 #include <iostream>
 #include <math.h>
 

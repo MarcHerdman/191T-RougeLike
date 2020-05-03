@@ -4,8 +4,9 @@
 #define LEVEL_H
 
 #include <Scene.h>
-//#include <Buttons.h>
+#include <Buttons.h>
 #include <Popup.h>
+#include <HelpScreen.h>
 
 class Level : public Scene
 {
@@ -18,7 +19,9 @@ class Level : public Scene
         void Action(std::string);       //Process any actions
         void ScreenResized(int,int);    //Recalculate the borders of the buttons
         void NewLevel();                //Move to next level when exit is passed
+        void CalculateChanges();
 
+        HelpScreen* help;
         Player* ply;                    //The player
         Monster* mon;                   //The Monsters
         Maze* maze;                     //The maze
@@ -29,8 +32,8 @@ class Level : public Scene
         Stencil* mask;
         Shader* shader;
 
-        //Texture* question;              //The popup message
-        //Buttons* btns;                  //The popup buttons
+        float maskRandomizer;
+        bool playerInMonsterRoom;
 
     protected:
 

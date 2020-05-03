@@ -18,23 +18,17 @@ void Maze::GenerateMaze(int x, int y)
 {
     displayPieces = new Texture();
     roomPieces = new Texture();
-    //westWall = new Texture();
-    //southWall = new Texture();
-    //eastWall = new Texture();
-    //northWall = new Texture();
-    //floor = new Texture();
 
     displayPieces->CreateTexture("images/RL_MapPieces.png", 4,4);
     roomPieces->CreateTexture("images/RL_TopDown.png",4,2);
-    //westWall->CreateTexture("images/RL_WestWall.png", 1, 1,0.0,0.0);
-    //southWall->CreateTexture("images/RL_SouthWall.png", 1, 2,0.5,0.0);
-    //eastWall->CreateTexture("images/RL_EastWall.png", 1, 1,1.0,0.0);
-    //northWall->CreateTexture("images/RL_NorthWall.png", 1, 2,0.5,0.0);
-    //floor->CreateTexture("images/RL_Floor.png", 1, 1,0.5,0.0);
 
     mazeSizeX = x;
     mazeSizeY = y;
     mazeSize = x*y;
+    for(int i = 0; i < mazeSize; ++i) //For every space in the maze...
+    {
+        pathToPlayer.push_back(make_pair(INT_MAX,-1)); //Set up a path array with all max distance from player and not visited
+    }
 
     mapScreenPosX = 0.5 + displayPieces->widthPercentage * mazeSizeX / 2;   //Where to put the map readout
     mapScreenPosY = 0.01;//displayPieces->heightPercentage * mazeSizeY;      //Where to put the map readout
@@ -71,12 +65,21 @@ void Maze::GenerateMaze(int x, int y)
     {
         maze[i].visited=false;
     }
-    plyLoc = 40;
-    exitLoc = rand() % 32;
-    ExitWall();
+    plyLoc = rand() % mazeSize;
+    runDijkstra(false);
+    SetExit();
+    do
+    {
+        monsterLoc = rand() % mazeSize;
+    }
+    while(pathToPlayer[monsterLoc].first < 5);
+    //plyLoc = 40;
+    //exitLoc = rand() % 32;
+    //ExitWall();
 
     maze[plyLoc].visited = true;
     PrintMaze(); //Draw maze in console
+
 }
 
 int Maze::GetNextDir(int curLoc)
@@ -164,49 +167,6 @@ void Maze::PrintMaze()
     }
 }
 
-/*
-void Maze::Moving(int dir)
-{
-    int localX = plyX % 1024;
-    //std::cout << localX << std::endl;
-    ipair cell = IntToXY(plyLoc);
-    if(dir == 0) //Left
-    {
-        if(!(maze[plyLoc].walls & 1 && localX < 128))
-        {
-            plyX -= speed;
-        }
-    }
-    else if(dir == 2) //Right
-    {
-        if(!(maze[plyLoc].walls & 4 && localX > 768))
-        {
-            plyX += speed;
-        }
-    }
-    else if(dir == 1 && localX > 392 && localX < 576) //Down
-    {
-        if(!(maze[plyLoc].walls & 2))
-        {
-            std::cout << "Move Down" << std::endl;
-            cell.second += 1;
-        }
-    }
-    else if(dir == 3 && localX > 392 && localX < 576) //Up
-    {
-        if(!(maze[plyLoc].walls & 8))
-        {
-            std::cout << "Move Up" << std::endl;
-            cell.second -= 1;
-        }
-    }
-    int cellX = plyX / 1024;
-    plyLoc = XYtoInt(std::make_pair(cellX, cell.second));
-    maze[plyLoc].visited = true;
-    //std::cout << "PLYX: " << plyX << "PLYLOC: " << locX << std::endl;
-}
-*/
-
 int Maze::XYtoInt(ipair ip)
 {
     return(ip.second * mazeSizeX + ip.first);
@@ -217,13 +177,6 @@ ipair Maze::IntToXY(int i)
     return std::make_pair(i%mazeSizeX, i/mazeSizeX);
 }
 
-/*
-void Maze::PrepareToDrawMaze()
-{
-    //std::cout << plyLoc << std::endl;
-    instantaniousXY = IntToXY(plyLoc);
-}
-*/
 
 void Maze::DrawMazeDisplay()
 {
@@ -231,19 +184,15 @@ void Maze::DrawMazeDisplay()
     displayPieces->TextureBinder();
     for(int i = 0; i < maze.size(); ++i)
     {
-        if(maze[i].visited)
+        displayPieces->curFrame = maze[i].walls;
+        ipair pos = IntToXY(i);
+        float locX = mapScreenPosX + displayPieces->widthPercentage*pos.first*2;
+        float locY = mapScreenPosY + displayPieces->heightPercentage*pos.second*2;
+        if(maze[i].visited) displayPieces->Draw(locX,locY,2.0,2.0);
+        if(i == plyLoc || i == exitCell || i == monsterLoc)
         {
-            displayPieces->curFrame = maze[i].walls;
-            ipair pos = IntToXY(i);
-            float locX = mapScreenPosX + displayPieces->widthPercentage*pos.first*2;
-            float locY = mapScreenPosY + displayPieces->heightPercentage*pos.second*2;
-
+            displayPieces->curFrame = 15;
             displayPieces->Draw(locX,locY,2.0,2.0);
-            if(i == plyLoc)
-            {
-                displayPieces->curFrame = 15;
-                displayPieces->Draw(locX,locY,2.0,2.0);
-            }
         }
     }
     //glPopMatrix();
@@ -314,7 +263,7 @@ void Maze::DrawRoom()
             bool mirror = false;
             bool flip = false;
             int curFrame = 7;
-            if(x == 0)
+            if(x == 0) //Left Row
             {
                 curFrame = 1;
                 if(y == 3 && !(maze[plyLoc].walls & 1)) curFrame = 3;
@@ -322,7 +271,7 @@ void Maze::DrawRoom()
                         if(y == 3 && (plyLoc == exitCell)) curFrame = 5;
                 }
             }
-            else if(x == cells-1)
+            else if(x == cells-1) //Right Row
             {
                 curFrame = 1;
                 mirror = true;
@@ -332,7 +281,7 @@ void Maze::DrawRoom()
                 }
             }
 
-            if(y == 0)
+            if(y == 0)//top row
             {
                 curFrame = 0;
                 if(x == 0 || x == cells-1) curFrame = 6;
@@ -341,14 +290,14 @@ void Maze::DrawRoom()
                         if(x == 3 && (plyLoc == exitCell)) curFrame = 4;
                 }
             }
-            else if(y == cells-1)
+            else if(y == cells-1)//Bottom row
             {
                 curFrame = 0;
                 flip = true;
-                if(x == 0 || x == cells-1) curFrame = 6;
-                else if(x == 3 && !(maze[plyLoc].walls & 2)) curFrame = 2;
+                if(x == 0 || x == cells-1) curFrame = 6; //Bottom corners
+                else if(x == 3 && !(maze[plyLoc].walls & 2)) curFrame = 2;//bottom middle
                 if(exitD == "South"){
-                        if(y == 3 && (plyLoc == exitCell)) curFrame = 4;
+                        if(x == 3 && (plyLoc == exitCell)) curFrame = 4;
                 }
             }
             roomPieces->curFrame = curFrame;
@@ -356,59 +305,92 @@ void Maze::DrawRoom()
         }
     }
 }
-/*
-void Maze::DrawMazeBG()
-{
 
-    northWall->curFrame = !((maze[plyLoc].walls & 8) >> 3); //Create a 1 or 0 for north door present or not
-    //float modifier = (plyX - (instantaniousXY.first * northWall->width)) / (float)defaultScreenSizeX;
-    //float startX = 0.5 - modifier;
-    glPushMatrix();
-        northWall->TextureBinder();
-        //northWall->Draw(startX,0);
-        northWall->Draw(0.5,0);
-    //glPopMatrix();
-    //glPushMatrix();
-        floor->TextureBinder();C:\Users\shaun\Documents\CSCI173\Final\src\Level.cpp
-        //floor->Draw(startX,northWall->heightPercentage);
-        floor->Draw(0.5,northWall->heightPercentage);
-            if(maze[plyLoc].walls & 1) //West Wall exists
-    {
-        //glPushMatrix();
-            westWall->TextureBinder();
-            //westWall->Draw(startX,0);
-            westWall->Draw(0.233,0);
-        //glPopMatrix();
-    }
-    if(maze[plyLoc].walls & 4) //East Wall exists
-    {
-        //glPushMatrix();
-            eastWall->TextureBinder();
-            //eastWall->Draw(startX+eastWall->widthPercentage*7,0);
-            eastWall->Draw(0.766,0);
-        //glPopMatrix();
-    }
-    glPopMatrix();
-}
-
-void Maze::DrawMazeFG()
-{
-    glPushMatrix();
-    southWall->curFrame = !((maze[plyLoc].walls & 2) >> 1); //Create a 1 or 0 for south door present or not
-    //float modifier = (plyX - (instantaniousXY.first * northWall->width)) / (float)defaultScreenSizeX;
-    //float startX = 0.5 - modifier;
-    //glPushMatrix();
-        southWall->TextureBinder();
-        //southWall->Draw(startX,northWall->heightPercentage + southWall->heightPercentage);
-        southWall->Draw(0.5,northWall->heightPercentage + southWall->heightPercentage);
-    glPopMatrix();
-}
-*/
 int Maze::GetRoomWalls()
 {
     return maze[plyLoc].walls;
 }
 
+void Maze::runDijkstra(bool debug)
+{
+    for(int i = 0; i < mazeSize; ++i) //For every space in the maze...
+    {
+        pathToPlayer[i] = make_pair(INT_MAX,-1); //Set up a path array with all max distance from player and not visited
+    }
+    priority_queue< ipair, vector <ipair>, greater<ipair> > pq; //Make a prioity queue that will priotitize low values
+    pathToPlayer[plyLoc] = make_pair(0,plyLoc);	//Set the players spot to "no steps required to get here" and "came here from here"
+    pq.push(make_pair(0,plyLoc));				//Push that same info to the priority queue
+    while (!pq.empty())						//As long as something is in the queue we have not exhausted all options
+    {
+        int thisVert = pq.top().second;			//Get the location index you are at
+        pq.pop();								//And pop this room from the queue
+        //neighbors n = W->getAdjacent(thisVert);	//Get all square around this one
+        if(debug) std::cout << "This vert is " << thisVert << std::endl;
+        for(int i = 0; i < 4; ++i)				//Process each square
+        {
+            bool canPass = false;
+            ipair neighborXY = IntToXY(thisVert); 											//get that squares info
+            if(i==0 && !(maze[thisVert].walls & 1))
+            {
+                if(debug) std::cout << "Checking West" << std::endl;
+                canPass = true;
+                neighborXY.first -= 1;
+            }
+            else if(i==1 && !(maze[thisVert].walls & 2))
+            {
+                if(debug) std::cout << "Checking South" << std::endl;
+                canPass = true;
+                neighborXY.second += 1;
+            }
+            else if(i==2 && !(maze[thisVert].walls & 4))
+            {
+                if(debug) std::cout << "Checking East" << std::endl;
+                canPass = true;
+                neighborXY.first += 1;
+            }
+            else if(i==3 && !(maze[thisVert].walls & 8))
+            {
+                if(debug) std::cout << "Checking North" << std::endl;
+                canPass = true;
+                neighborXY.second -= 1;
+            }
+            if(canPass)
+            {
+                int neighbor = XYtoInt(neighborXY);
+                if(debug) std::cout << "At " << neighbor << " whos distance value is " << pathToPlayer[neighbor].first << std::endl;
+                if (pathToPlayer[neighbor].first > pathToPlayer[thisVert].first + 1)	//If the distance value stored there is greater than the path the current square + 1...
+                {
+                    pathToPlayer[neighbor].first = pathToPlayer[thisVert].first + 1;	//Update that squares distance value
+                    pathToPlayer[neighbor].second = thisVert;							//Update that squares "came from" value to be the square we were just on
+                    pq.push(make_pair(pathToPlayer[neighbor].first, neighbor));			//Push the new square to the queue to be processed
+                    if(debug) std::cout << "Updated" << std::endl;
+                }
+            }
+        }
+        if(debug)
+        {
+            std::cout << "----------------------------------" << std::endl;
+            PrintPathToPlayer();
+            //std::string s;
+            //cin >> s;
+        }
+
+    }
+}
+
+void Maze::PrintPathToPlayer()
+{
+    for(int y = 0; y < mazeSizeY; y++)
+    {
+        for(int x = 0; x < mazeSizeX; x++)
+        {
+            if(pathToPlayer[y*mazeSizeX + x].first == INT_MAX) std::cout << "X";
+            else std::cout << pathToPlayer[y*mazeSizeX + x].first;
+            std::cout << "\t";
+        }
+        std::cout << std::endl;
+    }
+}
 
 std::string Maze::checkWallCollision(fpair loc)
 {
@@ -482,67 +464,25 @@ void Maze::movePlayer(std::string dir)
 
 void Maze::SetExit()
 {
-    if (exitLoc < 10){
-        exitCell = exitLoc;
+    int validCells[] = {0,1,2,3,4,5,6,7,8, 9,17, 18,26, 27,35, 36,44, 45,53, 54,62, 63,71, 72,73,74,75,76,77,78,79,80};
+    exitCell = validCells[rand() % 30];
+    while(pathToPlayer[exitCell].first < 5)
+    {
+        exitCell = validCells[rand() % 30];
     }
-    else if (exitLoc > 22){
-        exitCell = exitLoc +48;
-    }
-    else if (exitLoc == 11){
-        exitCell = 17;
-    }
-    else if (exitLoc == 12){
-        exitCell = 18;
-    }
-    else if (exitLoc == 13){
-        exitCell = 26;
-    }
-    else if (exitLoc == 14){
-        exitCell = 27;
-    }
-    else if (exitLoc == 15){
-        exitCell = 35;
-    }
-    else if (exitLoc == 16){
-        exitCell = 36;
-    }
-    else if (exitLoc == 17){
-        exitCell = 44;
-    }
-    else if (exitLoc == 18){
-        exitCell = 45;
-    }
-    else if (exitLoc == 19){
-        exitCell = 53;
-    }
-    else if (exitLoc == 20){
-        exitCell = 54;
-    }
-    else if (exitLoc == 21){
-        exitCell = 62;
-    }
-    else if (exitLoc == 22){
-        exitCell = 63;
-    }
-}
 
-void Maze::ExitWall()
-{
-    SetExit();
-
-    int temp = exitCell;
-
-    if (temp > 71){
+    if (exitCell > 71){
         exitD = "South";
     }
-    else if (temp < 9){
+    else if (exitCell < 9){
         exitD = "North";
     }
-    else if (temp%9 == 8){
+    else if (exitCell%9 == 8){
         exitD = "East";
     }
     else{
         exitD = "West";
     }
 }
+
 

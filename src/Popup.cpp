@@ -15,9 +15,11 @@ Popup::~Popup()
 
 void Popup::Init(int screenWidth, int screenHeight)
 {
+
     btns->Init("images/RL_Buttons_1024.png", 4, 8);
-    btns->AddButton("Accept", ACCEPT, 0.4, 0.33, false, screenWidth, screenHeight);
-    btns->AddButton("Decline", DECLINE, 0.6, 0.33, false, screenWidth, screenHeight);
+    btns->AddButton("Accept", ACCEPT, 0.35, 0.33, false, screenWidth, screenHeight);
+    btns->AddButton("InGameHelp", HELP, 0.5, 0.33, false, screenWidth, screenHeight);
+    btns->AddButton("Decline", DECLINE, 0.65, 0.33, false, screenWidth, screenHeight);
     msg->CreateTexture("images/RL_Exit.png",1,1,0.5,0.0);
 }
 

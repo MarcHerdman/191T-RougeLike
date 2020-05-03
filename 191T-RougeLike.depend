@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1588202340 source:c:\school\spring2020\csci191\191t-rougelike\main.cpp
+1588452941 source:c:\school\spring2020\csci191\191t-rougelike\main.cpp
 	<windows.h>
 	<stdlib.h>
 	<iostream>
@@ -13,7 +13,7 @@
 	<Level.h>
 	<MenuScreen.h>
 
-1588201701 c:\school\spring2020\csci191\191t-rougelike\include\scene.h
+1588444975 c:\school\spring2020\csci191\191t-rougelike\include\scene.h
 	<Shader.h>
 	<windows.h>
 	<GL/glut.h>
@@ -22,6 +22,7 @@
 	<Scene.h>
 	<Texture.h>
 	<iostream>
+	<Monster.h>
 	<Player.h>
 	<Inputs.h>
 	<Maze.h>
@@ -29,6 +30,7 @@
 	<Sound.h>
 	<Timer.h>
 	<Util.h>
+	<Square.h>
 
 1587787815 c:\school\spring2020\csci191\common\include\gl\glut.h
 	<windows.h>
@@ -36,10 +38,12 @@
 	<GL/gl.h>
 	<GL/glu.h>
 
-1588198125 c:\school\spring2020\csci191\191t-rougelike\include\entity.h
+1588452311 c:\school\spring2020\csci191\191t-rougelike\include\entity.h
+	<cstdlib>
 	<GL/gl.h>
 	<Texture.h>
 	<Util.h>
+	<math.h>
 
 1587791917 c:\school\spring2020\csci191\191t-rougelike\include\texture.h
 	<SOIL.h>
@@ -51,18 +55,18 @@
 
 1587787815 c:\school\spring2020\csci191\common\include\soil.h
 
-1588201280 source:c:\school\spring2020\csci191\191t-rougelike\src\button.cpp
+1588204179 source:c:\school\spring2020\csci191\191t-rougelike\src\button.cpp
 	"Button.h"
 
-1588201280 c:\school\spring2020\csci191\191t-rougelike\include\button.h
+1588204179 c:\school\spring2020\csci191\191t-rougelike\include\button.h
 
-1588198126 source:c:\school\spring2020\csci191\191t-rougelike\src\entity.cpp
+1588447741 source:c:\school\spring2020\csci191\191t-rougelike\src\entity.cpp
 	"Entity.h"
 
-1588201870 source:c:\school\spring2020\csci191\191t-rougelike\src\inputs.cpp
+1588204592 source:c:\school\spring2020\csci191\191t-rougelike\src\inputs.cpp
 	"Inputs.h"
 
-1588201563 c:\school\spring2020\csci191\191t-rougelike\include\inputs.h
+1588204592 c:\school\spring2020\csci191\191t-rougelike\include\inputs.h
 	<windows.h>
 	<Entity.h>
 	<Maze.h>
@@ -70,10 +74,10 @@
 	<Buttons.h>
 	<Sound.h>
 
-1588202139 source:c:\school\spring2020\csci191\191t-rougelike\src\scene.cpp
+1588447247 source:c:\school\spring2020\csci191\191t-rougelike\src\scene.cpp
 	"Scene.h"
 
-1588202155 source:c:\school\spring2020\csci191\191t-rougelike\src\texture.cpp
+1588204179 source:c:\school\spring2020\csci191\191t-rougelike\src\texture.cpp
 	"Texture.h"
 
 1587791917 source:c:\school\spring2020\csci191\191t-rougelike\src\timer.cpp
@@ -83,30 +87,30 @@
 	<time.h>
 	<iostream>
 
-1588202353 c:\school\spring2020\csci191\191t-rougelike\include\maze.h
+1588466074 c:\school\spring2020\csci191\191t-rougelike\include\maze.h
+	<stdlib.h>
 	<vector>
 	<iostream>
 	<time.h>
-	<stdlib.h>
 	<stack>
 	<utility>
 	<Texture.h>
 	<Util.h>
 	<bits/stdc++.h>
 
-1588202116 source:c:\school\spring2020\csci191\191t-rougelike\src\maze.cpp
+1588466148 source:c:\school\spring2020\csci191\191t-rougelike\src\maze.cpp
 	"Maze.h"
 
 1587791917 c:\school\spring2020\csci191\191t-rougelike\include\player.h
 	<Entity.h>
 
-1588198126 source:c:\school\spring2020\csci191\191t-rougelike\src\player.cpp
+1588452885 source:c:\school\spring2020\csci191\191t-rougelike\src\player.cpp
 	"Player.h"
 
 1587791917 c:\school\spring2020\csci191\191t-rougelike\include\util.h
 	<utility>
 
-1587791917 c:\school\spring2020\csci191\191t-rougelike\include\buttons.h
+1588446035 c:\school\spring2020\csci191\191t-rougelike\include\buttons.h
 	<vector>
 	<iostream>
 	<Texture.h>
@@ -125,9 +129,11 @@
 	<HelpScreen.h>
 	<Buttons.h>
 
-1588201587 c:\school\spring2020\csci191\191t-rougelike\include\level.h
+1588465733 c:\school\spring2020\csci191\191t-rougelike\include\level.h
 	<Scene.h>
+	<Buttons.h>
 	<Popup.h>
+	<HelpScreen.h>
 
 1587791917 c:\school\spring2020\csci191\191t-rougelike\include\popup.h
 	<Buttons.h>
@@ -146,13 +152,13 @@
 1587791917 source:c:\school\spring2020\csci191\191t-rougelike\src\helpscreen.cpp
 	"HelpScreen.h"
 
-1588202000 source:c:\school\spring2020\csci191\191t-rougelike\src\level.cpp
+1588466752 source:c:\school\spring2020\csci191\191t-rougelike\src\level.cpp
 	"Level.h"
 
 1587791917 source:c:\school\spring2020\csci191\191t-rougelike\src\menuscreen.cpp
 	"MenuScreen.h"
 
-1587791917 source:c:\school\spring2020\csci191\191t-rougelike\src\popup.cpp
+1588453917 source:c:\school\spring2020\csci191\191t-rougelike\src\popup.cpp
 	"Popup.h"
 
 1587791917 source:c:\school\spring2020\csci191\191t-rougelike\src\titlescreen.cpp
@@ -162,14 +168,14 @@
 	"Util.h"
 	<utility>
 
-1588201280 c:\school\spring2020\csci191\191t-rougelike\include\shader.h
-	<GL/glew.h>
+1588446128 c:\school\spring2020\csci191\191t-rougelike\include\shader.h
 	<stdlib.h>
+	<GL/glew.h>
 	<iostream>
 	<math.h>
 	<fstream>
 
-1587787809 c:\school\spring2020\csci191\common\include\gl\glew.h
+1588445109 c:\school\spring2020\csci191\common\include\gl\glew.h
 	<stddef.h>
 	<inttypes.h>
 	<stdint.h>
@@ -178,9 +184,9 @@
 	<OpenGL/glu.h>
 	<GL/glu.h>
 
-1588201280 c:\school\spring2020\csci191\191t-rougelike\include\sound.h
-	<SNDS/irrKlang.h>
+1588445457 c:\school\spring2020\csci191\191t-rougelike\include\sound.h
 	<stdlib.h>
+	<SNDS/irrKlang.h>
 	<iostream>
 	<Timer.h>
 
@@ -281,7 +287,36 @@
 	"ik_IRefCounted.h"
 	"ik_ISoundSource.h"
 
-1588201280 c:\school\spring2020\csci191\191t-rougelike\include\stencil.h
-	<Entity.h>
+1588445391 c:\school\spring2020\csci191\191t-rougelike\include\stencil.h
+	<GL/gl.h>
 	<math.h>
+	<Texture.h>
+
+1588467442 c:\school\spring2020\csci191\191t-rougelike\include\monster.h
+	<Entity.h>
+	<Player.h>
+
+1588444975 c:\school\spring2020\csci191\191t-rougelike\include\square.h
+	<GL/gl.h>
+	<Texture.h>
+
+1588204179 source:c:\school\spring2020\csci191\191t-rougelike\src\sound.cpp
+	"Sound.h"
+
+1588452530 source:c:\school\spring2020\csci191\191t-rougelike\src\monster.cpp
+	"Monster.h"
+
+1588444975 source:c:\school\spring2020\csci191\191t-rougelike\src\square.cpp
+	"Square.h"
+
+1588444975 source:c:\school\spring2020\csci191\191t-rougelike\src\stencil.cpp
+	"Stencil.h"
+
+1588204592 source:c:\school\spring2020\csci191\191t-rougelike\src\follow.cpp
+	"Follow.h"
+
+1588204592 c:\school\spring2020\csci191\191t-rougelike\include\follow.h
+
+1588444975 source:c:\school\spring2020\csci191\191t-rougelike\src\shader.cpp
+	"Shader.h"
 

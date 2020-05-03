@@ -17,6 +17,8 @@ class Monster : public Entity
         std::string EnemyCollisionWithPlayer(fpair, fpair);
 
         bool hasCaught = false;
+        int waitInRoomTime;
+        int hasWaited;
     protected:
 
     private:

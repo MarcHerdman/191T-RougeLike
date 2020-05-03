@@ -339,9 +339,9 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 
     BlankScreen* bs = new BlankScreen(&scenes);     //Create a blank scene for catching QUIT
     scenes.push(bs);                                //Push it to bottom of the scene stack
-    //TitleScreen* ts = new TitleScreen(&scenes);     //Create the Title Screen
+    TitleScreen* ts = new TitleScreen(&scenes);     //Create the Title Screen
     //MenuScreen* ts = new MenuScreen(&scenes);     //DEBUG: Go directly to Menu Screen
-    Level* ts = new Level(&scenes);               //DEBUG: Go directly to a level
+    //Level* ts = new Level(&scenes);               //DEBUG: Go directly to a level
     scenes.push(ts);                                //Set the created scene to top(active) scene
 
     FPS = 1.0/fps * 1000;                            //Calculate the FPS

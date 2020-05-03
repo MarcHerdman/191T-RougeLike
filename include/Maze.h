@@ -3,10 +3,11 @@
 #ifndef MAZE_H
 #define MAZE_H
 
+#include<stdlib.h>
 #include<vector>
 #include<iostream>
 #include<time.h>
-#include<stdlib.h>
+
 #include<stack>
 #include<utility>
 #include<Texture.h>
@@ -53,12 +54,15 @@ class Maze
 
         int GetRoomWalls();
 
+        void runDijkstra(bool);
+        void PrintPathToPlayer();
+
         //int WallBits[4] = {1,2,4,8};
         int oppWallBits[4] = {4,8,1,2};     //The opposing room walls
 
         int mazeSizeX, mazeSizeY, mazeSize; //# of cells in X, Y and total;
         int plyLoc;                         //The index value of the cell player is in
-        int exitLoc;                        // roll random number for exit location generation
+        int monsterLoc;
         int exitCell;                       //Index value of the cell the exit will be generated in
         string exitD;                       // direction of exit in it's cell (N,E,S,W)
         int plyX;                           //Total number of pixel moved along the x axis
@@ -68,15 +72,11 @@ class Maze
 
         Texture* displayPieces;             //Textures for the minimap
         Texture* roomPieces;
-        //Texture* westWall;                  //Textures for the room display
-        //Texture* southWall;                 // ""                  ""
-        //Texture* eastWall;                  // ""                  ""
-        //Texture* northWall;                 // ""                  ""
-        //Texture* floor;                     // ""                  ""
+
+        vector<ipair> pathToPlayer;
 
         float mapScreenPosX;                //Where to draw the map screen
         float mapScreenPosY;                //Where to draw the map screen
-        //ipair instantaniousXY;              //The X and Y index of the cell the player is currently in
 
         void Rotate(int);                   //Rotate the maze
 

@@ -3,12 +3,12 @@
 
 #ifndef ENTITY_H
 #define ENTITY_H
-
+#include <cstdlib>
 #include<GL/gl.h>
 #include<Texture.h>
 #include<Util.h>
 #include <math.h>
-#include <cstdlib>
+
 
 class Entity
 {
@@ -25,6 +25,7 @@ class Entity
         virtual void Action(int) = 0;           //Force all child classes to have an Action function
         //virtual bool CheckCollision(int) = 0;
 
+
         float xPos;                             //x position of the entity
         float yPos;                             //y position of the entity
 
@@ -32,6 +33,7 @@ class Entity
         std::string whenIdle;                   //what idle animation to play if no longer moving
 
         float walkSpeed;                        //Movement speed in terms of percentage of screen moved per frame
+        float runSpeed;                        //Movement speed in terms of percentage of screen moved per frame
 
         Texture* tex;                           //Texture information for the entity
 
