@@ -22,6 +22,7 @@ Level::Level(std::stack<Scene*>* s)
     kBMs->SetBtns(popup->btns);
     kBMs->SetSound(sound);
 
+    footstepSpacer = 0;
     maskRandomizer = 0.0;
     playerInMonsterRoom = false;
 }
@@ -47,7 +48,7 @@ void Level::Init(int screenWidth, int screenHeight)
     square->Init("images/noise.png");
     alphaSquare->Init("images/foghelper.png");
     mask->tex->CreateTexture("images/Idontwantatextureonthisobjectbutprogramkeepscrashing.png",1,1);
-    //sound->playMusic("sounds/Haunted.mp3");
+    sound->playMusic("sounds/Haunted.mp3");
     //btns->Init("images/RL_Buttons_1024.png", 4, 8);
     //btns->AddButton("Accept", ACCEPT, 0.4, 0.33, false, screenWidth, screenHeight);
     //btns->AddButton("Decline", DECLINE, 0.6, 0.33, false, screenWidth, screenHeight);
@@ -118,6 +119,15 @@ void Level::CalculateChanges()
             maze->movePlayer(dir);
         }
     }
+        if(ply->movementFlag!=0){
+            if (footstepSpacer == 0) {
+            footstepSpacer =5;
+            if(sound) sound->playSound("sounds/walking.mp3");
+            }
+            else {
+                footstepSpacer--;
+            }
+    }
     maskRandomizer += 0.1;
 }
 //Draw this scene to the screen
@@ -127,11 +137,13 @@ void Level::Draw()
     {
         CalculateChanges();
     }
+
     glClear(GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	// Clear Screen And Depth Buffer
     glLoadIdentity();
     glPushMatrix();
         maze->DrawMazeDisplay();
         maze->DrawRoom();
+
         ply->DrawEntity();
         if(playerInMonsterRoom) mon->DrawEntity();
     glPopMatrix();
@@ -172,13 +184,17 @@ void Level::Action(std::string action)
         {
             std::cout << "UNPAUSE" << std::endl;
             //btns->SetActive(false);
+
             popup->SetActive(false);
+            sound->resumeMusic();
+
             timer->Resume();
         }
         else
         {
             std::cout << "PAUSE" << std::endl;
             timer->Pause();
+            sound->pauseMusic();
             //btns->SetActive(true);
             popup->SetActive(true);
         }

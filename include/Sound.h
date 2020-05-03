@@ -17,8 +17,13 @@ class Sound
         virtual ~Sound();
         Timer *tmr = new Timer();
         ISoundEngine *engine = createIrrKlangDevice();
-
+        ISound* currentSound;
+        int volume;
+        int position;
+        char* file;
         void playMusic(char *);
+        void pauseMusic();
+        void resumeMusic();
         void playSound(char *);
         void pauseSound(char *);
         int initSounds();

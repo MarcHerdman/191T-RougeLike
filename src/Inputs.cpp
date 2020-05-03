@@ -45,12 +45,11 @@ void Inputs::KeyPressed()//ONLY RESPOND ONCE WHEN THE KEY IS FIRST PRESSED
                 if(ply)
                 {
                     ply->Action(1);
-                    if(sound) sound->playSound("sounds/Click.wav");
                     if(ply->xPos > mon->xPos) mon->Action(4);
                     else mon->Action(1);
                 }
                 //if(mon) mon->Action(1);
-                
+
                 //if(ply) ply->tex->SetAnimation("WalkLeft", true, true, 0);
                 //if(maze) maze->Moving(0);
                 break;
@@ -58,7 +57,6 @@ void Inputs::KeyPressed()//ONLY RESPOND ONCE WHEN THE KEY IS FIRST PRESSED
                 if(ply)
                 {
                     ply->Action(4);
-                    if(sound) sound->playSound("sounds/Click.wav");
                     if(ply->xPos < mon->xPos) mon->Action(1);
                     else mon->Action(4);
                 }
@@ -71,7 +69,6 @@ void Inputs::KeyPressed()//ONLY RESPOND ONCE WHEN THE KEY IS FIRST PRESSED
                 {
                     ply->Action(8);
                     if(ply->yPos > mon->yPos) mon->Action(2);
-                    if(sound) sound->playSound("sounds/Click.wav");
                     else mon->Action(8);
                 }
                 //if(mon) mon->Action(8);
@@ -83,7 +80,6 @@ void Inputs::KeyPressed()//ONLY RESPOND ONCE WHEN THE KEY IS FIRST PRESSED
                 {
                     ply->Action(2);
                     if(ply->yPos < mon->yPos) mon->Action(8);
-                    if(sound) sound->playSound("sounds/Click.wav");
                     else mon->Action(2);
                 }
                 //if(mon) mon->Action(2);]

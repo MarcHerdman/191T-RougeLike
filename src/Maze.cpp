@@ -204,7 +204,7 @@ void Maze::DrawMazeDisplay()
             displayPieces->curFrame = 18;
             displayPieces->Draw(locX,locY,1.0,1.0);
         }
-        if(i == plyLoc)
+         if(i == plyLoc)
         {
             displayPieces->curFrame = 17;
             displayPieces->Draw(locX,locY,1.0,1.0);
