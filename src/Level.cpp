@@ -47,7 +47,7 @@ void Level::Init(int screenWidth, int screenHeight)
     square->Init("images/noise.png");
     alphaSquare->Init("images/foghelper.png");
     mask->tex->CreateTexture("images/Idontwantatextureonthisobjectbutprogramkeepscrashing.png",1,1);
-    //sound->playMusic("sounds/Haunted.mp3");
+    sound->playMusic("sounds/Haunted.mp3");
     //btns->Init("images/RL_Buttons_1024.png", 4, 8);
     //btns->AddButton("Accept", ACCEPT, 0.4, 0.33, false, screenWidth, screenHeight);
     //btns->AddButton("Decline", DECLINE, 0.6, 0.33, false, screenWidth, screenHeight);
@@ -172,6 +172,7 @@ void Level::Action(std::string action)
         {
             std::cout << "UNPAUSE" << std::endl;
             //btns->SetActive(false);
+
             popup->SetActive(false);
             timer->Resume();
         }
@@ -179,6 +180,7 @@ void Level::Action(std::string action)
         {
             std::cout << "PAUSE" << std::endl;
             timer->Pause();
+            //sound->pauseSound("sounds/Haunted.mp3");
             //btns->SetActive(true);
             popup->SetActive(true);
         }

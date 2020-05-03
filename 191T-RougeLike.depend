@@ -320,3 +320,324 @@
 1588444975 source:c:\school\spring2020\csci191\191t-rougelike\src\shader.cpp
 	"Shader.h"
 
+1588471869 source:c:\users\cvaug\desktop\csci173\191t-rougelike\main.cpp
+	<windows.h>
+	<stdlib.h>
+	<iostream>
+	<windows.h>
+	<stack>
+	<ctime>
+	<Timer.h>
+	<Scene.h>
+	<BlankScreen.h>
+	<TitleScreen.h>
+	<Level.h>
+	<MenuScreen.h>
+
+1586847399 c:\users\cvaug\desktop\csci173\191t-rougelike\include\timer.h
+	<time.h>
+	<iostream>
+
+1588471869 c:\users\cvaug\desktop\csci173\191t-rougelike\include\scene.h
+	<Shader.h>
+	<windows.h>
+	<GL/glut.h>
+	<vector>
+	<stack>
+	<Scene.h>
+	<Texture.h>
+	<iostream>
+	<Monster.h>
+	<Player.h>
+	<Inputs.h>
+	<Maze.h>
+	<Stencil.h>
+	<Sound.h>
+	<Timer.h>
+	<Util.h>
+	<Square.h>
+
+1588471869 c:\users\cvaug\desktop\csci173\191t-rougelike\include\shader.h
+	<stdlib.h>
+	<GL/glew.h>
+	<iostream>
+	<math.h>
+	<fstream>
+
+1501505181 c:\users\cvaug\desktop\csci173\common\include\gl\glew.h
+	<stddef.h>
+	<inttypes.h>
+	<stdint.h>
+	<inttypes.h>
+	<Availability.h>
+	<OpenGL/glu.h>
+	<GL/glu.h>
+
+1585326168 c:\users\cvaug\desktop\csci173\common\include\gl\glut.h
+	<windows.h>
+	<stdlib.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1586847399 c:\users\cvaug\desktop\csci173\191t-rougelike\include\texture.h
+	<SOIL.h>
+	<GL/gl.h>
+	<iostream>
+	<map>
+	<utility>
+	<Util.h>
+
+1215483208 c:\users\cvaug\desktop\csci173\common\include\soil.h
+
+1586847399 c:\users\cvaug\desktop\csci173\191t-rougelike\include\util.h
+	<utility>
+
+1588471869 c:\users\cvaug\desktop\csci173\191t-rougelike\include\monster.h
+	<Entity.h>
+	<Player.h>
+
+1588471869 c:\users\cvaug\desktop\csci173\191t-rougelike\include\entity.h
+	<cstdlib>
+	<GL/gl.h>
+	<Texture.h>
+	<Util.h>
+	<math.h>
+
+1586847399 c:\users\cvaug\desktop\csci173\191t-rougelike\include\player.h
+	<Entity.h>
+
+1588471869 c:\users\cvaug\desktop\csci173\191t-rougelike\include\inputs.h
+	<windows.h>
+	<Entity.h>
+	<Maze.h>
+	<Timer.h>
+	<Buttons.h>
+	<Sound.h>
+
+1588474712 c:\users\cvaug\desktop\csci173\191t-rougelike\include\maze.h
+	<stdlib.h>
+	<vector>
+	<iostream>
+	<time.h>
+	<stack>
+	<utility>
+	<Texture.h>
+	<Util.h>
+	<bits/stdc++.h>
+
+1586847399 c:\users\cvaug\desktop\csci173\191t-rougelike\include\buttons.h
+	<vector>
+	<iostream>
+	<Texture.h>
+
+1588471869 c:\users\cvaug\desktop\csci173\191t-rougelike\include\sound.h
+	<stdlib.h>
+	<SNDS/irrKlang.h>
+	<iostream>
+	<Timer.h>
+
+1517335446 c:\users\cvaug\desktop\csci173\common\include\snds\irrklang.h
+	"ik_irrKlangTypes.h"
+	"ik_vec3d.h"
+	"ik_IRefCounted.h"
+	"ik_IVirtualRefCounted.h"
+	"ik_ESoundOutputDrivers.h"
+	"ik_ESoundEngineOptions.h"
+	"ik_EStreamModes.h"
+	"ik_SAudioStreamFormat.h"
+	"ik_ISoundEngine.h"
+	"ik_ISoundSource.h"
+	"ik_ISound.h"
+	"ik_IAudioStream.h"
+	"ik_IAudioStreamLoader.h"
+	"ik_ISoundEffectControl.h"
+	"ik_ISoundStopEventReceiver.h"
+	"ik_IFileFactory.h"
+	"ik_IFileReader.h"
+	"ik_ISoundDeviceList.h"
+	"ik_IAudioRecorder.h"
+	"ik_ISoundMixedOutputReceiver.h"
+
+1517256008 c:\users\cvaug\desktop\csci173\common\include\snds\ik_irrklangtypes.h
+	<wchar.h>
+
+1517256008 c:\users\cvaug\desktop\csci173\common\include\snds\ik_vec3d.h
+	<math.h>
+	"ik_irrKlangTypes.h"
+
+1517256008 c:\users\cvaug\desktop\csci173\common\include\snds\ik_irefcounted.h
+	"ik_irrKlangTypes.h"
+
+1517256008 c:\users\cvaug\desktop\csci173\common\include\snds\ik_ivirtualrefcounted.h
+	"ik_irrKlangTypes.h"
+
+1517256008 c:\users\cvaug\desktop\csci173\common\include\snds\ik_esoundoutputdrivers.h
+
+1517256008 c:\users\cvaug\desktop\csci173\common\include\snds\ik_esoundengineoptions.h
+
+1517256008 c:\users\cvaug\desktop\csci173\common\include\snds\ik_estreammodes.h
+
+1517256008 c:\users\cvaug\desktop\csci173\common\include\snds\ik_saudiostreamformat.h
+	"ik_IRefCounted.h"
+
+1517256008 c:\users\cvaug\desktop\csci173\common\include\snds\ik_isoundengine.h
+	"ik_IRefCounted.h"
+	"ik_vec3d.h"
+	"ik_ISoundSource.h"
+	"ik_ISound.h"
+	"ik_EStreamModes.h"
+	"ik_IFileFactory.h"
+	"ik_ISoundMixedOutputReceiver.h"
+
+1517256032 c:\users\cvaug\desktop\csci173\common\include\snds\ik_isoundsource.h
+	"ik_IVirtualRefCounted.h"
+	"ik_vec3d.h"
+	"ik_EStreamModes.h"
+	"ik_SAudioStreamFormat.h"
+
+1517256008 c:\users\cvaug\desktop\csci173\common\include\snds\ik_isound.h
+	"ik_IVirtualRefCounted.h"
+	"ik_ISoundEffectControl.h"
+	"ik_vec3d.h"
+
+1517256008 c:\users\cvaug\desktop\csci173\common\include\snds\ik_isoundeffectcontrol.h
+	"ik_IVirtualRefCounted.h"
+	"ik_vec3d.h"
+
+1517256008 c:\users\cvaug\desktop\csci173\common\include\snds\ik_ifilefactory.h
+	"ik_IRefCounted.h"
+
+1517256008 c:\users\cvaug\desktop\csci173\common\include\snds\ik_isoundmixedoutputreceiver.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1517256008 c:\users\cvaug\desktop\csci173\common\include\snds\ik_iaudiostream.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1517256008 c:\users\cvaug\desktop\csci173\common\include\snds\ik_iaudiostreamloader.h
+	"ik_IRefCounted.h"
+	"ik_IFileReader.h"
+
+1517256008 c:\users\cvaug\desktop\csci173\common\include\snds\ik_ifilereader.h
+	"ik_IRefCounted.h"
+
+1517256008 c:\users\cvaug\desktop\csci173\common\include\snds\ik_isoundstopeventreceiver.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1517256008 c:\users\cvaug\desktop\csci173\common\include\snds\ik_isounddevicelist.h
+	"ik_IRefCounted.h"
+
+1517256024 c:\users\cvaug\desktop\csci173\common\include\snds\ik_iaudiorecorder.h
+	"ik_IRefCounted.h"
+	"ik_ISoundSource.h"
+
+1588471869 c:\users\cvaug\desktop\csci173\191t-rougelike\include\stencil.h
+	<GL/gl.h>
+	<math.h>
+	<Texture.h>
+
+1588385791 c:\users\cvaug\desktop\csci173\191t-rougelike\include\square.h
+	<GL/gl.h>
+	<Texture.h>
+
+1586847399 c:\users\cvaug\desktop\csci173\191t-rougelike\include\blankscreen.h
+	<Scene.h>
+
+1586847399 c:\users\cvaug\desktop\csci173\191t-rougelike\include\titlescreen.h
+	<Scene.h>
+	<MenuScreen.h>
+	<Buttons.h>
+
+1586847399 c:\users\cvaug\desktop\csci173\191t-rougelike\include\menuscreen.h
+	<Scene.h>
+	<Level.h>
+	<HelpScreen.h>
+	<Buttons.h>
+
+1588471869 c:\users\cvaug\desktop\csci173\191t-rougelike\include\level.h
+	<Scene.h>
+	<Buttons.h>
+	<Popup.h>
+	<HelpScreen.h>
+
+1586847399 c:\users\cvaug\desktop\csci173\191t-rougelike\include\popup.h
+	<Buttons.h>
+	<Texture.h>
+
+1586847399 c:\users\cvaug\desktop\csci173\191t-rougelike\include\helpscreen.h
+	<Scene.h>
+	<Buttons.h>
+
+1586847399 source:c:\users\cvaug\desktop\csci173\191t-rougelike\src\blankscreen.cpp
+	"BlankScreen.h"
+
+1584744199 source:c:\users\cvaug\desktop\csci173\191t-rougelike\src\button.cpp
+	"Button.h"
+
+1584744199 c:\users\cvaug\desktop\csci173\191t-rougelike\include\button.h
+
+1586847399 source:c:\users\cvaug\desktop\csci173\191t-rougelike\src\buttons.cpp
+	"Buttons.h"
+
+1588471869 source:c:\users\cvaug\desktop\csci173\191t-rougelike\src\entity.cpp
+	"Entity.h"
+
+1588471869 source:c:\users\cvaug\desktop\csci173\191t-rougelike\src\follow.cpp
+	"Follow.h"
+
+1588471869 c:\users\cvaug\desktop\csci173\191t-rougelike\include\follow.h
+
+1586847399 source:c:\users\cvaug\desktop\csci173\191t-rougelike\src\helpscreen.cpp
+	"HelpScreen.h"
+
+1588471869 source:c:\users\cvaug\desktop\csci173\191t-rougelike\src\inputs.cpp
+	"Inputs.h"
+
+1588475159 source:c:\users\cvaug\desktop\csci173\191t-rougelike\src\level.cpp
+	"Level.h"
+
+1586847399 source:c:\users\cvaug\desktop\csci173\191t-rougelike\src\menuscreen.cpp
+	"MenuScreen.h"
+
+1588471869 source:c:\users\cvaug\desktop\csci173\191t-rougelike\src\monster.cpp
+	"Monster.h"
+
+1588471869 source:c:\users\cvaug\desktop\csci173\191t-rougelike\src\player.cpp
+	"Player.h"
+
+1588471869 source:c:\users\cvaug\desktop\csci173\191t-rougelike\src\popup.cpp
+	"Popup.h"
+
+1588361644 source:c:\users\cvaug\desktop\csci173\191t-rougelike\src\scene.cpp
+	"Scene.h"
+
+1588363498 source:c:\users\cvaug\desktop\csci173\191t-rougelike\src\shader.cpp
+	"Shader.h"
+
+1587601764 source:c:\users\cvaug\desktop\csci173\191t-rougelike\src\sound.cpp
+	"Sound.h"
+
+1588385823 source:c:\users\cvaug\desktop\csci173\191t-rougelike\src\square.cpp
+	"Square.h"
+
+1588389366 source:c:\users\cvaug\desktop\csci173\191t-rougelike\src\stencil.cpp
+	"Stencil.h"
+
+1588385359 source:c:\users\cvaug\desktop\csci173\191t-rougelike\src\texture.cpp
+	"Texture.h"
+
+1586847399 source:c:\users\cvaug\desktop\csci173\191t-rougelike\src\timer.cpp
+	"Timer.h"
+
+1586847399 source:c:\users\cvaug\desktop\csci173\191t-rougelike\src\titlescreen.cpp
+	"TitleScreen.h"
+
+1586847399 source:c:\users\cvaug\desktop\csci173\191t-rougelike\src\util.cpp
+	"Util.h"
+	<utility>
+
+1588474888 source:c:\users\cvaug\desktop\csci173\191t-rougelike\src\maze.cpp
+	"Maze.h"
+
