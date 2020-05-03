@@ -72,6 +72,7 @@ class Maze
 
         Texture* displayPieces;             //Textures for the minimap
         Texture* roomPieces;
+        Texture* mazeFrame;
 
         vector<ipair> pathToPlayer;
 

@@ -18,9 +18,11 @@ void Maze::GenerateMaze(int x, int y)
 {
     displayPieces = new Texture();
     roomPieces = new Texture();
+    mazeFrame = new Texture();
 
-    displayPieces->CreateTexture("images/RL_MapPieces.png", 4,4);
+    displayPieces->CreateTexture("images/RL_MapPieces.png", 4,5);
     roomPieces->CreateTexture("images/RL_TopDown.png",4,2);
+    mazeFrame->CreateTexture("images/RL_frame.jpg",1,1,1,0);
 
     mazeSizeX = x;
     mazeSizeY = y;
@@ -30,8 +32,8 @@ void Maze::GenerateMaze(int x, int y)
         pathToPlayer.push_back(make_pair(INT_MAX,-1)); //Set up a path array with all max distance from player and not visited
     }
 
-    mapScreenPosX = 0.5 + displayPieces->widthPercentage * mazeSizeX / 2;   //Where to put the map readout
-    mapScreenPosY = 0.01;//displayPieces->heightPercentage * mazeSizeY;      //Where to put the map readout
+    mapScreenPosX = 0.5415;//0.5 + displayPieces->widthPercentage * mazeSizeX / 2;   //Where to put the map readout
+    mapScreenPosY = 0.015;//displayPieces->heightPercentage * mazeSizeY;      //Where to put the map readout
 
     for(int i = 0; i< mazeSize; ++i)
     {
@@ -181,18 +183,31 @@ ipair Maze::IntToXY(int i)
 void Maze::DrawMazeDisplay()
 {
     //glPushMatrix();
+    mazeFrame->TextureBinder();
+    mazeFrame->Draw(1,0);
     displayPieces->TextureBinder();
     for(int i = 0; i < maze.size(); ++i)
     {
         displayPieces->curFrame = maze[i].walls;
         ipair pos = IntToXY(i);
-        float locX = mapScreenPosX + displayPieces->widthPercentage*pos.first*2;
-        float locY = mapScreenPosY + displayPieces->heightPercentage*pos.second*2;
-        if(maze[i].visited) displayPieces->Draw(locX,locY,2.0,2.0);
-        if(i == plyLoc || i == exitCell || i == monsterLoc)
+        float locX = mapScreenPosX + displayPieces->widthPercentage*pos.first;
+        float locY = mapScreenPosY + displayPieces->heightPercentage*pos.second;
+        if(maze[i].visited) displayPieces->Draw(locX,locY,1.0,1.0);
+        //displayPieces->Draw(locX,locY,1.0,1.0);
+        if(i == exitCell)
         {
-            displayPieces->curFrame = 15;
-            displayPieces->Draw(locX,locY,2.0,2.0);
+            displayPieces->curFrame = 16;
+            displayPieces->Draw(locX,locY,1.0,1.0);
+        }
+        else if(i == monsterLoc)
+        {
+            displayPieces->curFrame = 18;
+            displayPieces->Draw(locX,locY,1.0,1.0);
+        }
+        if(i == plyLoc)
+        {
+            displayPieces->curFrame = 17;
+            displayPieces->Draw(locX,locY,1.0,1.0);
         }
     }
     //glPopMatrix();
