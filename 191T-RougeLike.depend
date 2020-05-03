@@ -596,7 +596,7 @@
 1588479925 source:c:\users\cvaug\desktop\csci173\191t-rougelike\src\inputs.cpp
 	"Inputs.h"
 
-1588481278 source:c:\users\cvaug\desktop\csci173\191t-rougelike\src\level.cpp
+1588489685 source:c:\users\cvaug\desktop\csci173\191t-rougelike\src\level.cpp
 	"Level.h"
 
 1586847399 source:c:\users\cvaug\desktop\csci173\191t-rougelike\src\menuscreen.cpp
@@ -605,7 +605,7 @@
 1588471869 source:c:\users\cvaug\desktop\csci173\191t-rougelike\src\monster.cpp
 	"Monster.h"
 
-1588471869 source:c:\users\cvaug\desktop\csci173\191t-rougelike\src\player.cpp
+1588488461 source:c:\users\cvaug\desktop\csci173\191t-rougelike\src\player.cpp
 	"Player.h"
 
 1588471869 source:c:\users\cvaug\desktop\csci173\191t-rougelike\src\popup.cpp
@@ -626,7 +626,7 @@
 1588389366 source:c:\users\cvaug\desktop\csci173\191t-rougelike\src\stencil.cpp
 	"Stencil.h"
 
-1588385359 source:c:\users\cvaug\desktop\csci173\191t-rougelike\src\texture.cpp
+1588486968 source:c:\users\cvaug\desktop\csci173\191t-rougelike\src\texture.cpp
 	"Texture.h"
 
 1586847399 source:c:\users\cvaug\desktop\csci173\191t-rougelike\src\timer.cpp

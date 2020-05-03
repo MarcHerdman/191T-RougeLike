@@ -154,7 +154,7 @@ void Level::Draw()
     }
     else
     {
-        alphaSquare->DrawSquare(0,0,2,2);
+        //alphaSquare->DrawSquare(0,0,2,2);
 
         glPushMatrix();
             mask->drawMask();
