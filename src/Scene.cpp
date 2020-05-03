@@ -55,8 +55,11 @@ int Scene::WinMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
     switch(uMsg)
     {
         case WM_KEYDOWN:
+
             if(!timer->IsPaused() && !(lParam & 0x40000000)) kBMs->KeyPressed(); //ONLY RESPOND ONCE WHEN THE KEY IS FIRST PRESSED
             break;
+
+
 
         case WM_KEYUP:
             if(wParam == VK_ESCAPE) Action("KB_Esc");       //Escape is passed regardless of paused

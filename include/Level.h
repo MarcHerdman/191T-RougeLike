@@ -33,6 +33,7 @@ class Level : public Scene
         Shader* shader;
 
         float maskRandomizer;
+        int footstepSpacer;
         bool playerInMonsterRoom;
 
     protected:
