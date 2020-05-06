@@ -17,7 +17,7 @@ MenuScreen::~MenuScreen()
 
 void MenuScreen::Init(int screenWidth, int screenHeight)
 {
-    background->CreateTexture("images/RL_MenuScreen.jpg",1,1);
+    background->CreateTexture("images/RL_MenuScreenNEW.jpg",1,1);
     btns->Init("images/RL_Buttons_1024.png", 4, 8);
     btns->AddButton("Play", PLAY, 0.25, 0.33, true, screenWidth, screenHeight);
     btns->AddButton("Help", HELP, 0.5, 0.33, true, screenWidth, screenHeight);

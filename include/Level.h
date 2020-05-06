@@ -31,6 +31,7 @@ class Level : public Scene
         Square* alphaSquare;
         Stencil* mask;
         Shader* shader;
+        int levelnum;
 
         float maskRandomizer;
         int footstepSpacer;

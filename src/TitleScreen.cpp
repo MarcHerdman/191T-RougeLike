@@ -16,7 +16,7 @@ TitleScreen::~TitleScreen()
 }
 void TitleScreen::Init(int screenWidth, int screenHeight)
 {
-    background->CreateTexture("images/RL_TitleScreen.jpg",1,1);
+    background->CreateTexture("images/RL_TitleScreenNEW.jpg",1,1);
     btns->Init("images/RL_Buttons_1024.png", 4, 8);
     btns->AddButton("Begin", BEGIN, 0.125, 0.33, true, screenWidth, screenHeight);
 }

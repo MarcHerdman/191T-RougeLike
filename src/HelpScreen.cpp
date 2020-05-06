@@ -19,7 +19,7 @@ HelpScreen::~HelpScreen()
 //Must be called before all other functions
 void HelpScreen::Init(int x, int y)
 {
-    background->CreateTexture("images/RL_HelpScreen.jpg",1,1);
+    background->CreateTexture("images/RL_HelpScreenNEW.jpg",1,1);
     btns->Init("images/RL_Buttons_1024.png", 4, 8, 0.0, 0.0);
     btns->AddButton("Return", RETURN, 0.05, 0.05, true, screenWidth, screenHeight);
 }

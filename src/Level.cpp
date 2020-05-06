@@ -49,6 +49,7 @@ void Level::Init(int screenWidth, int screenHeight)
     alphaSquare->Init("images/foghelper.png");
     mask->tex->CreateTexture("images/Idontwantatextureonthisobjectbutprogramkeepscrashing.png",1,1);
     sound->playMusic("sounds/Haunted.mp3");
+    levelnum = 1;
     //btns->Init("images/RL_Buttons_1024.png", 4, 8);
     //btns->AddButton("Accept", ACCEPT, 0.4, 0.33, false, screenWidth, screenHeight);
     //btns->AddButton("Decline", DECLINE, 0.6, 0.33, false, screenWidth, screenHeight);
@@ -111,7 +112,15 @@ void Level::CalculateChanges()
         //std::cout << dir << std::endl;
         if((maze->plyLoc == maze->exitCell) && (dir == maze->exitD.substr(0,1)))
         {
-            NewLevel();                  //move to next level
+            if (levelnum ==3) {
+                std::cout << "YOU ARE DEAD..." << std::endl;
+            sound ->pauseMusic();
+            timer->Pause();
+            popup->SetActive(true);
+            }
+            else {
+                NewLevel();                  //move to next level
+            }
 
         }
         else
@@ -221,4 +230,5 @@ void Level::NewLevel()
     maze = new Maze();
     maze->GenerateMaze(9,9);
     ply->Teleport("M");
+    levelnum++;
 }
