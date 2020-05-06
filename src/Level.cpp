@@ -10,6 +10,8 @@ Level::Level(std::stack<Scene*>* s)
     ply = new Player();
     maze = new Maze();
     popup = new Popup;
+    deathPopup = new Popup;
+    winPopup = new Popup;
     sound = new Sound();
     square = new Square();
     shader = new Shader();
@@ -42,13 +44,15 @@ void Level::Init(int screenWidth, int screenHeight)
     ply->PositionEntity(std::make_pair(0.2, 0.2));
     mon->PositionEntity(std::make_pair(0.1, 0.6));
     maze->GenerateMaze(9,9);
-    popup->Init(screenWidth, screenHeight);
+    popup->Init(screenWidth, screenHeight,1);
+    deathPopup->Init(screenWidth, screenHeight,2);
+    winPopup->Init(screenWidth, screenHeight,3);
     sound->initSounds();
     shader->initShader("vert.vs","frag.fs",shader->program);
     square->Init("images/noise.png");
     alphaSquare->Init("images/foghelper.png");
     mask->tex->CreateTexture("images/Idontwantatextureonthisobjectbutprogramkeepscrashing.png",1,1);
-    sound->playMusic("sounds/Haunted.mp3");
+    //sound->playMusic("sounds/Haunted.mp3");
     levelnum = 1;
     //btns->Init("images/RL_Buttons_1024.png", 4, 8);
     //btns->AddButton("Accept", ACCEPT, 0.4, 0.33, false, screenWidth, screenHeight);
@@ -91,7 +95,7 @@ void Level::CalculateChanges()
             std::cout << "YOU ARE DEAD..." << std::endl;
             sound ->pauseMusic();
             timer->Pause();
-            popup->SetActive(true);
+            deathPopup->SetActive(true);
         }
     }
     else
@@ -113,10 +117,10 @@ void Level::CalculateChanges()
         if((maze->plyLoc == maze->exitCell) && (dir == maze->exitD.substr(0,1)))
         {
             if (levelnum ==3) {
-                std::cout << "YOU ARE DEAD..." << std::endl;
+                std::cout << "YOU ARE Winner..." << std::endl;
             sound ->pauseMusic();
             timer->Pause();
-            popup->SetActive(true);
+            winPopup->SetActive(true);
             }
             else {
                 NewLevel();                  //move to next level
@@ -159,7 +163,11 @@ void Level::Draw()
     glPopMatrix();
     if(timer->IsPaused())
     {
-        popup->Draw(mouseX,mouseY);
+
+        if(popup->isActive)popup->Draw(mouseX,mouseY);
+        else if(deathPopup->isActive)deathPopup->Draw(mouseX,mouseY);
+        else if(winPopup->isActive)winPopup->Draw(mouseX,mouseY);
+
     }
     else
     {
@@ -190,7 +198,7 @@ void Level::Action(std::string action)
     std::cout << "Action: "  << action << std::endl;
     if(action == "KB_Esc" || action == "Decline") //Decline can only happen if paused
     {
-        if(timer->IsPaused())
+        if(timer->IsPaused() && popup->isActive)
         {
             std::cout << "UNPAUSE" << std::endl;
             //btns->SetActive(false);
@@ -200,7 +208,7 @@ void Level::Action(std::string action)
 
             timer->Resume();
         }
-        else
+        else if(!timer->IsPaused() &&!winPopup->isActive || !deathPopup->isActive)
         {
             std::cout << "PAUSE" << std::endl;
             timer->Pause();
@@ -217,6 +225,11 @@ void Level::Action(std::string action)
     {
         std::cout << "In Help" << std::endl;
         sceneStack->push(help);
+    }
+    else if (action == "Quit") {
+        while (!sceneStack->empty()) {
+            sceneStack->pop();
+        }
     }
 }
 //Recalculate the button edges each time screen is resized

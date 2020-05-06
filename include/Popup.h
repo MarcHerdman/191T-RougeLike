@@ -10,7 +10,7 @@ class Popup
         Popup();
         virtual ~Popup();
 
-        void Init(int,int);
+        void Init(int,int,int);
         void SetActive(bool);
         void Draw(int,int);
 

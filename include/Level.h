@@ -26,6 +26,8 @@ class Level : public Scene
         Monster* mon;                   //The Monsters
         Maze* maze;                     //The maze
         Popup* popup;
+        Popup* deathPopup;
+        Popup* winPopup;
         Sound* sound;
         Square* square;
         Square* alphaSquare;
