@@ -95,6 +95,7 @@ void Level::CalculateChanges()
             std::cout << "YOU ARE DEAD..." << std::endl;
             sound ->pauseMusic();
             timer->Pause();
+            kBMs ->SetBtns(deathPopup->btns);
             deathPopup->SetActive(true);
         }
     }
@@ -116,10 +117,11 @@ void Level::CalculateChanges()
         //std::cout << dir << std::endl;
         if((maze->plyLoc == maze->exitCell) && (dir == maze->exitD.substr(0,1)))
         {
-            if (levelnum ==3) {
+            if (levelnum == 3) {
                 std::cout << "YOU ARE Winner..." << std::endl;
             sound ->pauseMusic();
             timer->Pause();
+            kBMs ->SetBtns(winPopup->btns);
             winPopup->SetActive(true);
             }
             else {
@@ -214,6 +216,7 @@ void Level::Action(std::string action)
             timer->Pause();
             sound->pauseMusic();
             //btns->SetActive(true);
+            kBMs->SetBtns(popup->btns);
             popup->SetActive(true);
         }
     }
@@ -227,7 +230,7 @@ void Level::Action(std::string action)
         sceneStack->push(help);
     }
     else if (action == "Quit") {
-        while (!sceneStack->empty()) {
+        while (sceneStack->size() > 1) {
             sceneStack->pop();
         }
     }

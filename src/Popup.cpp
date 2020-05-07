@@ -32,11 +32,12 @@ void Popup::Init(int screenWidth, int screenHeight,int popupType)
         msg->CreateTexture("images/RL_ExitDead.png",1,1,0.5,0.0);
         break;
     case 3:
-        break;
         btns->Init("images/RL_Buttons_1024.png", 4, 8);
         btns->AddButton("Accept", ACCEPT, 0.35, 0.33, false, screenWidth, screenHeight);
         btns->AddButton("Quit", QUIT, 0.65, 0.33, false, screenWidth, screenHeight);
         msg->CreateTexture("images/RL_ExitWin.png",1,1,0.5,0.0);
+        break;
+
     }
 
 }
@@ -44,6 +45,7 @@ void Popup::Init(int screenWidth, int screenHeight,int popupType)
 void Popup::SetActive(bool status)
 {
     isActive = status;
+    cout << "IWprld\n";
     btns->SetActive(status);
 }
 

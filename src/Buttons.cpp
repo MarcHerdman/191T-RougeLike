@@ -77,8 +77,11 @@ std::string Buttons::CheckClick()
 //Determine whether all buttons in this instance of the class are visible and clickable
 void Buttons::SetActive(bool state)
 {
+    cout << btns.size() << " I totally work\n";
+
     for(int i=0; i<btns.size(); ++i)
     {
+        cout << btns.size() << endl;
         btns[i]->isActive = state;
     }
 }
