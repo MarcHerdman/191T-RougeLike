@@ -52,7 +52,7 @@ void Level::Init(int screenWidth, int screenHeight)
     square->Init("images/noise.png");
     alphaSquare->Init("images/foghelper.png");
     mask->tex->CreateTexture("images/Idontwantatextureonthisobjectbutprogramkeepscrashing.png",1,1);
-    //sound->playMusic("sounds/Haunted.mp3");
+    sound->playMusic("sounds/Haunted.mp3");
     levelnum = 1;
     //btns->Init("images/RL_Buttons_1024.png", 4, 8);
     //btns->AddButton("Accept", ACCEPT, 0.4, 0.33, false, screenWidth, screenHeight);
