@@ -86,7 +86,7 @@ void Monster::Teleport(std::string dir)
 std::string Monster::EnemyCollisionWithPlayer(fpair enemy, fpair player)
 {
     if(player.first > enemy.first - 0.015 && player.first < enemy.first + 0.015
-       && player.second > enemy.second - 0.015 && player.first < enemy.second + 0.015)
+       && player.second > enemy.second - 0.015 && player.second < enemy.second + 0.015)
     {
         //Level->Action("KB_Esc");
         hasCaught = true;
