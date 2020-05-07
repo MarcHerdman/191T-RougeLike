@@ -144,7 +144,7 @@ void Level::CalculateChanges()
                 footstepSpacer--;
             }
     }
-    maskRandomizer += 0.1;
+    maskRandomizer += 0.05;
 }
 //Draw this scene to the screen
 void Level::Draw()

@@ -16,7 +16,7 @@ void Entity::DrawEntity()
 {
     tex->TextureBinder();
     //tex->Draw(0.5 - tex->widthPercentage,0.5 - tex->heightPercentage, 3.0, 3.0);
-    tex->Draw(xPos,yPos,3.0,3.0);
+    tex->Draw(xPos,yPos,2.25,2.25);
 }
 
 fpair Entity::GetNextXY()
